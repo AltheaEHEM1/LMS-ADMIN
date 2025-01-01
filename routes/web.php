@@ -12,6 +12,10 @@ Route::get('/DASHBORDandingpage_employee', function () {
     return view('DASHBORDandingpage_employee'); 
 });
 
+Route::get('/login_employee', function () {
+    return view('login_employee'); 
+});
+
 Route::get('/EMPLOYEE', function () {
     return view('EMPLOYEE'); 
 });
@@ -55,3 +59,8 @@ Route::get('/CATALOG', function () {
 Route::get('/CATALOG_REPORTS', function () {
     return view('CATALOG_REPORTS'); 
 });
+
+// Handle Login Submission
+Route::post('/login_employee', [AuthController::class, 'login_employee'])->name('login_employee');
+
+Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');

@@ -14,15 +14,19 @@
     
      <!-- Logo image -->
      <img src="./images/logo_login.png" alt="library logo" class="w-[550px] mb-10 translate-x-[80px] translate-y-[120px]">
+
+
     
     <!-- Sign In Form -->
-    <form class="w-full max-w-sm space-y-6 translate-x-[160px] translate-y-[130px]" id="SigninForm">
+    <form method="POST" action="{{ route('login_employee') }}" class="w-full max-w-sm space-y-6 translate-x-[160px] translate-y-[130px]" id="SigninForm">
+    @csrf
     <!-- Email Input -->
     <div>
         <label for="email" class="block text-sm font-medium text-gray-300 text-left">
             Email <span class="text-red-500">*</span>
         </label>
         <input type="email" id="email" name="email" placeholder="Enter your email"
+            value="{{ old('email') }}"
             class="mt-1 p-3 w-full rounded-md border border-gray-300 focus:ring-[#011b33] focus:border-[#011b33] text-black" required>
     </div>
 
@@ -33,18 +37,30 @@
         </label>
         <input type="password" id="password" name="password" placeholder="Enter your password"
             class="mt-1 p-3 w-full rounded-md border border-gray-300 focus:ring-[#011b33] focus:border-[#011b33] text-black" required>
-
+        
         <!-- Eye icon to toggle password visibility -->
         <span class="absolute top-2/3 right-3 transform -translate-y-1/2 cursor-pointer text-gray-500" id="togglePassword">
             <i class="fas fa-eye text-lg"></i>
         </span>
     </div>
 
-    <!-- log in In Button -->
+    <!-- Login Button -->
     <button type="submit" class="w-full py-3 bg-white text-black rounded-md hover:bg-[#034b72] hover:text-white transition duration-300">
         Sign In
     </button>
 </form>
+
+@if ($errors->any())
+    <div class="bg-red-500 text-white p-3 rounded mb-4">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
 
 <script>
     // Get the form and the input elements
@@ -56,20 +72,18 @@
 
     // Add event listener to handle form submission
     form.addEventListener('submit', function (e) {
-        // Prevent the form from submitting if validation fails
-        e.preventDefault();
+    e.preventDefault();
 
-        // Check if email and password are provided
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
 
-        if (email === '' || password === '') {
-            alert('Please enter both email and password.');
-            return; // Stop form submission if validation fails
-        }
+    if (email === '' || password === '') {
+        alert('Please enter both email and password.');
+        return; // Stop form submission if validation fails
+    }
 
-        // If validation passes, navigate to the landing page
-        window.location.href = '/DASHBORDandingpage_employee'; // Navigate to the new page
+    // If validation passes, navigate to the landing page
+    window.location.href = '/DASHBORDandingpage_employee'; // Navigate to the new page
     });
 
         // Toggle password visibility

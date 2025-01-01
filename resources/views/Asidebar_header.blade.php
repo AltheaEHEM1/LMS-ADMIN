@@ -7,7 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!--for the graph-->
+    @vite('resources/js/Asidebar.js')
 
     <title>Novella</title>
 
@@ -104,7 +105,7 @@
                         <a href="#" id="settingsLink" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                             <i class="fas fa-cog mr-2"></i>Settings
                         </a>
-                        <a href="#" id="logoutLink" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <a href="#" onclick="openModal('LogoutModal')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                             <i class="fas fa-sign-out-alt mr-2"></i>Logout
                         </a>
                     </div>
@@ -113,37 +114,74 @@
         </header>
     </div>
 
+    <!-- Modal Background with opacity (Initially hidden) -->
+    <div id="LogoutModal" class="fixed inset-0 bg-gray-500 bg-opacity-50 items-center justify-center z-50 hidden">
+        <!-- Modal Content -->
+        <div class="bg-white p-6 rounded-lg shadow-md w-[60%] max-w-sm relative">
+            <h1 class="text-2xl font-semibold text-center mb-6">Are you sure you want to log out of this account?</h1>
+
+            <div class="flex justify-center space-x-4">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+                <!-- Cancel Button -->
+                <button type="button" onclick="closeModal('LogoutModal')" class="flex items-center px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">
+                    <i class="fas fa-times mr-2"></i> Cancel
+                </button>
+
+                <!-- Log Out Button -->
+                <button type="button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="flex items-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-300">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Log out
+                </button>
+    
+            </div>
+        </div>
+    </div>
+
+
+
+
     <script>
-        
-        // Highlight the active sidebar item based on URL
-        document.addEventListener('DOMContentLoaded', () => {
-            const currentUrl = window.location.pathname;
-            const sidebarLinks = document.querySelectorAll('.sidebar-item');
+        //for the logout modal
+        // Function to open a modal by ID
+        function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+                modal.classList.remove('hidden'); // Remove the hidden class
+                modal.classList.add('flex'); // Add the flex class to display the modal
+        }
+        }
 
-            sidebarLinks.forEach(link => {
-                if (link.getAttribute('href') === currentUrl) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // JavaScript to toggle dropdown visibility
-        const dropdownButton = document.getElementById('dropdownButton');
-        const dropdownMenu = document.getElementById('dropdownMenu');
-        const settingsLink = document.getElementById('settingsLink');
-        const logoutLink = document.getElementById('logoutLink');
-
-        // Toggle dropdown visibility
-        dropdownButton.addEventListener('click', () => {
-            dropdownMenu.classList.toggle('hidden');
-        });
-
-        // Redirect to appropriate page when clicking links
-        settingsLink.addEventListener('click', () => {
-            window.location.href = '/settings';
-        });
-
-        logoutLink.addEventListener('click', () => {
-            window.location.href = '/logout';
-        });
+        // Function to close a modal by ID
+        function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+                modal.classList.add('hidden'); // Add the hidden class to hide the modal
+                modal.classList.remove('flex'); // Remove the flex class
+        }
+        }
     </script>
+
+
+    <!-- <div id="LogoutModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 items-center justify-center hidden z-50">
+        <div class="bg-white p-6 rounded-lg shadow-md w-[60%] max-w-sm">
+                <h1 class="text-2xl font-semibold text-center mb-6">Are you sure you want to log out of this account?</h1>
+
+                <!- Hidden Logout Form ->
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+                </form>
+
+                <!- Inline Cancel and Log Out Buttons ->
+                <div class="flex justify-center space-x-4">
+                <!- Cancel Button with Icon ->
+                <button type="button" onclick="closeModal('LogoutModal')" class="flex items-center px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">
+                        <i class="fas fa-times mr-2"></i> Cancel
+                </button>
+
+                <!- Log Out Button with Icon ->
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="flex items-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-300">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Log Out
+                </a>
+        </div>
+    </div> -->
+
+ 
