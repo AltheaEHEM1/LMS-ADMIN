@@ -27,12 +27,6 @@
                         </div>
                     </div>
 
-                    <div class="mb-4 flex justify-start">
-                        <button onclick="openModal('NewModal')" class="bg-[#012A4A] text-white px-4 py-2 rounded-lg shadow hover:bg-[#028ABE]">
-                            New Member
-                        </button>
-                    </div>
-
 
                     <div class="overflow-x-auto">
                         <table class="min-w-full bg-white border border-gray-200">
@@ -87,90 +81,6 @@
 
 
     <!--modals-->
-        <!-- New Member Modal -->
-        <div id="NewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 items-center justify-center hidden">
-                <div class="bg-white p-7 rounded-lg shadow-md w-[60%] ml-[20%] mt-20">
-                    <h2 class="text-xl font-semibold mb-4">Add New Employee</h2>
-
-                    <form id="newEmployeeForm" onsubmit="return validateForm()">
-                        <!-- Name Section (Inline: First Name, Middle Name, Last Name) -->
-                        <div class="grid grid-cols-3 gap-4 mb-4">
-                            <div>
-                                <label class="text-sm text-gray-600">First Name <span class="text-red-500">*</span></label>
-                                <input type="text" placeholder="Althea Amor" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="firstName" required>
-                                <p id="firstNameError" class="text-red-500 text-sm hidden">First Name is required.</p>
-                            </div>
-
-                            <div>
-                                <label class="text-sm text-gray-600">Middle Name <span class="text-red-500">*</span></label>
-                                <input type="text" placeholder="J" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="middleName" required>
-                                <p id="middleNameError" class="text-red-500 text-sm hidden">Middle Name is required.</p>
-                            </div>
-
-                            <div>
-                                <label class="text-sm text-gray-600">Last Name <span class="text-red-500">*</span></label>
-                                <input type="text" placeholder="Asis" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="lastName" required>
-                                <p id="lastNameError" class="text-red-500 text-sm hidden">Last Name is required.</p>
-                            </div>
-                        </div>
-
-                        <!-- Phone No., Date of Birth, Email, and Address Section (Left Side) -->
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <!-- Left Side -->
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="text-sm text-gray-600">Phone No. <span class="text-red-500">*</span></label>
-                                    <input type="text" placeholder="+639123456789" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="phoneNo" required>
-                                    <p id="phoneNoError" class="text-red-500 text-sm hidden">Phone No. is required.</p>
-                                </div>
-
-                                <div>
-                                    <label class="text-sm text-gray-600">Date of Birth <span class="text-red-500">*</span></label>
-                                    <input type="date" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="dob" required>
-                                    <p id="dobError" class="text-red-500 text-sm hidden">Date of Birth is required.</p>
-                                </div>
-
-                                <div>
-                                    <label for="email" class="block text-sm font-medium text-gray-700">Email <span class="text-red-500">*</span></label>
-                                    <input type="email" placeholder="Enter your email" id="email" name="email" required class="w-full mt-1 border border-[#011B33] rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                    <p id="emailError" class="text-red-500 text-sm hidden">Email is required.</p>
-                                    <p id="emailErrorInvalid" class="text-red-500 text-sm hidden error-message">Please enter a valid email address.</p>
-                                </div>
-
-                                <div>
-                                    <label class="text-sm text-gray-600">Address <span class="text-red-500">*</span></label>
-                                    <textarea placeholder="Enter address here" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" rows="3" id="address" required></textarea>
-                                    <p id="addressError" class="text-red-500 text-sm hidden">Address is required.</p>
-                                </div>
-                            </div>
-
-                            <!-- Right Side (Photo Upload Section) -->
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="text-sm font-semibold text-gray-700">Upload Photo</label>
-                                    <!-- Photo Upload Input (Larger Image) -->
-                                    <div class="w-48 h-48 flex items-center justify-center mx-auto mb-4">
-                                        <img src="./images/photo.png" alt="photo" class="w-full h-full object-cover">
-                                    </div>
-                                    <!-- File Upload Input (Block Format) -->
-                                    <input type="file" id="uploadPhoto" name="photo" accept="image/*" class="w-full mt-1 px-3 py-2 border rounded">
-                                </div>
-
-                            
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Modal Footer -->
-                    <div class="flex justify-end">
-                        <button type="button" onclick="closeModal('NewModal')" class="mr-2 px-3 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">Cancel</button>
-                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-[#011B33]">Save</button>
-                    </div>
-                </div>
-            </div>
-
-
-
         <!-- View Modal -->
             <div id="ViewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 items-center justify-center hidden">
                 <div class="bg-white p-7 rounded-lg shadow-md w-[60%] ml-[20%] mt-20">

@@ -61,7 +61,7 @@
 </div>
 
 <!--modals-->
-        <!-- New Member Modal -->
+        <!-- New Modal -->
         <div id="ViewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 items-center justify-center hidden">
             <div class="bg-white p-7 rounded-lg shadow-md w-[70%] ml-[20%] mt-20">
                 <h1 class="text-2xl font-bold mb-4">Reservations</h1>
