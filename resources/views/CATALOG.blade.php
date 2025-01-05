@@ -1,18 +1,17 @@
 @include('Asidebar_header')
 
-<!-- Direction of Tabs -->
-<section class="bg-gray-100 fixed ml-72 px-11 py-6 w-full top-20 left-0"> 
-    <p class="text-sm text-gray-600">
-        <i class="fas fa-home text-gray-800"></i>
-        Dashboard / Catalog
-    </p>
-</section>
+    <!-- Direction of Tabs -->
+    <section class="bg-gray-100 fixed ml-72 px-11 py-6 w-full top-20 left-0"> 
+        <p class="text-sm text-gray-600">
+            <i class="fas fa-home text-gray-800"></i>
+            Dashboard / Catalog
+        </p>
+    </section>
 
-<!-- Scrollable Box below the Direction Tabs -->
-<div class="bg-white border border-gray-300 rounded-lg h-[75vh] overflow-y-auto shadow-sm fixed top-[calc(8rem+1rem)] left-[59%] transform -translate-x-1/2 w-3/4">
-    <div class="p-4 text-center text-gray-500">
-        <!--Header-->
+    <!-- Scrollable Box below the Direction Tabs -->
+    <div class="bg-white border border-gray-300 rounded-lg h-[75vh] overflow-y-auto shadow-sm fixed top-[calc(8rem+1rem)] left-[59%] transform -translate-x-1/2 w-3/4">
         <div class="p-6">
+            <!-- Header -->
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-semibold text-gray-800">Catalog</h2>
                 <div class="flex items-center space-x-2">
@@ -31,133 +30,128 @@
 
             <!-- Divider -->
             <hr class="mt-2 border-gray-300" />
-        </div>
 
-        <!-- Action Buttons -->
-        <div class="flex items-end space-x-2 pl-6 pb-6">
-            <button class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white">Categories</button>
-            <button 
-                class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white"
-                onclick="togglePopup('smartAddPopup')">
-                Smart Add
-            </button>
-            <button class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white">Manual Add</button>
-            <button class="bg-gray-200 px-4 py-2 rounded-md hover:bg-gray-300">Refresh</button>
-        </div>
-
-
-        <div class="overflow-x-auto">
-            <table class="min-w-full bg-white border border-gray-200">
-                <thead>
-                    <tr class="bg-[#012A4A] text-white uppercase text-sm leading-normal">
-                        <th class="py-3 px-6 text-left">ID</th>
-                        <th class="py-3 px-6 text-left">Title</th>
-                        <th class="py-3 px-6 text-left">Type</th>
-                        <th class="py-3 px-6 text-left">Author</th>
-                        <th class="py-3 px-6 text-left">Publisher</th>
-                        <th class="py-3 px-6 text-left">Identifier</th>
-                        <th class="py-3 px-6 text-center">Copies</th>
-                        <th class="py-3 px-6 text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="py-3 px-6 text-left text-gray-700">001</td>
-                        <td class="py-3 px-6 text-left text-gray-700">1984</td>
-                        <td class="py-3 px-6 text-left text-gray-700">Book</td>
-                        <td class="py-3 px-6 text-left text-gray-700">George Orwell</td>
-                        <td class="py-3 px-6 text-left text-gray-700">Secker & Warburg</td>
-                        <td class="py-3 px-6 text-left text-gray-700">ISBN: 9780451524935</td>
-                        <td class="py-3 px-6 text-center text-gray-700">1/1</td>
-                        <td class="py-3 px-6 text-center">
-                            <a href="CATALOG-VIEW_ITEM" class="text-blue-500 hover:underline pr-2">
-                                <i class="fa fa-eye"></i>
-                            </a>
-                            <button onclick="togglePopup('addNewCopyPopup')" class="text-green-500 hover:underline">
-                                <i class="fa fa-plus"></i> 
-                            </button>
-                        </td>
-                    </tr>
-                    <!-- Repeat rows as needed -->
-                </tbody>
-            </table>
-        </div>
-        
-
-    </div>
-</div>
-
-<!-- Add New Copy Popup -->
-<div id="addNewCopyPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 class="text-lg font-bold mb-4">Add New Copy</h2>
-        <form>
-            <label class="block mb-2 text-sm text-gray-600" for="accessionNo">Accession No.</label>
-            <input type="text" id="accessionNo" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
-            
-            <label class="block mb-2 text-sm text-gray-600" for="copyNo">Copy No.</label>
-            <input type="text" id="copyNo" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
-            
-            <div class="flex items-center mb-2">
-                <label for="active" class="flex items-center cursor-pointer">
-                    <div class="relative">
-                        <input type="checkbox" id="active" class="sr-only">
-                        <div class="w-10 h-4 bg-gray-300 rounded-full shadow-inner"></div>
-                        <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
-                    </div>
-                </label>
-                <label for="active" class="text-sm text-gray-600">Active</label>
+            <!-- Action Buttons -->
+            <div class="flex items-end space-x-2 px-4 py-4">
+                <a href="CATALOG-ADDCATEGORIES" class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white">Categories</a>
+                {{-- <button 
+                    class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white"
+                    onclick="togglePopup('smartAddPopup')">
+                    Smart Add
+                </button> this button has been removed --}}
+                <a href="CATALOG-ADDBOOK" class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white">Add Book</a>
+                <button class="bg-gray-200 px-4 py-2 rounded-md hover:bg-gray-300">Refresh</button>
             </div>
 
-            <p class="text-xs text-gray-600">Make this item active for checking out, OPAC listing and other activities.</p>
-            
-            <div class="flex justify-end space-x-2">
-                <button type="button" onclick="togglePopup('addNewCopyPopup')" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Close</button>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Submit</button>
+
+            <!-- Table -->
+            <div class="overflow-x-auto mt-4">
+                <table class="min-w-full bg-white border border-gray-200">
+                    <thead>
+                        <tr class="bg-[#012A4A] text-white text-sm leading-normal">
+                            <th class="py-3 px-6 text-left">ID</th>
+                            <th class="py-3 px-6 text-left">Title</th>
+                            <th class="py-3 px-6 text-left">Type</th>
+                            <th class="py-3 px-6 text-left">Author</th>
+                            <th class="py-3 px-6 text-left">Publisher</th>
+                            <th class="py-3 px-6 text-left">Identifier</th>
+                            <th class="py-3 px-6 text-center">Copies</th>
+                            <th class="py-3 px-6 text-center">Action</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left text-gray-700">001</td>
+                            <td class="py-3 px-6 text-left text-gray-700">1984</td>
+                            <td class="py-3 px-6 text-left text-gray-700">Book</td>
+                            <td class="py-3 px-6 text-left text-gray-700">George Orwell</td>
+                            <td class="py-3 px-6 text-left text-gray-700">Secker & Warburg</td>
+                            <td class="py-3 px-6 text-left text-gray-700">ISBN: 9780451524935</td>
+                            <td class="py-3 px-6 text-center text-gray-700">1/1</td>
+                            <td class="py-3 px-6 text-center">
+                                <a href="CATALOG-VIEW_ITEM" class="text-blue-500 hover:underline pr-2">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <button onclick="togglePopup('addNewCopyPopup')" class="text-green-500 hover:underline">
+                                    <i class="fa fa-plus"></i> 
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Repeat rows as needed -->
+                    </tbody>
+                </table>
             </div>
-        </form>
+        </div>
     </div>
-</div>
 
 
-<!-- Smart Add Popup -->
-<div id="smartAddPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 class="text-lg font-bold mb-4">Add A Book</h2>
-        <form>
-            <label class="block mb-2 text-sm text-gray-600" for="isbn">ISBN 10 or 13</label>
-            <input type="text" id="isbn" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
-            
-            <label class="block mb-2 text-sm text-gray-600" for="accessionNo">Accession No.</label>
-            <input type="text" id="accessionNo" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
+    <!-- Add New Copy Popup -->
+    <div id="addNewCopyPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 class="text-lg font-bold mb-4">Add New Copy</h2>
+            <form>
+                <label class="block mb-2 text-sm text-gray-600" for="accessionNo">Accession No.</label>
+                <input type="text" id="accessionNo" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
+                
+                <label class="block mb-2 text-sm text-gray-600" for="copyNo">Copy No.</label>
+                <input type="text" id="copyNo" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
+                
+                <div class="flex items-center mb-2">
+                    <label for="active" class="flex items-center cursor-pointer">
+                        <div class="relative">
+                            <input type="checkbox" id="active" class="sr-only">
+                            <div class="w-10 h-4 bg-gray-300 rounded-full shadow-inner"></div>
+                            <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+                        </div>
+                    </label>
+                    <label for="active" class="text-sm text-gray-600">Active</label>
+                </div>
 
-            <label class="block mb-2 text-sm text-gray-600" for="category">Category</label>
-            <input type="text" id="category" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
-
-            <div class="flex justify-end space-x-2">
-                <button type="button" onclick="togglePopup('smartAddPopup')" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Close</button>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Submit</button>
-            </div>
-        </form>
+                <p class="text-xs text-gray-600">Make this item active for checking out, OPAC listing and other activities.</p>
+                
+                <div class="flex justify-end space-x-2">
+                    <button type="button" onclick="togglePopup('addNewCopyPopup')" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Close</button>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Submit</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+
+
+    {{-- <!-- Smart Add Popup --> remove this code as the Smart Add button is removed
+    <div id="smartAddPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 class="text-lg font-bold mb-4">Add A Book</h2>
+            <form>
+                <label class="block mb-2 text-sm text-gray-600" for="isbn">ISBN 10 or 13</label>
+                <input type="text" id="isbn" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
+                
+                <label class="block mb-2 text-sm text-gray-600" for="accessionNo">Accession No.</label>
+                <input type="text" id="accessionNo" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
+
+                <label class="block mb-2 text-sm text-gray-600" for="category">Category</label>
+                <input type="text" id="category" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
+
+                <div class="flex justify-end space-x-2">
+                    <button type="button" onclick="togglePopup('smartAddPopup')" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Close</button>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div> --}}
 
 
 
 
-<script>
-    function togglePopup(popupId) {
-        const popup = document.getElementById(popupId);
-        popup.classList.toggle('hidden');
-    }
+    <script>
+        function togglePopup(popupId) {
+            const popup = document.getElementById(popupId);
+            popup.classList.toggle('hidden');
+        }
 
-
-    
-
-    // function navigateToDetails() {
-    //     window.location.href = 'book-details.html'; // Replace with your details page link
-    // }
-
-
-</script>
+        // function navigateToDetails() {
+        //     window.location.href = 'book-details.html'; // Replace with your details page link
+        // }
+    </script>
 

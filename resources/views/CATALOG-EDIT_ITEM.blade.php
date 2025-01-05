@@ -96,7 +96,7 @@
         </div>
     </div>
 
-    <!-- Action Buttons -->
+    <!-- Save Changes Button -->
     <div class="flex justify-end mt-4">
         <button class="btn btn-primary px-4 py-2 mx-6 my-6 background bg-gray-300 text-white rounded-md hover:bg-[#012A4A]">Save Changes</button>
     </div>

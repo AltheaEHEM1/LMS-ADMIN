@@ -64,6 +64,14 @@ Route::get('/CATALOG-EDIT_ITEM', function () {
     return view('CATALOG-EDIT_ITEM'); 
 });
 
+Route::get('/CATALOG-ADDBOOK', function () {
+    return view('CATALOG-ADDBOOK'); 
+});
+
+Route::get('/CATALOG-ADDCATEGORIES', function () {
+    return view('CATALOG-ADDCATEGORIES'); 
+});
+
 Route::get('/CATALOG_REPORTS', function () {
     return view('CATALOG_REPORTS'); 
 });
