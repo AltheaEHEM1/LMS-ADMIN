@@ -80,20 +80,36 @@
     <div class="flex-1 ml-72 overflow-y-auto relative bg-blue-100">
         <!-- Header -->
         <header class="flex items-center px-10 py-4 bg-white shadow-md z-20 fixed top-0 w-full border-b border-gray-200">
-            <!-- User Icon -->
-            <div class="w-8 h-8 bg-blue-500 text-white flex items-center justify-center rounded-full">
-                <i class="fas fa-user"></i> <!-- User icon, blue color -->
-            </div>
-
             <!-- User Name & Role -->
-            <div class="ml-3">
-                <p class="font-semibold text-gray-800">[NAME]</p>
-                <p class="text-sm text-gray-500">Administrator</p>
-            </div>
+            <a href="/Profile" class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
+                <div>
+                    <p class="font-semibold text-gray-800">[NAME]</p>
+                    <p class="text-sm text-gray-500">Administrator</p>
+                </div>
+            </a>
 
             <!-- Fixed Bell and Dropdown Icons -->
             <div class="fixed-icons">
-                <i class="fas fa-bell text-gray-600"></i>
+                <!-- Notification Icon -->
+               <div class="relative">
+                    <i id="notificationIcon" class="fa fa-bell text-gray text-xl hover:text-[#028ABE] cursor-pointer"></i>
+                    <!-- Notification Badge -->
+                    <span id="notificationBadge" class="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5">
+                    5
+                    </span>
+                    <!-- Notification Box -->
+                    <div id="notificationBox" class="absolute top-10 right-0 bg-white border border-gray-300 rounded-lg shadow-lg w-72 max-h-96 overflow-y-auto hidden z-50">
+                    <div class="p-4 border-b border-gray-200 cursor-pointer hover:bg-gray-100">New message received</div>
+                    <div class="p-4 border-b border-gray-200 cursor-pointer hover:bg-gray-100">Your book is ready for pickup</div>
+                    <div class="p-4 border-b border-gray-200 cursor-pointer hover:bg-gray-100">Reminder: Return due tomorrow</div>
+                    <div class="p-4 text-center text-gray-500">No more notifications</div>
+                    </div>
+                </div>
+
+
+
+
                 <div class="relative">
                     <button id="dropdownButton" class="flex items-center space-x-2 focus:outline-none">
                         <i class="fas fa-cog text-gray-600"></i>
@@ -102,7 +118,7 @@
 
                     <!-- Dropdown Menu -->
                     <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
-                        <a href="#" id="settingsLink" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <a href="/Settings" id="settingsLink" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                             <i class="fas fa-cog mr-2"></i>Settings
                         </a>
                         <a href="#" onclick="openModal('LogoutModal')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
@@ -158,30 +174,23 @@
                 modal.classList.remove('flex'); // Remove the flex class
         }
         }
+
+          // Toggle notification dropdown
+          const notificationIcon = document.getElementById('notificationIcon');
+        const notificationBox = document.getElementById('notificationBox');
+        notificationIcon.addEventListener('click', () => {
+            notificationBox.classList.toggle('hidden');
+        });
+
+        const mobileNotificationIcon = document.getElementById('mobileNotificationIcon');
+        const mobileNotificationBox = document.getElementById('mobileNotificationBox');
+        mobileNotificationIcon.addEventListener('click', () => {
+            mobileNotificationBox.classList.toggle('hidden');
+        });
+
+
     </script>
 
 
-    <!-- <div id="LogoutModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 items-center justify-center hidden z-50">
-        <div class="bg-white p-6 rounded-lg shadow-md w-[60%] max-w-sm">
-                <h1 class="text-2xl font-semibold text-center mb-6">Are you sure you want to log out of this account?</h1>
-
-                <!- Hidden Logout Form ->
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-                </form>
-
-                <!- Inline Cancel and Log Out Buttons ->
-                <div class="flex justify-center space-x-4">
-                <!- Cancel Button with Icon ->
-                <button type="button" onclick="closeModal('LogoutModal')" class="flex items-center px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">
-                        <i class="fas fa-times mr-2"></i> Cancel
-                </button>
-
-                <!- Log Out Button with Icon ->
-                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="flex items-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-300">
-                        <i class="fas fa-sign-out-alt mr-2"></i> Log Out
-                </a>
-        </div>
-    </div> -->
-
+   
  
