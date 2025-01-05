@@ -56,6 +56,14 @@ Route::get('/CATALOG', function () {
     return view('CATALOG'); 
 });
 
+Route::get('/CATALOG-VIEW_ITEM', function () {
+    return view('CATALOG-VIEW_ITEM'); 
+});
+
+Route::get('/CATALOG-EDIT_ITEM', function () {
+    return view('CATALOG-EDIT_ITEM'); 
+});
+
 Route::get('/CATALOG_REPORTS', function () {
     return view('CATALOG_REPORTS'); 
 });

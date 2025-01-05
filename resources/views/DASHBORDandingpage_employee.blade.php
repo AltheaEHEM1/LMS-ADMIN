@@ -1,4 +1,7 @@
 @include('Asidebar_header')
+@vite('resources/js/dashboard.js')
+
+
     <!-- Direction of Tabs -->
     <section class="bg-gray-100 fixed ml-72 px-11 py-6 w-full top-20 left-0"> 
     <p class="text-sm text-gray-600">
@@ -130,7 +133,7 @@
         </div>
     </div>
 
-    <script>
+    {{-- <script>
     // Books Chart
     const booksCtx = document.getElementById('booksChart').getContext('2d');
     new Chart(booksCtx, {
@@ -191,4 +194,4 @@
         maintainAspectRatio: false,
         }
     });
-    </script>
+    </script> --}}
