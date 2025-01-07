@@ -48,12 +48,16 @@
                     <div class="flex space-x-8 items-center justify-center">
                         <div class="p-4">
                             <label class="block text-sm font-medium text-gray-700">Booking Date</label>
-                            <input id="bookingDate" type="date" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <div class="border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 bg-gray-100">
+                                January 2,2025
+                            </div>
                         </div>
 
                         <div class="p-4">
                             <label class="block text-sm font-medium text-gray-700">Returning Date</label>
-                            <input id="returningDate" type="date" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <div class="border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 bg-gray-100">
+                                January 10,2025
+                            </div>
                         </div>
 
                         <div class="p-4">
