@@ -413,7 +413,6 @@
                 </div>
 
 
-
          <!-- Delete Modal -->
         <div id="DeleteModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 items-center justify-center hidden">
             <div class="bg-white p-6 rounded-lg shadow-md w-[60%] max-w-sm">

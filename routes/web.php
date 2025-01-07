@@ -70,7 +70,6 @@ Route::get('/Edit', function () {
 });
 
 
-
 /////CIRCULATION_REPORTS
 Route::get('/CIRCULATION_REPORTS', function () {
     return view('CIRCULATION_REPORTS'); 
