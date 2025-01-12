@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmployeeController;
 //////////////////////////////////////////////////////////
 //if you want to run the log in of employee
 Route::get('/', function () {
@@ -125,3 +126,6 @@ Route::get('/CategoryList', function () {
 Route::post('/login_employee', [AuthController::class, 'login_employee'])->name('login_employee');
 
 Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
+
+//creation of employees
+Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');

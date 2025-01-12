@@ -90,7 +90,8 @@
                 <div class="bg-white p-7 rounded-lg shadow-md w-[60%] ml-[20%] mt-20">
                     <h2 class="text-xl font-semibold mb-4">Add New Employee</h2>
 
-                    <form id="newEmployeeForm" onsubmit="return validateForm()">
+                    <form id="newEmployeeForm" action="/employees" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                        @csrf
                         <!-- Name Section (Inline: First Name, Middle Name, Last Name) -->
                         <div class="grid grid-cols-3 gap-4 mb-4">
                             <div>

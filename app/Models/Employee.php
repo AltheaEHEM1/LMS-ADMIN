@@ -16,14 +16,27 @@ class Employee extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name', 
+        'first_name', 
+        'middle_name', 
+        'last_name', 
         'email', 
-        'email_verified_at', 
         'password', 
-        'activate', 
-        'cataloger', 
-        'librarian', 
-        'admin',
+        'phone_no', 
+        'date_of_birth', 
+        'address', 
+        'photo', 
+        'activate',
+        'access_dashboard', 
+        'access_employee', 
+        'access_reservation', 
+        'access_catalog', 
+        'access_members', 
+        'access_circulations', 
+        'access_circulation_reports', 
+        'access_member_reports', 
+        'access_overdue_reports', 
+        'access_catalog_reports',
+        'created_by',
     ];
 
     /**
@@ -54,5 +67,11 @@ class Employee extends Authenticatable
         return $this->morphMany(Session::class, 'user');
     }
 
-    
+    /**
+     * Relationship to indicate the employee who created this one.
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo(self::class, 'created_by');
+    }
 }

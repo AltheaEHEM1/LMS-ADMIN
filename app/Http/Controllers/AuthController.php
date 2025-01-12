@@ -16,11 +16,20 @@ class AuthController extends BaseController
             'password' => 'required|min:6',
         ]);
 
+        // Check if the user exists and is activated
+        $employee = \App\Models\Employee::where('email', $request->email)->first();
+
+        if ($employee && !$employee->activate) {
+            // Account exists but is not activated
+            return back()->withErrors([
+                'email' => 'Your account is not activated. Please contact the administrator.',
+            ])->withInput($request->only('email'));
+        }
+
         // Attempt login
         if (Auth::attempt($credentials)) {
             // Successful login
-            return redirect()->route('DASHBORDandingpage_employee')->with('success', 'Logged in successfully!');
-
+            return redirect()->route('DASHBOARDLandingpage_employee')->with('success', 'Logged in successfully!');
         }
 
         // Failed login
@@ -28,6 +37,7 @@ class AuthController extends BaseController
             'email' => 'The email or password is wrong.',
         ])->withInput($request->only('email'));
     }
+
 
 
     public function destroy(Request $request)
