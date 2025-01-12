@@ -12,15 +12,33 @@ return new class extends Migration
     public function up(): void
     {
         // Create 'employees' table
-        Schema::create('employees', function (Blueprint $table) { // Renamed to 'employees'
+        Schema::create('employees', function (Blueprint $table) { 
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('activate')->default(true); // Indicates if the employee account is active
+            $table->boolean('cataloger')->default(false); // Role: cataloger
+            $table->boolean('librarian')->default(false); // Role: librarian
+            $table->boolean('admin')->default(false); // Role: admin
             $table->rememberToken();
             $table->timestamps();
         });
+        
+        if (!DB::table('employees')->where('email', 'rubenjrtbertuso@gmail.com')->exists()) {
+            DB::table('employees')->insert([
+                'name' => 'RubenBertuso',
+                'email' => 'rubenjrtbertuso@gmail.com',
+                'password' => Hash::make('benjr23'), // Replace 'securepassword' with a strong password
+                'activate' => true,
+                'cataloger' => true,
+                'librarian' => true,
+                'admin' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
 
         // Create 'password_reset_tokens' table
         Schema::create('password_reset_tokens', function (Blueprint $table) {
