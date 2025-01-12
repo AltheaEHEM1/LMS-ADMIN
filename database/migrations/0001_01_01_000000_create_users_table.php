@@ -30,14 +30,7 @@ return new class extends Migration
         });
 
         // Create 'sessions' table
-        Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->foreignId('employee_id')->nullable()->index(); // Changed to 'employee_id'
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->longText('payload');
-            $table->integer('last_activity')->index();
-        });
+        
     }
 
     /**

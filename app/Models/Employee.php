@@ -46,6 +46,8 @@ class Employee extends Authenticatable
      */
     public function sessions()
     {
-        return $this->hasMany(Session::class, 'employee_id');
+        return $this->morphMany(Session::class, 'user');
     }
+
+    
 }
