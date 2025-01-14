@@ -1,4 +1,8 @@
 @include('Asidebar_header')
+@vite('resources/js/profile.js')
+
+
+
     <!-- Direction of Tabs -->
     <section class="bg-gray-100 fixed ml-72 px-11 py-6 w-full top-20 left-0"> 
         <p class="text-sm text-gray-600">
@@ -254,7 +258,7 @@
     </div>
     
 
-    <script>
+    {{-- <script>
         // Function to open a modal by ID
         function openModal(modalId) {
         const modal = document.getElementById(modalId);
@@ -273,7 +277,7 @@
         }
         }
 
-</script>
+</script> --}}
 
 
 
