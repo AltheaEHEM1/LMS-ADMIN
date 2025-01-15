@@ -57,4 +57,32 @@ class EmployeeController extends Controller
         // Redirect back with success message
         return redirect()->route('EMPLOYEE')->with('success', 'Employee added successfully!');
     }
+    public function activateEmployee(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $email = $request->input('email');
+
+        // Find the employee by email
+        $employee = Employee::where('email', $email)->first();
+
+        if (!$employee) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Employee not found.'
+            ], 404);
+        }
+
+        // Update the activate field to true
+        $employee->activate = true;
+        $employee->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Employee activation status updated successfully.',
+            'employee' => $employee
+        ], 200);
+    }
 }
