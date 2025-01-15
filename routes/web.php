@@ -129,3 +129,11 @@ Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 
 //creation of employees
 Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
+
+
+Route::get('/EMPLOYEET', function () {
+    return view('EMPLOYEE'); 
+})->name('employee.page');
+
+
+Route::post('/activate-employee', [EmployeeController::class, 'activateEmployee']);
