@@ -1,4 +1,8 @@
 @include('Asidebar_header')
+@vite('resources/js/profile.js')
+
+
+
     <!-- Direction of Tabs -->
     <section class="bg-gray-100 fixed ml-72 px-11 py-6 w-full top-20 left-0"> 
         <p class="text-sm text-gray-600">
@@ -254,26 +258,6 @@
     </div>
     
 
-    <script>
-        // Function to open a modal by ID
-        function openModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-                modal.classList.remove('hidden'); // Remove the hidden class
-                modal.classList.add('flex'); // Add the flex class to display the modal
-        }
-        }
-
-        // Function to close a modal by ID
-        function closeModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-                modal.classList.add('hidden'); // Add the hidden class to hide the modal
-                modal.classList.remove('flex'); // Remove the flex class
-        }
-        }
-
-</script>
 
 
 

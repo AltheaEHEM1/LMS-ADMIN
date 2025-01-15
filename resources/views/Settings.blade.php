@@ -1,4 +1,7 @@
 @include('Asidebar_header')
+@vite('resources/js/settings.js')
+
+
 <!-- Direction of Tabs -->
 <section class="bg-gray-100 fixed ml-72 px-11 py-6 w-full top-20 left-0"> 
     <p class="text-sm text-gray-600">
@@ -22,7 +25,7 @@
 
 
 
-  
+
 
 </body>
 </html>

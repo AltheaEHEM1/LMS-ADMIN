@@ -1,4 +1,6 @@
 @include('Asidebar_header')
+@vite('resources/js/overdue-reports.js')
+
 <!-- Direction of Tabs -->
 <section class="bg-gray-100 fixed ml-72 px-11 py-6 w-full top-20 left-0"> 
     <p class="text-sm text-gray-600">
@@ -64,21 +66,7 @@
             </div>
         </div>
 
-<script>
-    const dropdownButton = document.getElementById('dropdown-button');
-    const dropdownMenu = document.getElementById('dropdown-menu');
 
-    dropdownButton.addEventListener('click', () => {
-        dropdownMenu.classList.toggle('hidden'); // Toggle the 'hidden' class
-    });
-
-    // Close dropdown if clicked outside
-    document.addEventListener('click', (event) => {
-        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-            dropdownMenu.classList.add('hidden');
-        }
-    });
-</script>
 
     
 </body>

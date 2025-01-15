@@ -1,4 +1,7 @@
 @include('Asidebar_header')
+@vite('resources/js/catalog-view_item.js')
+
+
     <!-- Direction of Tabs -->
     <section class="bg-gray-100 fixed ml-72 px-11 py-6 w-full top-20 left-0"> 
         <p class="text-sm text-gray-600">
@@ -139,10 +142,3 @@
         </form>
     </div>
 </div>
-
-<script>
-    function togglePopup() {
-        const popup = document.getElementById("popup");
-        popup.classList.toggle("hidden");
-    }
-</script>

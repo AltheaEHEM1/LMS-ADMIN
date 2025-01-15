@@ -1,4 +1,6 @@
 @include('Asidebar_header')
+@vite('resources/js/members.js')
+
     <!-- Direction of Tabs -->
     <section class="bg-gray-100 fixed ml-72 px-11 py-6 w-full top-20 left-0"> 
         <p class="text-sm text-gray-600">
@@ -248,108 +250,6 @@
             </div>
         </div>
 
-
-        <script>
-                // Function to open a modal by ID
-                function openModal(modalId) {
-                const modal = document.getElementById(modalId);
-                if (modal) {
-                        modal.classList.remove('hidden'); // Remove the hidden class
-                        modal.classList.add('flex'); // Add the flex class to display the modal
-                }
-                }
-
-                // Function to close a modal by ID
-                function closeModal(modalId) {
-                const modal = document.getElementById(modalId);
-                if (modal) {
-                        modal.classList.add('hidden'); // Add the hidden class to hide the modal
-                        modal.classList.remove('flex'); // Remove the flex class
-                }
-                }
-
-                //New Modal validations
-                // Form Validation
-            function validateForm() {
-            let isValid = true;
-
-            // Check required fields
-            const firstName = document.getElementById('firstName');
-            const middleName = document.getElementById('middleName');
-            const lastName = document.getElementById('lastName');
-            const phoneNo = document.getElementById('phoneNo');
-            const dob = document.getElementById('dob');
-            const email = document.getElementById('email');
-            const address = document.getElementById('address');
-            
-            // First Name Validation
-            if (firstName.value.trim() === "") {
-                document.getElementById('firstNameError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('firstNameError').classList.add('hidden');
-            }
-
-            // Middle Name Validation
-            if (middleName.value.trim() === "") {
-                document.getElementById('middleNameError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('middleNameError').classList.add('hidden');
-            }
-
-            // Last Name Validation
-            if (lastName.value.trim() === "") {
-                document.getElementById('lastNameError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('lastNameError').classList.add('hidden');
-            }
-
-            // Phone No. Validation
-            if (phoneNo.value.trim() === "") {
-                document.getElementById('phoneNoError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('phoneNoError').classList.add('hidden');
-            }
-
-            // Date of Birth Validation
-            if (dob.value.trim() === "") {
-                document.getElementById('dobError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('dobError').classList.add('hidden');
-            }
-
-            // Email Validation
-            if (email.value.trim() === "") {
-                document.getElementById('emailError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('emailError').classList.add('hidden');
-            }
-
-            // Email Format Validation
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email.value.trim())) {
-                document.getElementById('emailErrorInvalid').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('emailErrorInvalid').classList.add('hidden');
-            }
-
-            // Address Validation
-            if (address.value.trim() === "") {
-                document.getElementById('addressError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('addressError').classList.add('hidden');
-            }
-
-            return isValid;
-        }
-        </script>
 
 
 

@@ -1,4 +1,5 @@
 @include('Asidebar_header')
+@vite('resources/js/catalog.js')
 
     <!-- Direction of Tabs -->
     <section class="bg-gray-100 fixed ml-72 px-11 py-6 w-full top-20 left-0"> 
@@ -81,45 +82,35 @@
     </div>
 
 
-      <!-- Add New Copy Popup -->
-      <div id="addNewCopyPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h2 class="text-lg font-bold mb-4">Add New Copy</h2>
-            <form>
-                <label class="block mb-2 text-sm text-gray-600" for="accessionNo">Accession No.</label>
-                <input type="text" id="accessionNo" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
-                
-                <label class="block mb-2 text-sm text-gray-600" for="copyNo">Copy No.</label>
-                <input type="text" id="copyNo" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
-                
-                <div class="flex items-center mb-2">
-                    <label for="active" class="flex items-center cursor-pointer">
-                        <div class="relative">
-                            <input type="checkbox" id="active" class="sr-only">
-                            <div class="w-10 h-4 bg-gray-300 rounded-full shadow-inner"></div>
-                            <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
-                        </div>
-                    </label>
-                    <label for="active" class="text-sm text-gray-600">Active</label>
-                </div>
+    <!-- Add New Copy Popup -->
+    <div id="addNewCopyPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h2 class="text-lg font-bold mb-4">Add New Copy</h2>
+        <form>
+            <label class="block mb-2 text-sm text-gray-600" for="accessionNo">Accession No.</label>
+            <input type="text" id="accessionNo" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
+            
+            <label class="block mb-2 text-sm text-gray-600" for="copyNo">Copy No.</label>
+            <input type="text" id="copyNo" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
+            
+            <div class="flex items-center mb-2">
+                <label for="active" class="flex items-center cursor-pointer">
+                    <div class="relative">
+                        <input type="checkbox" id="active" class="sr-only">
+                        <div class="w-10 h-4 bg-gray-300 rounded-full shadow-inner transition-colors" id="toggle-bg"></div>
+                        <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition-transform" id="toggle-dot"></div>
+                    </div>
+                </label>
+                <label for="active" class="text-sm text-gray-600">Active</label>
+            </div>
+            
 
-                <p class="text-xs text-gray-600">Make this item active for checking out, OPAC listing and other activities.</p>
-                
-                <div class="flex justify-end space-x-2">
-                    <button type="button" onclick="togglePopup('addNewCopyPopup')" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Close</button>
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Submit</button>
-                </div>
-            </form>
-        </div>
+            <p class="text-xs text-gray-600">Make this item active for checking out, OPAC listing and other activities.</p>
+            
+            <div class="flex justify-end space-x-2">
+                <button type="button" onclick="togglePopup('addNewCopyPopup')" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Close</button>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Submit</button>
+            </div>
+        </form>
     </div>
-
-    <script>
-        function togglePopup(popupId) {
-            const popup = document.getElementById(popupId);
-            popup.classList.toggle('hidden');
-        }
-
-        // function navigateToDetails() {
-        //     window.location.href = 'book-details.html'; // Replace with your details page link
-        // }
-    </script>
+</div>

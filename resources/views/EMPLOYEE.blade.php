@@ -1,4 +1,6 @@
 @include('Asidebar_header')
+@vite('resources/js/employee.js')
+
         <!-- Direction of Tabs -->
         <section class="bg-gray-100 fixed ml-72 px-11 py-6 w-full top-20 left-0"> 
             <p class="text-sm text-gray-600">
@@ -35,7 +37,7 @@
                         </ul>
                     </div>
                     @endif
-    
+
                     <div class="mb-4 flex justify-start">
                         <button onclick="openModal('NewModal')" class="bg-[#012A4A] text-white px-4 py-2 rounded-lg shadow hover:bg-[#028ABE]">
                             New Employee
@@ -90,9 +92,9 @@
                 </div>
 
             </div>
-            
         </div>
-        
+
+    
     <!--modals-->
         <!-- New Member Modal -->
             <div id="NewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 items-center justify-center hidden">
@@ -109,7 +111,7 @@
                                        class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" required>
                                 <p id="firstNameError" class="text-red-500 text-sm hidden">First Name is required.</p>
                             </div>
-                        
+
                             <!-- Middle Name -->
                             <div>
                                 <label class="text-sm text-gray-600">Middle Name</label>
@@ -117,7 +119,7 @@
                                        class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800">
                                 <p id="middleNameError" class="text-red-500 text-sm hidden">Middle Name is required.</p>
                             </div>
-                        
+
                             <!-- Last Name -->
                             <div>
                                 <label class="text-sm text-gray-600">Last Name <span class="text-red-500">*</span></label>
@@ -150,7 +152,7 @@
                                     <p id="emailError" class="text-red-500 text-sm hidden">Email is required.</p>
                                     <p id="emailErrorInvalid" class="text-red-500 text-sm hidden error-message">Please enter a valid email address.</p>
                                 </div>
-
+                                
                                 <div>
                                     <label for="password" class="block text-sm font-medium text-gray-700">Password <span class="text-red-500">*</span></label>
                                     <input type="password" name="password" id="password" placeholder="Enter your password" 
@@ -165,7 +167,6 @@
                                            class="w-full mt-1 border rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
                                     <p id="confirmPasswordError" class="text-red-500 text-sm hidden">Passwords do not match.</p>
                                 </div>
-                                
 
                                 <div>
                                     <label class="text-sm text-gray-600">Address <span class="text-red-500">*</span></label>
@@ -188,8 +189,8 @@
 
                                 <!-- Modal Trigger Button -->
                                 <button type="button" onclick="openModal('AccessModal')" class="px-4 py-2 bg-[#012A4A] text-white rounded-md">
-                                    Employee Accessibility
-                                </button>
+                                Employee Accessibility
+                            </button>
 
                                 <!-- Modal -->
                                 <div id="AccessModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center">
@@ -476,115 +477,6 @@
             </div>
         </div>
 
-
-        <script>
-                // Function to open a modal by ID
-                function openModal(modalId) {
-                const modal = document.getElementById(modalId);
-                if (modal) {
-                        modal.classList.remove('hidden'); // Remove the hidden class
-                        modal.classList.add('flex'); // Add the flex class to display the modal
-                }
-                }
-
-                // Function to close a modal by ID
-                function closeModal(modalId) {
-                const modal = document.getElementById(modalId);
-                if (modal) {
-                        modal.classList.add('hidden'); // Add the hidden class to hide the modal
-                        modal.classList.remove('flex'); // Remove the flex class
-                }
-                }
-
-                //New Modal validations
-                // Form Validation
-            function validateForm() {
-            let isValid = true;
-
-            // Check required fields
-            const firstName = document.getElementById('firstName');
-            const middleName = document.getElementById('middleName');
-            const lastName = document.getElementById('lastName');
-            const phoneNo = document.getElementById('phoneNo');
-            const dob = document.getElementById('dob');
-            const email = document.getElementById('email');
-            const address = document.getElementById('address');
-            
-            // First Name Validation
-            if (firstName.value.trim() === "") {
-                document.getElementById('firstNameError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('firstNameError').classList.add('hidden');
-            }
-
-            // Middle Name Validation
-            if (middleName.value.trim() === "") {
-                document.getElementById('middleNameError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('middleNameError').classList.add('hidden');
-            }
-
-            // Last Name Validation
-            if (lastName.value.trim() === "") {
-                document.getElementById('lastNameError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('lastNameError').classList.add('hidden');
-            }
-
-            // Phone No. Validation
-            if (phoneNo.value.trim() === "") {
-                document.getElementById('phoneNoError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('phoneNoError').classList.add('hidden');
-            }
-
-            // Date of Birth Validation
-            if (dob.value.trim() === "") {
-                document.getElementById('dobError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('dobError').classList.add('hidden');
-            }
-
-            // Email Validation
-            if (email.value.trim() === "") {
-                document.getElementById('emailError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('emailError').classList.add('hidden');
-            }
-
-            // Email Format Validation
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email.value.trim())) {
-                document.getElementById('emailErrorInvalid').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('emailErrorInvalid').classList.add('hidden');
-            }
-
-            // Address Validation
-            if (address.value.trim() === "") {
-                document.getElementById('addressError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('addressError').classList.add('hidden');
-            }
-
-            return isValid;
-        }
-
-        function savePermissions() {
-            // Add logic to save permissions
-            console.log("Permissions saved");
-            // Close the modal
-            closeModal('AccessModal');
-        }
-        </script>
 
 
 </body>

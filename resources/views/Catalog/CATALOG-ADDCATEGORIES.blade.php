@@ -1,4 +1,5 @@
 @include('Asidebar_header')
+@vite('resources/js/catalog-addcategories.js')
 
     <!-- Direction of Tabs -->
     <section class="bg-gray-100 fixed ml-72 px-11 py-6 w-full top-20 left-0"> 
@@ -210,14 +211,3 @@
         </div>
     </div>
 </div>
-
-<!-- JavaScript -->
-<script>
-    function showModal(modalId) {
-        document.getElementById(modalId).classList.remove('hidden');
-    }
-
-    function closeModal(modalId) {
-        document.getElementById(modalId).classList.add('hidden');
-    }
-</script>

@@ -1,4 +1,5 @@
 @include('Asidebar_header')
+@vite('resources/js/catalog-edit_item.js')
 
 <!-- Direction of Tabs -->
 <section class="bg-gray-100 fixed ml-72 px-11 py-6 w-full top-20 left-0"> 
@@ -36,7 +37,7 @@
 
             <!-- Cover Photo Section -->
             <div class="flex flex-col items-center">
-                <img src="https://via.placeholder.com/100" class="w-40 h-60 object-cover border rounded-lg shadow-md mb-4">
+                <img id="current-cover-photo" src="https://via.placeholder.com/100" class="w-40 h-60 object-cover border rounded-lg shadow-md mb-4">
                 <button onclick="toggleCoverPhotoPopup()" class="btn btn-outline-primary px-3 py-2 text-sm border border-gray-300 rounded-md text-[#012A4A] hover:bg-gray-100">
                     Change Cover Photo
                 </button>
@@ -119,21 +120,3 @@
     </div>
 </div>
 
-<!-- JavaScript for Popup -->
-<script>
-    function toggleCoverPhotoPopup() {
-        const popup = document.getElementById('cover-photo-popup');
-        popup.classList.toggle('hidden');
-    }
-
-    // Handle the cover photo upload
-    document.getElementById('change-cover-photo-form').addEventListener('submit', function (e) {
-        e.preventDefault();
-        const coverPhotoInput = document.getElementById('coverPhoto');
-        if (coverPhotoInput.files.length > 0) {
-            const newCoverPhoto = URL.createObjectURL(coverPhotoInput.files[0]);
-            document.getElementById('current-cover-photo').src = newCoverPhoto;
-            toggleCoverPhotoPopup();
-        }
-    });
-</script>

@@ -1,4 +1,5 @@
 @include('Asidebar_header')
+@vite('resources/js/check-out.js')
 
     <!-- Direction of Tabs -->
     <section class="bg-gray-100 fixed ml-72 px-11 py-6 w-full top-20 left-0"> 
@@ -81,24 +82,3 @@
     </div>
 </div>
 
-<!-- JavaScript for Pop-Ups -->
-<script>
-    // Function to show modal
-    function showModal(modalId) {
-        document.getElementById(modalId).classList.remove('hidden');
-    }
-
-    // Function to close modal
-    function closeModal(modalId) {
-        document.getElementById(modalId).classList.add('hidden');
-    }
-
-    // Event listeners for buttons
-    document.getElementById('uploadButton').addEventListener('click', function () {
-        showModal('uploadModal');
-    });
-
-    document.getElementById('saveButton').addEventListener('click', function () {
-        showModal('saveModal');
-    });
-</script>

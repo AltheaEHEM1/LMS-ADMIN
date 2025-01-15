@@ -130,7 +130,7 @@
         </header>
     </div>
 
-    <!-- Modal Background with opacity (Initially hidden) -->
+   <!-- Modal Background with opacity (Initially hidden) -->
     <div id="LogoutModal" class="fixed inset-0 bg-gray-500 bg-opacity-50 items-center justify-center z-50 hidden">
         <!-- Modal Content -->
         <div class="bg-white p-6 rounded-lg shadow-md w-[60%] max-w-sm relative">
@@ -147,50 +147,9 @@
                 <button type="button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="flex items-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-300">
                     <i class="fas fa-sign-out-alt mr-2"></i> Log out
                 </button>
-    
+
             </div>
         </div>
     </div>
 
 
-
-
-    <script>
-        //for the logout modal
-        // Function to open a modal by ID
-        function openModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-                modal.classList.remove('hidden'); // Remove the hidden class
-                modal.classList.add('flex'); // Add the flex class to display the modal
-        }
-        }
-
-        // Function to close a modal by ID
-        function closeModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-                modal.classList.add('hidden'); // Add the hidden class to hide the modal
-                modal.classList.remove('flex'); // Remove the flex class
-        }
-        }
-
-          // Toggle notification dropdown
-          const notificationIcon = document.getElementById('notificationIcon');
-        const notificationBox = document.getElementById('notificationBox');
-        notificationIcon.addEventListener('click', () => {
-            notificationBox.classList.toggle('hidden');
-        });
-
-        const mobileNotificationIcon = document.getElementById('mobileNotificationIcon');
-        const mobileNotificationBox = document.getElementById('mobileNotificationBox');
-        mobileNotificationIcon.addEventListener('click', () => {
-            mobileNotificationBox.classList.toggle('hidden');
-        });
-
-
-    </script>
-
-
-   
- 
