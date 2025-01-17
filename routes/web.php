@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
+
 //////////////////////////////////////////////////////////
 //if you want to run the log in of employee
 Route::get('/', function () {
@@ -136,4 +137,3 @@ Route::get('/EMPLOYEET', function () {
 })->name('employee.page');
 
 
-Route::post('/activate-employee', [EmployeeController::class, 'activateEmployee']);
