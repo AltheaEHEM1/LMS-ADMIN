@@ -86,4 +86,34 @@ class EmployeeController extends Controller
             'message' => 'Employee not found.',
         ], 404);
     }
+
+    public function deactivateUser(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        // Retrieve the email from the request
+        $email = $request->input('email');
+
+        // Find the employee by email
+        $employee = Employee::where('email', $email)->first();
+
+        if ($employee) {
+            // Update the activate column to true
+            $employee->activate = false;
+            $employee->save();
+
+            return response()->json([
+                'message' => 'Employee activated successfully.',
+                'employee' => $employee
+            ], 200);
+        }
+
+        // If employee not found
+        return response()->json([
+            'message' => 'Employee not found.',
+        ], 404);
+    }
 }

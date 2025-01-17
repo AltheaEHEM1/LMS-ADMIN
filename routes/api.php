@@ -11,4 +11,5 @@ Route::get('/user', function (Request $request) {
 
 
 Route::post('/activate-user', [EmployeeController::class, 'activateUser']);
+Route::post('/deactivate-user', [EmployeeController::class, 'deactivateUser']);
 
