@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\BookController;
 
 //////////////////////////////////////////////////////////
 //if you want to run the log in of employee
@@ -23,9 +24,13 @@ Route::get('/Settings', function () {
 });
 
 
-Route::get('/DASHBORDandingpage_employee', function () {
-    return view('DASHBORDandingpage_employee'); 
+Route::get('/DASHBORDLandingpage_employee', function () {
+    return view('DASHBORDLandingpage_employee'); 
 });
+
+Route::get('/DASHBORDLandingpage_employee1', function () {
+    return view('DASHBORDLandingpage_employee'); 
+})->name('DASHBOARDLandingpage_employee');
 
 Route::get('/EMPLOYEE', function () {
     return view('EMPLOYEE'); 
@@ -137,3 +142,7 @@ Route::get('/EMPLOYEET', function () {
 })->name('employee.page');
 
 
+
+
+
+Route::post('/books', [BookController::class, 'store'])->name('book.store');

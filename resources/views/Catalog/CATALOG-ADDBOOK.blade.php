@@ -17,44 +17,59 @@
             <h1 class="text-xl font-bold text-[#012A4A] mb-2">Add New Item</h1>
             <hr class="mt-2 border-gray-300" />
         </div>
-
+        @if ($errors->any())
+            <div>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="ml-6 rounded-md p-6">
             <!-- Form Fields Section -->
             <div class="col-span-2 grid grid-cols-1 gap-4">
                 <!-- Form Fields -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Media Type</label>
-                    <input id="mediaType" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Category</label>
-                    <input id="category" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                    <p class="text-sm text-gray-500 mt-1">Category not listed? Please "Add new category" first.</p>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Title</label>
-                    <input id="title" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">ISBN</label>
-                    <input id="isbn" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">ISBN 13</label>
-                    <input id="isbn13" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Edition</label>
-                    <input id="edition" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Year</label>
-                    <input id="year" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Tag</label>
-                    <input id="tag" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                </div>
+                <form id="addBookForm" method="POST" action="{{ route('book.store') }}">
+                    @csrf <!-- CSRF Token -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Media Type</label>
+                        <input name="media_type" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Category</label>
+                        <input name="category" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Title</label>
+                        <input name="title" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">ISBN</label>
+                        <input name="isbn" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">ISBN 13</label>
+                        <input name="isbn_13" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Edition</label>
+                        <input name="edition" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Year</label>
+                        <input name="year" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Tag</label>
+                        <input name="tag" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Photo</label>
+                        <input name="photo" type="file" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <button type="submit" class="px-4 py-2 bg-[#012A4A] text-white rounded-md mt-4">Save Changes</button>
+                </form>
 
                 <!-- Buttons Section -->
                 <div class="flex items-center space-x-2 mt-4">
