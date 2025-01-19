@@ -1,14 +1,9 @@
-// Get the form and the input elements
+// Get the form and input elements
 const form = document.getElementById('SigninForm');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const togglePasswordIcon = document.getElementById('togglePassword');
 const eyeIcon = togglePasswordIcon.querySelector('i');
-
-// Ensure password is hidden by default
-passwordInput.type = 'password';
-eyeIcon.classList.remove('fa-eye-slash');
-eyeIcon.classList.add('fa-eye');
 
 // Add event listener to handle form submission
 form.addEventListener('submit', async function (e) {
@@ -33,14 +28,18 @@ form.addEventListener('submit', async function (e) {
             body: JSON.stringify({ email, password }),
         });
 
-        const result = await response.json();
-
         if (response.ok) {
-            // Login successful, redirect to the dashboard
-            window.location.href = '/DASHBORDLandingpage_employee';
+            // Redirect handled by Laravel if login is successful
+            const result = await response.json();
+            window.location.href = result.redirect || '/DASHBORDLandingpage_employee';
+        } else if (response.status === 422) {
+            // Laravel validation error
+            const errorData = await response.json();
+            alert(errorData.errors.email || 'Invalid input. Please try again.');
         } else {
-            // Show error message
-            alert(result.message || 'Login failed. Please try again.');
+            // General error
+            const errorData = await response.json();
+            alert(errorData.message || 'Login failed. Please try again.');
         }
     } catch (error) {
         console.error('Error during login:', error);
@@ -50,18 +49,10 @@ form.addEventListener('submit', async function (e) {
 
 // Toggle password visibility
 togglePasswordIcon.addEventListener('click', function () {
-    // Check if the password is currently hidden
     const isPasswordHidden = passwordInput.type === 'password';
     passwordInput.type = isPasswordHidden ? 'text' : 'password';
 
     // Update the eye icon
-    if (isPasswordHidden) {
-        // When password becomes visible, show the closed eye icon
-        eyeIcon.classList.remove('fa-eye');
-        eyeIcon.classList.add('fa-eye-slash');
-    } else {
-        // When password is hidden, show the open eye icon
-        eyeIcon.classList.remove('fa-eye-slash');
-        eyeIcon.classList.add('fa-eye');
-    }
+    eyeIcon.classList.toggle('fa-eye');
+    eyeIcon.classList.toggle('fa-eye-slash');
 });
