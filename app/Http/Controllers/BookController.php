@@ -50,7 +50,7 @@ class BookController extends Controller
         ]);
 
         // Redirect to a specific page with a success message
-        return redirect()->route('book.index')->with('success', 'Book created successfully.');
+        return redirect()->route('catalogs')->with('success', 'Book created successfully.');
     }
 
 
