@@ -59,7 +59,7 @@
                     <li><a href="/RESERVATION" id="Reservation" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
                         <i class="fas fa-calendar-check mr-4"></i> Reservations</a></li>
                     <li>
-                        <a href="{{ route('catalog') }}" id="catalog" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                        <a href="{{ route('catalogs') }}" id="catalog" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
                                 <i class="fas fa-book-open mr-4"></i> Catalog
                         </a>
                     </li>

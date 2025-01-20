@@ -6,7 +6,7 @@
         <p class="text-sm text-gray-600">
             <i class="fas fa-home text-gray-800"></i>
             <a a href="/DASHBORDandingpage_employee">Dashboard</a>
-            <a a href="{{ route('catalog') }}">/ Catalog</a> 
+            <a a href="{{ route('catalogs') }}">/ Catalog</a> 
         </p>
     </section>
 
