@@ -57,7 +57,7 @@ class BookController extends Controller
     public function showCatalog()
     {
         $books = Book::all(); // Fetch all books from the database
-        return view('catalog', compact('books')); // Pass books to the view
+        return view('/CATALOG', compact('books')); // Pass books to the view
     }
 
 }
