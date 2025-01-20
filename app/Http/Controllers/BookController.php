@@ -52,4 +52,12 @@ class BookController extends Controller
         // Redirect to a specific page with a success message
         return redirect()->route('book.index')->with('success', 'Book created successfully.');
     }
+
+
+    public function showCatalog()
+    {
+        $books = Book::all(); // Fetch all books from the database
+        return view('catalog', compact('books')); // Pass books to the view
+    }
+
 }

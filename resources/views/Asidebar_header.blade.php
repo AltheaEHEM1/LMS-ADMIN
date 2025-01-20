@@ -58,8 +58,11 @@
                         <i class="fas fa-user-tie mr-4"></i> Employee</a></li>
                     <li><a href="/RESERVATION" id="Reservation" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
                         <i class="fas fa-calendar-check mr-4"></i> Reservations</a></li>
-                    <li><a href="/CATALOG" id="catalog" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
-                        <i class="fas fa-book-open mr-4"></i> Catalog</a></li>
+                    <li>
+                        <a href="{{ route('catalog') }}" id="catalog" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                                <i class="fas fa-book-open mr-4"></i> Catalog
+                        </a>
+                    </li>
                     <li><a href="/MEMBERS" id="members" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
                         <i class="fas fa-users mr-4"></i> Members</a></li>
                     <li><a href="/CIRCULATION" id="circulation" class="sidebar-item flex items-center py-3 px-6 rounded-lg">

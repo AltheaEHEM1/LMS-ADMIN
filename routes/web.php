@@ -146,3 +146,5 @@ Route::get('/EMPLOYEET', function () {
 
 
 Route::post('/books', [BookController::class, 'store'])->name('book.store');
+Route::get('/catalog', [BookController::class, 'showCatalog'])->name('catalog');
+

@@ -6,7 +6,7 @@
         <p class="text-sm text-gray-600">
             <i class="fas fa-home text-gray-800"></i>
             <a a href="/DASHBORDandingpage_employee">Dashboard</a>
-            <a a href="/CATALOG">/ Catalog</a> 
+            <a a href="{{ route('catalog') }}">/ Catalog</a> 
         </p>
     </section>
 
@@ -57,25 +57,28 @@
                     </thead>
                     
                     <tbody>
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left text-gray-700">001</td>
-                            <td class="py-3 px-6 text-left text-gray-700">1984</td>
-                            <td class="py-3 px-6 text-left text-gray-700">Book</td>
-                            <td class="py-3 px-6 text-left text-gray-700">George Orwell</td>
-                            <td class="py-3 px-6 text-left text-gray-700">Secker & Warburg</td>
-                            <td class="py-3 px-6 text-left text-gray-700">ISBN: 9780451524935</td>
-                            <td class="py-3 px-6 text-center text-gray-700">1/1</td>
-                            <td class="py-3 px-6 text-center">
-                                <a href="CATALOG-VIEW_ITEM" class="text-blue-500 hover:underline pr-2">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <button onclick="togglePopup('addNewCopyPopup')" class="text-green-500 hover:underline">
-                                    <i class="fa fa-plus"></i> 
-                                </button>
-                            </td>
-                        </tr>
-                        <!-- Repeat rows as needed -->
+                        @foreach ($books as $book)
+                            <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                <td class="py-3 px-6 text-left text-gray-700">{{ $book->id }}</td>
+                                <td class="py-3 px-6 text-left text-gray-700">{{ $book->title }}</td>
+                                <td class="py-3 px-6 text-left text-gray-700">{{ $book->media_type }}</td>
+                                <td class="py-3 px-6 text-left text-gray-700">{{ $book->category }}</td>
+                                <td class="py-3 px-6 text-left text-gray-700">{{ $book->isbn }}</td>
+                                <td class="py-3 px-6 text-left text-gray-700">{{ $book->isbn_13 }}</td>
+                                <td class="py-3 px-6 text-left text-gray-700">{{ $book->edition }}</td>
+                                <td class="py-3 px-6 text-center">
+                                    <a href="{{ url('catalog/view', $book->id) }}" class="text-blue-500 hover:underline pr-2">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <button onclick="togglePopup('addNewCopyPopup')" class="text-green-500 hover:underline">
+                                        <i class="fa fa-plus"></i> 
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
+                    
+                    
                 </table>
             </div>
         </div>
