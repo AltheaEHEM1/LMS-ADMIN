@@ -35,8 +35,8 @@
 
             <!-- Action Buttons -->
             <div class="flex items-end space-x-2 px-4 py-4">
-                <a href="CATALOG-ADDCATEGORIES" class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white">Categories</a>
-                <a href="CATALOG-ADDBOOK" class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white">Add Book</a>
+                <a href="/CATALOG-ADDCATEGORIES" class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white">Categories</a>
+                <a href="/CATALOG-ADDBOOK" class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white">Add Book</a>
             </div>
 
 
