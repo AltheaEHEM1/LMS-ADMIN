@@ -151,4 +151,4 @@ Route::get('/CATALOG', function () {
     return view('CATALOG'); 
 })->name('catalog');
 
-Route::get('/EMPLOYEE/show', [BookController::class, 'showEmployee'])->name('employee.show');
+Route::get('/EMPLOYEE/show', [EmployeeController::class, 'showEmployee'])->name('employee.show');
