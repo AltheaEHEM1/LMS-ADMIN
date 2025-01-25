@@ -116,4 +116,11 @@ class EmployeeController extends Controller
             'message' => 'Employee not found.',
         ], 404);
     }
+
+
+    public function showEmployee()
+    {
+        $employees = Employee::all(); // Fetch all books from the database
+        return view('/EMPLOYEE', compact('employees')); // Pass books to the view
+    }
 }
