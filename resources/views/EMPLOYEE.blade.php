@@ -69,7 +69,7 @@
                                         </div>
                                     </td>
                                     <td class="py-3 px-4">{{ $employee->email }}</td>
-                                    <td class="py-3 px-4">{{ $employee->date_of_birth }}</td>
+                                    <td class="py-3 px-4">{{ $employee->created_at }}</td>
                                     <td class="py-3 px-4 text-green-600">{{ $employee->activate }}</td>
                                     <td class="py-3 px-4 flex justify-center items-center space-x-5">
                                         <!-- View Icon -->

@@ -42,6 +42,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($users as $user)
                                 <tr class="border-b hover:bg-gray-50">
                                     
                                     <td class="py-3 px-4 flex items-center space-x-3">
@@ -49,11 +50,11 @@
                                             N
                                         </div>
                                         <div class="items-start text-left">
-                                            <p class="font-medium">Nadine Borja</p>
+                                            <p class="font-medium">{{ $user->username }}</p>
                                         </div>
                                     </td>
-                                    <td class="py-3 px-4">nadine9567@gmail.com</td>
-                                    <td class="py-3 px-4">1-1-2025</td>
+                                    <td class="py-3 px-4">{{ $user->email }}</td>
+                                    <td class="py-3 px-4">{{ $user->created_at }}</td>
                                     <td class="py-3 px-4 text-green-600">Active</td>
                                     <td class="py-3 px-4 flex justify-center items-center space-x-5">
                                         <!-- View Icon -->
@@ -71,6 +72,7 @@
                                     </td>
                                 </tr>
                                 <!-- Repeat for other rows -->
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

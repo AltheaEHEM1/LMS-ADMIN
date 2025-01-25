@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -120,7 +121,13 @@ class EmployeeController extends Controller
 
     public function showEmployee()
     {
-        $employees = Employee::all(); // Fetch all books from the database
-        return view('/EMPLOYEE', compact('employees')); // Pass books to the view
+        $employees = Employee::all(); // 
+        return view('/EMPLOYEE', compact('employees')); 
+    }
+
+    public function showUser()
+    {
+        $users = User::all();
+        return view('/MEMBERS', compact('users')); 
     }
 }

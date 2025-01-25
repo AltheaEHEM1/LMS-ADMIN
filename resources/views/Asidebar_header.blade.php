@@ -63,7 +63,7 @@
                                 <i class="fas fa-book-open mr-4"></i> Catalog
                         </a>
                     </li>
-                    <li><a href="/MEMBERS" id="members" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                    <li><a href="{{ route('user.show') }}" id="members" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
                         <i class="fas fa-users mr-4"></i> Members</a></li>
                     <li><a href="/CIRCULATION" id="circulation" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
                         <i class="fas fa-exchange-alt mr-4"></i> Circulations</a></li>

@@ -152,3 +152,4 @@ Route::get('/CATALOG', function () {
 })->name('catalog');
 
 Route::get('/EMPLOYEE/show', [EmployeeController::class, 'showEmployee'])->name('employee.show');
+Route::get('/User/show', [EmployeeController::class, 'showUser'])->name('user.show');
