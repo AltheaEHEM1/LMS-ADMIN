@@ -114,7 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show the modal
         openModal('EditModal');
     }
-    
+    function openDeleteModal(button) {
+        const eid = button.getAttribute('data-id');
+        document.getElementById('DrecordId').value = eid;
+        openModal('DeleteModal')
+    }
     
     
     
@@ -124,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.closeModal = closeModal;
     window.openViewModal = openViewModal;
     window.openEditModal = openEditModal;
+    window.openDeleteModal = openDeleteModal;
 
 
     // Form Validation

@@ -40,6 +40,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->unsignedBigInteger('created_by')->nullable(); // ID of the user who created this record
             $table->timestamps();
+            $table->softDeletes(); // Add soft delete column
         
             // Foreign key for created_by field
             $table->foreign('created_by')->references('id')->on('employees')->onDelete('cascade');

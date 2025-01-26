@@ -11,7 +11,19 @@ use Illuminate\Database\QueryException;
 class EmployeeController extends Controller
 {   
 
-    
+    public function softDelete(Request $request)
+    {
+        // Validate the request
+        $recordedId = intval($request->recordId); // Convert recordId to integer
+
+        // Find the employee by ID
+        $employee = Employee::findOrFail($recordedId);
+
+        // Perform soft delete
+        $employee->delete();
+
+        return redirect()->back()->with('success', 'Employee has been deleted successfully.');
+    }
 
     public function update(Request $request)
     {

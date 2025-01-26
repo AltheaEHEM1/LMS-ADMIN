@@ -145,6 +145,8 @@ Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
 // update of employees
 Route::post('/employees/update', [EmployeeController::class, 'update'])->name('employees.update');
+// softdelete employees
+Route::post('/employees/delete', [EmployeeController::class, 'softDelete'])->name('employees.delete');
 
 
 
