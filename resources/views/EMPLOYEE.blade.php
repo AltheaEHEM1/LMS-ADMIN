@@ -73,7 +73,19 @@
                                     <td class="py-3 px-4 text-green-600">{{ $employee->activate }}</td>
                                     <td class="py-3 px-4 flex justify-center items-center space-x-5">
                                         <!-- View Icon -->
-                                        <button onclick="openModal('ViewModal')" class="text-blue-500 hover:text-blue-700">
+                                        <button 
+                                            onclick="openViewModal(this)" 
+                                            class="text-blue-500 hover:text-blue-700" 
+                                            data-first-name="{{ $employee->first_name }}"
+                                            data-middle-name="{{ $employee->middle_name }}"
+                                            data-last-name="{{ $employee->last_name }}"
+                                            data-phone="{{ $employee->phone }}"
+                                            data-dob="{{ $employee->date_of_birth }}"
+                                            data-address="{{ $employee->address }}"
+                                            data-email="{{ $employee->email }}"
+                                            data-joined="{{ $employee->created_at }}"
+                                            data-modified="{{ $employee->updated_at }}"
+                                            data-photo="{{ $employee->photo ? asset('storage/' . $employee->photo) : asset('path/to/default/photo.jpg') }}">
                                             <i class="fa fa-eye w-5 h-5"></i>
                                         </button>
                                         <!-- Edit Icon -->
@@ -278,40 +290,40 @@
                         <div class="w-1/2 pr-4">
                             <dl class="space-y-2">
                                 <div class="flex justify-between">
-                                    <dt class="text-sm font-medium text-gray-500">First Name</dt>
-                                    <dd class="text-sm text-gray-900">Althea</dd>
+                                    <dt data-key="first-name" class="text-sm font-medium text-gray-500">First Name</dt>
+                                    <dd class="text-sm text-gray-900"></dd>
                                 </div>
                                 <div class="flex justify-between">
-                                    <dt class="text-sm font-medium text-gray-500">Middle Name</dt>
-                                    <dd class="text-sm text-gray-900">Jacinto</dd>
+                                    <dt data-key="middle-name" class="text-sm font-medium text-gray-500">Middle Name</dt>
+                                    <dd class="text-sm text-gray-900"></dd>
                                 </div>
                                 <div class="flex justify-between">
-                                    <dt class="text-sm font-medium text-gray-500">Last Name</dt>
-                                    <dd class="text-sm text-gray-900">Asis</dd>
+                                    <dt data-key="last-name" class="text-sm font-medium text-gray-500">Last Name</dt>
+                                    <dd class="text-sm text-gray-900"></dd>
                                 </div>
                                 <div class="flex justify-between">
-                                    <dt class="text-sm font-medium text-gray-500">Phone No.</dt>
-                                    <dd class="text-sm text-gray-900">+639123456789</dd>
+                                    <dt data-key="phone" class="text-sm font-medium text-gray-500">Phone No.</dt>
+                                    <dd class="text-sm text-gray-900"></dd>
                                 </div>
                                 <div class="flex justify-between">
-                                    <dt class="text-sm font-medium text-gray-500">Date of Birth</dt>
-                                    <dd class="text-sm text-gray-900">03-02-2004</dd>
+                                    <dt data-key="dob" class="text-sm font-medium text-gray-500">Date of Birth</dt>
+                                    <dd class="text-sm text-gray-900"></dd>
                                 </div>
                                 <div class="flex justify-between">
-                                    <dt class="text-sm font-medium text-gray-500">Address</dt>
-                                    <dd class="text-sm text-gray-900">210 sto. nino st. brgy holy spirit</dd>
+                                    <dt data-key="address" class="text-sm font-medium text-gray-500">Address</dt>
+                                    <dd class="text-sm text-gray-900"></dd>
                                 </div>
                                 <div class="flex justify-between">
-                                    <dt class="text-sm font-medium text-gray-500">Email</dt>
-                                    <dd class="text-sm text-gray-900">altheaamor12@gmail.com</dd>
+                                    <dt data-key="email" class="text-sm font-medium text-gray-500">Email</dt>
+                                    <dd class="text-sm text-gray-900"></dd>
                                 </div>
                                 <div class="flex justify-between">
-                                    <dt class="text-sm font-medium text-gray-500">Joined</dt>
-                                    <dd class="text-sm text-gray-900">2024-10-27 11:50:52</dd>
+                                    <dt data-key="joined" class="text-sm font-medium text-gray-500">Joined</dt>
+                                    <dd class="text-sm text-gray-900"></dd>
                                 </div>
                                 <div class="flex justify-between">
-                                    <dt class="text-sm font-medium text-gray-500">Modified</dt>
-                                    <dd class="text-sm text-gray-900">2024-10-27 11:50:52</dd>
+                                    <dt data-key="modified" class="text-sm font-medium text-gray-500">Modified</dt>
+                                    <dd class="text-sm text-gray-900"></dd>
                                 </div>
                             </dl>
                         </div>
@@ -319,7 +331,7 @@
                         <!-- Right Side: Photo Upload Section -->
                         <div class="w-1/2 pl-4">
                             <div class="w-48 h-48 flex items-center justify-center mx-auto mb-4">
-                                <img src="./images/photo.png" alt="photo" class="w-full h-full object-cover">
+                                <img src="{{ asset('storage/' . $employee->photo) }}" alt="Employee Photo" class="w-full h-full object-cover" data-key="photo">
                             </div>
                         </div>
                     </div>

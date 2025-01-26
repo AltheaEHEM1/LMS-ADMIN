@@ -47,7 +47,7 @@
             <div class="p-5">
                 <!-- Logo -->
                 <div class="mb-10 mt-6">
-                    <img src="./images/logo_login_headerC.png" alt="Logo" class="w-36 mx-auto">
+                    <img src="/images/logo_login_headerC.png" alt="Logo" class="w-36 mx-auto">
                 </div>
 
                 <!-- Navigation Menu -->
