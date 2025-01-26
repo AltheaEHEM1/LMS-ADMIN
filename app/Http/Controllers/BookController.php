@@ -24,9 +24,8 @@ class BookController extends Controller
             'isbn'       => 'required|string|max:255',
             'isbn_13'    => 'required|string|max:255',
             'edition'    => 'required|string|max:255',
-            'year'       => 'required|string|max:4',
+            'publishedyear'       => 'required|string|max:12',
             'tag'        => 'nullable|string|max:255',
-            'photo'      => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Handle file upload for the photo
@@ -43,7 +42,7 @@ class BookController extends Controller
             'isbn'       => $request->input('isbn'),
             'isbn_13'    => $request->input('isbn_13'),
             'edition'    => $request->input('edition'),
-            'year'       => $request->input('year'),
+            'year'       => $request->input('publishedyear'),
             'tag'        => $request->input('tag'),
             'photo'      => $photoPath,
             'created_by' => Auth::id(), // Assign the currently authenticated user as the creator
