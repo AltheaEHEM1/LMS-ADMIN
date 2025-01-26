@@ -52,10 +52,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
 
+    function openEditModal(button) {
+        // Get data attributes from the button
+        const id = button.getAttribute('data-id');
+        const firstName = button.getAttribute('data-first-name');
+        const middleName = button.getAttribute('data-middle-name');
+        const lastName = button.getAttribute('data-last-name');
+        const phone = button.getAttribute('data-phone');
+        const dob = button.getAttribute('data-dob');
+        const address = button.getAttribute('data-address');
+        const email = button.getAttribute('data-email');
+        const photo = button.getAttribute('data-photo');
+    
+        // Set the values in the modal form
+        document.getElementById('firstName').value = firstName || ''; // Default to empty string if null
+        document.getElementById('middleName').value = middleName || '';
+        document.getElementById('lastName').value = lastName || '';
+        document.getElementById('phoneNo').value = phone || '';
+        document.getElementById('dob').value = dob || '';
+        document.getElementById('address').value = address || '';
+        document.getElementById('email').value = email || '';
+        alert(`Employee ID: ${id}`);
+    
+    // Alternatively, set it as text in a specific element
+        document.getElementById('displayId').innerText = `Employee ID: ${id}`;
+        // Update the photo preview
+        const photoPreview = document.querySelector('#EditModal img');
+        if (photoPreview) {
+            photoPreview.src = photo || '/path/to/default/photo.jpg'; // Use a fallback photo if none is provided
+        }
+    
+        // Store the employee ID in a hidden input (if needed)
+        document.getElementById('EditEmployeeForm').setAttribute('data-id', id);
+    
+        // Show the modal
+        openModal('EditModal');
+    }
+    
+    
+    
+
     // Expose functions globally if needed
     window.openModal = openModal;
     window.closeModal = closeModal;
     window.openViewModal = openViewModal;
+    window.openEditModal = openEditModal;
 
 
     // Form Validation
@@ -100,7 +141,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        return isValid;
+        const id = this.getAttribute('data-id');
+        const formData = new FormData(this);
+
+        fetch(`/employee/update/${id}`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Employee updated successfully');
+                location.reload(); // Refresh the page or update the UI
+            } else {
+                alert('Error updating employee');
+            }
+        })
+        .catch(error => console.error('Error:', error));
     }
 
     // Expose functions globally if needed

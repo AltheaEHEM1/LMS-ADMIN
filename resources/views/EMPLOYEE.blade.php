@@ -89,7 +89,18 @@
                                             <i class="fa fa-eye w-5 h-5"></i>
                                         </button>
                                         <!-- Edit Icon -->
-                                        <button onclick="openModal('EditModal')" class="text-gray-600 hover:text-gray-800">
+                                        <button 
+                                            onclick="openEditModal(this)" 
+                                            class="text-gray-600 hover:text-gray-800"
+                                            data-id="{{ $employee->id }}"
+                                            data-first-name="{{ $employee->first_name }}"
+                                            data-middle-name="{{ $employee->middle_name }}"
+                                            data-last-name="{{ $employee->last_name }}"
+                                            data-phone="{{ $employee->phone }}"
+                                            data-dob="{{ $employee->date_of_birth }}"
+                                            data-address="{{ $employee->address }}"
+                                            data-email="{{ $employee->email }}"
+                                            data-photo="{{ $employee->photo ? asset('storage/' . $employee->photo) : asset('path/to/default/photo.jpg') }}">
                                             <i class="fa fa-pencil-alt w-5 h-5"></i>
                                         </button>
                                         <!-- Delete Icon -->
@@ -349,6 +360,7 @@
                         <form id="EditEmployeeForm" onsubmit="return validateForm()">
                         <!-- Name Section (Inline: First Name, Middle Name, Last Name) -->
                         <div class="grid grid-cols-3 gap-4 mb-4">
+                            <div id="displayId" class="text-gray-800 mt-2"></div>
                             <div>
                                 <label class="text-sm text-gray-600">First Name <span class="text-red-500">*</span></label>
                                 <input type="text" placeholder="Althea Amor" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="firstName" required>
@@ -404,7 +416,7 @@
                                     <label class="text-sm font-semibold text-gray-700">Upload Photo</label>
                                     <!-- Photo Upload Input (Larger Image) -->
                                     <div class="w-48 h-48 flex items-center justify-center mx-auto mb-4">
-                                        <img src="./images/photo.png" alt="photo" class="w-full h-full object-cover">
+                                        <img src="{{ asset('storage/' . $employee->photo) }}" alt="Employee Photo" class="w-full h-full object-cover" data-key="photo">
                                     </div>
                                     <!-- File Upload Input (Block Format) -->
                                     <input type="file" id="uploadPhoto" name="photo" accept="image/*" class="w-full mt-1 px-3 py-2 border rounded">
@@ -461,12 +473,13 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
-                        <!-- Modal Footer -->
                         <div class="flex justify-end">
                             <button type="button" onclick="closeModal('EditModal')" class="mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">Cancel</button>
                             <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-[#011B33]">Save</button>
                         </div>
+                    </form>
+                        <!-- Modal Footer -->
+                        
                     </div>
                 </div>
 

@@ -8,7 +8,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
-{
+{   
+    public function update(Request $request, $id)
+    {
+        $employee = Employee::findOrFail($id);
+        $employee->update($request->all());
+
+        if ($request->hasFile('photo')) {
+            $employee->photo = $request->file('photo')->store('photos', 'public');
+        }
+
+        return response()->json(['success' => true]);
+    }
     public function store(Request $request)
     {
         // Validate the form inputs
