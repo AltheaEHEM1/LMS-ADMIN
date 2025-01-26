@@ -6,20 +6,79 @@ use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\QueryException;
 
 class EmployeeController extends Controller
 {   
-    public function update(Request $request, $id)
+
+    
+
+    public function update(Request $request)
     {
-        $employee = Employee::findOrFail($id);
-        $employee->update($request->all());
+        $validated = $request->validate([
+            'recordId' => 'required|string', // Validate as a string initially
+            'first_name' => 'required|string|max:255',
+            'middle_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone_no' => 'required|string|max:15',
+            'date_of_birth' => 'required|date',
+            'email' => 'required|email|max:255',
+            'address' => 'required|string',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
 
-        if ($request->hasFile('photo')) {
-            $employee->photo = $request->file('photo')->store('photos', 'public');
+        $recordId = intval($validated['recordId']); // Convert recordId to integer
+
+        try {
+            // Search for the employee by the primary key (id)
+            $employee = Employee::findOrFail($recordId);
+
+            // Update employee details
+            $employee->first_name = $validated['first_name'];
+            $employee->middle_name = $validated['middle_name'];
+            $employee->last_name = $validated['last_name'];
+            $employee->phone_no = $validated['phone_no'];
+            $employee->date_of_birth = $validated['date_of_birth'];
+            $employee->email = $validated['email'];
+            $employee->address = $validated['address'];
+            $employee->access_dashboard = $request->has('dashboard');
+            $employee->access_employee = $request->has('employee');
+            $employee->access_reservation = $request->has('reservation');
+            $employee->access_catalog = $request->has('catalog');
+            $employee->access_members = $request->has('members');
+            $employee->access_circulations = $request->has('circulations');
+            $employee->access_circulation_reports = $request->has('circulationReports');
+            $employee->access_member_reports = $request->has('membersReports');
+            $employee->access_overdue_reports = $request->has('overdueReports');
+            $employee->access_catalog_reports = $request->has('catalogReports');
+
+            // Handle photo upload
+            if ($request->hasFile('photo')) {
+                $path = $request->file('photo')->store('employees', 'public');
+                $employee->photo = $path;
+            }
+
+            $employee->save();
+
+            return redirect()->back()->with('success', 'Employee updated successfully.');
+        } catch (QueryException $e) {
+            // Handle duplicate email error
+            if ($e->getCode() === '23000') {
+                return redirect()->back()->withErrors(['email' => 'The email provided is already in use. Please use a different email address.']);
+            }
+
+            // Handle other query exceptions
+            return redirect()->back()->withErrors(['error' => 'An unexpected database error occurred. Please try again later.']);
+        } catch (\Exception $e) {
+            // Handle any other exceptions
+            return redirect()->back()->withErrors(['error' => 'An unexpected error occurred. Please try again later.']);
         }
-
-        return response()->json(['success' => true]);
     }
+
+    
+
+
+
     public function store(Request $request)
     {
         // Validate the form inputs
@@ -59,7 +118,7 @@ class EmployeeController extends Controller
             'access_catalog' => $request->has('catalog'),
             'access_members' => $request->has('members'),
             'access_circulations' => $request->has('circulations'),
-            'access_circulation_reports' => $request->has('circulationsReports'),
+            'access_circulation_reports' => $request->has('circulationReports'),
             'access_member_reports' => $request->has('membersReports'),
             'access_overdue_reports' => $request->has('overdueReports'),
             'access_catalog_reports' => $request->has('catalogReports'),
