@@ -19,7 +19,6 @@ export default defineConfig({
                 'resources/js/overdue-reports.js',
                 'resources/js/profile.js',
                 'resources/js/reservation.js',
-                'resources/js/settings.js', 
 
                 'resources/js/catalog-addbook.js',
                 'resources/js/catalog-addcategories.js',

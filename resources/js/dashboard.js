@@ -1,44 +1,46 @@
 
 
-    // Books Chart
-    const booksCtx = document.getElementById('booksChart').getContext('2d');
-    new Chart(booksCtx, {
-        type: 'bar',
-        data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+  // Books Chart
+const booksCtx = document.getElementById('booksChart').getContext('2d');
+new Chart(booksCtx, {
+    type: 'bar',
+    data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], // Monthly labels
         datasets: [{
             label: 'Books Issued',
-            data: [50, 60, 45, 70, 65],
+            data: [50, 60, 45, 70, 65, 80, 90, 85, 75, 95, 100, 110], // Monthly data for issued books
             backgroundColor: 'rgba(75, 192, 192, 0.6)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
         }]
-        },
-        options: {
+    },
+    options: {
         responsive: true,
         maintainAspectRatio: false,
-        }
-    });
+    }
+});
 
-    // Reserved Chart
-    const reservedCtx = document.getElementById('reservedChart').getContext('2d');
-    new Chart(reservedCtx, {
-        type: 'bar',
-        data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+
+    // Circulated Books Chart by Month
+const circulatedCtx = document.getElementById('circulatedChart').getContext('2d');
+new Chart(circulatedCtx, {
+    type: 'bar',
+    data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], // Months of the year
         datasets: [{
-            label: 'Books Reserved',
-            data: [10, 15, 8, 12, 9],
-            backgroundColor: 'rgba(54, 162, 235, 0.6)',
-            borderColor: 'rgba(54, 162, 235, 1)',
+            label: 'Books Circulated',
+            data: [100, 120, 95, 110, 105, 130, 125, 140, 110, 115, 100, 125], // Example data for circulated books each month
+            backgroundColor: 'rgba(75, 192, 192, 0.6)', // Color for the bars
+            borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
         }]
-        },
-        options: {
+    },
+    options: {
         responsive: true,
         maintainAspectRatio: false,
-        }
-    });
+    }
+});
+
 
     // Overdue Chart
     const overdueCtx = document.getElementById('overdueChart').getContext('2d');
