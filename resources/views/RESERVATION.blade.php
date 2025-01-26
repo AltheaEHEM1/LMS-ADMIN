@@ -71,65 +71,61 @@
 
 
                 <div class="flex gap-8">
-    <!-- Book Image -->
-    <div class="w-1/3">
-        <img src="https://via.placeholder.com/150" alt="Noli Me Tangere" class="w-full h-72 rounded-lg shadow-md">
-        <h2 class="text-xl font-semibold mt-4">Noli Me Tangere</h2>
-        <p class="text-gray-500">Rizal, Jose P.</p>
-    </div>
+                    <!-- Book Image -->
+                    <div class="w-1/3">
+                        <img src="https://via.placeholder.com/150" alt="Noli Me Tangere" class="w-full h-72 rounded-lg shadow-md">
+                        <h2 class="text-xl font-semibold mt-4">Noli Me Tangere</h2>
+                        <p class="text-gray-500">Rizal, Jose P.</p>
+                    </div>
 
-    <!-- Information and Borrowing Sections -->
-    <div class="w-2/3 space-y-6">
-        <!-- Information Section -->
-        <div>
-            <h3 class="text-lg font-semibold">Information</h3>
-            <div class="text-sm text-gray-600 space-y-1">
-                <p><strong>ISBN:</strong> 9710807528</p>
-                <p><strong>Publisher:</strong> Mandaluyong City: National Book Store</p>
-                <p><strong>Item Type:</strong> Book</p>
-                <p><strong>Edition:</strong> Fifth Edition</p>
-                <p><strong>Description:</strong> xxii, 381 pages, 1 unnumbered leaf of plate</p>
-                <p><strong>Loan Period:</strong> 3 days</p>
-            </div>
-        </div>
+                    <!-- Information and Borrowing Sections -->
+                    <div class="w-2/3 space-y-6">
+                        <!-- Information Section -->
+                        <div>
+                            <h3 class="text-lg font-semibold">Information</h3>
+                            <div class="text-sm text-gray-600 space-y-1">
+                                <p><strong>ISBN:</strong> 9710807528</p>
+                                <p><strong>Publisher:</strong> Mandaluyong City: National Book Store</p>
+                                <p><strong>Item Type:</strong> Book</p>
+                                <p><strong>Edition:</strong> Fifth Edition</p>
+                                <p><strong>Description:</strong> xxii, 381 pages, 1 unnumbered leaf of plate</p>
+                                <p><strong>Loan Period:</strong> 3 days</p>
+                            </div>
+                        </div>
 
-        <!-- Borrower's Information Section -->
-        <div>
-            <h3 class="text-lg font-semibold">Borrower's Information</h3>
-            <div class="text-sm text-gray-600 space-y-1">
-                <p><strong>Name:</strong> Althea Amor J. Asis</p>
-                <p><strong>Phone no.:</strong> +639123456789</p>
-                <p><strong>Email Address:</strong> altheaamorjasis@gmail.com</p>
-            </div>
-        </div>
+                        <!-- Borrower's Information Section -->
+                        <div>
+                            <h3 class="text-lg font-semibold">Borrower's Information</h3>
+                            <div class="text-sm text-gray-600 space-y-1">
+                                <p><strong>Name:</strong> Althea Amor J. Asis</p>
+                                <p><strong>Phone no.:</strong> +639123456789</p>
+                                <p><strong>Email Address:</strong> altheaamorjasis@gmail.com</p>
+                            </div>
+                        </div>
 
-        <!-- Borrowing Details Section -->
-        <div>
-            <h3 class="text-lg font-semibold">Borrowing Details</h3>
-            <div class="flex gap-4 items-center">
-                <div>
-                    <label for="booking-date" class="block text-sm font-medium text-gray-700">Booking date</label>
-                    <input type="date" id="booking-date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        <!-- Borrowing Details Section -->
+                        <div>
+                            <h3 class="text-lg font-semibold">Borrowing Details</h3>
+                            <div class="flex gap-4 items-center">
+                                <div>
+                                    <label for="booking-date" class="block text-sm font-medium text-gray-700">Booking date</label>
+                                    <input type="date" id="booking-date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                </div>
+                                <div>
+                                    <label for="returning-date" class="block text-sm font-medium text-gray-700">Returning date</label>
+                                    <input type="date" id="returning-date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                </div>
+                                <div>
+                                    <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                                    <select id="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                        <option>Approved</option>
+                                        <option>Denied</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label for="returning-date" class="block text-sm font-medium text-gray-700">Returning date</label>
-                    <input type="date" id="returning-date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                </div>
-                <div>
-                    <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                    <select id="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                        <option>Approved</option>
-                        <option>Denied</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
 
                 <!-- Modal Footer -->
                 <div class="flex justify-end">

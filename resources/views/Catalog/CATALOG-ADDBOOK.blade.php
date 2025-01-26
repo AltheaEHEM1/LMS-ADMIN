@@ -32,59 +32,87 @@
                 <!-- Form Fields -->
                 <form id="addBookForm" method="POST" action="{{ route('book.store') }}">
                     @csrf <!-- CSRF Token -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Media Type</label>
-                        <input name="media_type" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+
+                    <!-- First Row: Type, Category, Author -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Type</label>
+                            <input name="media_type" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Category</label>
+                            <input name="category" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Author</label>
+                            <input name="Author" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Category</label>
-                        <input name="category" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+
+                    <!-- Second Row: Title, ISBN 10, ISBN 13 -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Title</label>
+                            <input name="title" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">ISBN 10</label>
+                            <input name="isbn" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">ISBN 13</label>
+                            <input name="isbn_13" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Title</label>
-                        <input name="title" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+
+                    <!-- Third Row: ASIN, Published Year, Publisher -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">ASIN</label>
+                            <input name="edition" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Published Year</label>
+                            <input name="publishedyear" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Publisher</label>
+                            <input name="publisher" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">ISBN</label>
-                        <input name="isbn" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+
+                    <!-- Fourth Row: Pages, Tag, Stock -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Pages</label>
+                            <input name="pages" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Tag</label>
+                            <input name="tag" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Stock</label>
+                            <input name="stock" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">ISBN 13</label>
-                        <input name="isbn_13" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+
+                    <!-- Fifth Row: Language, Photo -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Language</label>
+                            <input name="stock" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Photo</label>
+                            <input name="photo" type="file" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <button type="submit" class="px-4 py-2 bg-[#012A4A] text-white rounded-md mt-4 w-full sm:w-auto">Save Changes</button>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Edition</label>
-                        <input name="edition" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Year</label>
-                        <input name="year" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Tag</label>
-                        <input name="tag" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Photo</label>
-                        <input name="photo" type="file" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                    </div>
-                    <button type="submit" class="px-4 py-2 bg-[#012A4A] text-white rounded-md mt-4">Save Changes</button>
                 </form>
 
-                <!-- Buttons Section -->
-                <div class="flex items-center space-x-2 mt-4">
-                    <!-- Upload Cover Photo Button -->
-                    <button id="uploadButton" class="px-4 py-2 bg-gray-300 text-white rounded-md hover:bg-[#012A4A]">
-                        Upload Cover Photo
-                    </button>
-                </div>
-
-                <!-- Save Changes Button (Moved to Next Line) -->
-                <div class="flex mt-2">
-                    <button id="saveButton" class="px-4 py-2 bg-gray-300 text-white rounded-md hover:bg-[#012A4A]">
-                        Save Changes
-                    </button>
-                </div>
             </div>
         </div>
     </div>

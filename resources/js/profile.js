@@ -1,18 +1,17 @@
 
-// Function to open a modal by ID
-    function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-            modal.classList.remove('hidden'); // Remove the hidden class
-            modal.classList.add('flex'); // Add the flex class to display the modal
-    }
-}
+ // Set modal open/close for logout
+ const logoutLink = document.querySelector('a[href="#"]');
+ if (logoutLink) {
+     logoutLink.addEventListener('click', function(e) {
+         e.preventDefault(); // Prevent the default link behavior
+         openModal('LogoutModal');
+     });
+ }
 
-// Function to close a modal by ID
-function closeModal(modalId) {
-const modal = document.getElementById(modalId);
-    if (modal) {
-            modal.classList.add('hidden'); // Add the hidden class to hide the modal
-            modal.classList.remove('flex'); // Remove the flex class
-    }
-}
+ // Close modal when cancel button is clicked
+ const cancelButton = document.querySelector('#LogoutModal button[type="button"]');
+ if (cancelButton) {
+     cancelButton.addEventListener('click', function() {
+         closeModal('LogoutModal');
+     });
+ }

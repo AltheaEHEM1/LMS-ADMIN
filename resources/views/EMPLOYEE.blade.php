@@ -110,168 +110,167 @@
 
     
     <!--modals-->
-        <!-- New Member Modal -->
-            <div id="NewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 items-center justify-center hidden">
-                <div class="bg-white p-7 rounded-lg shadow-md w-[60%] ml-[20%] mt-20">
-                    <h2 class="text-xl font-semibold mb-4">Add New Employee</h2>
+                <!-- New Member Modal -->
+                <div id="NewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 items-center justify-center hidden">
+                    <div class="bg-white p-5 rounded-lg shadow-md w-[60%] ml-[20%] mt-20 max-h-[80vh] overflow-y-auto">
+                        <h2 class="text-xl font-semibold mb-4">Add New Employee</h2>
 
-                    <form id="newEmployeeForm" action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
-                        @csrf
-                        <!-- Name Section (Inline: First Name, Middle Name, Last Name) -->
-                        <div class="grid grid-cols-3 gap-4 mb-4">
-                            <div>
-                                <label class="text-sm text-gray-600">First Name <span class="text-red-500">*</span></label>
-                                <input type="text" name="firstName" id="firstName" placeholder="Althea Amor" 
-                                       class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" required>
-                                <p id="firstNameError" class="text-red-500 text-sm hidden">First Name is required.</p>
-                            </div>
-
-                            <!-- Middle Name -->
-                            <div>
-                                <label class="text-sm text-gray-600">Middle Name</label>
-                                <input type="text" name="middleName" id="middleName" placeholder="J" 
-                                       class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800">
-                                <p id="middleNameError" class="text-red-500 text-sm hidden">Middle Name is required.</p>
-                            </div>
-
-                            <!-- Last Name -->
-                            <div>
-                                <label class="text-sm text-gray-600">Last Name <span class="text-red-500">*</span></label>
-                                <input type="text" name="lastName" id="lastName" placeholder="Asis" 
-                                       class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" required>
-                                <p id="lastNameError" class="text-red-500 text-sm hidden">Last Name is required.</p>
-                            </div>
-                        </div>
-
-                        <!-- Phone No., Date of Birth, Email, and Address Section (Left Side) -->
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <!-- Left Side -->
-                            <div class="space-y-4">
+                        <form id="newEmployeeForm" action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                            @csrf
+                            <!-- Name Section (Inline: First Name, Middle Name, Last Name) -->
+                            <div class="grid grid-cols-3 gap-4 mb-4">
                                 <div>
-                                    <label class="text-sm text-gray-600">Phone No. <span class="text-red-500">*</span></label>
-                                    <input type="text" name="phoneNo" id="phoneNo" placeholder="+639123456789" 
-                                           class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" required>
-                                    <p id="phoneNoError" class="text-red-500 text-sm hidden">Phone No. is required.</p>
+                                    <label class="text-sm text-gray-600">First Name <span class="text-red-500">*</span></label>
+                                    <input type="text" name="firstName" id="firstName" placeholder="Althea Amor" 
+                                        class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" required>
+                                    <p id="firstNameError" class="text-red-500 text-sm hidden">First Name is required.</p>
                                 </div>
 
+                                <!-- Middle Name -->
                                 <div>
-                                    <label class="text-sm text-gray-600">Date of Birth <span class="text-red-500">*</span></label>
-                                    <input type="date" name="date_of_birth" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="dob" required>
-                                    <p id="dobError" class="text-red-500 text-sm hidden">Date of Birth is required.</p>
+                                    <label class="text-sm text-gray-600">Middle Name</label>
+                                    <input type="text" name="middleName" id="middleName" placeholder="J" 
+                                        class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800">
+                                    <p id="middleNameError" class="text-red-500 text-sm hidden">Middle Name is required.</p>
                                 </div>
 
+                                <!-- Last Name -->
                                 <div>
-                                    <label for="email" class="block text-sm font-medium text-gray-700">Email <span class="text-red-500">*</span></label>
-                                    <input type="email" name="email" placeholder="Enter your email" id="email" name="email" required class="w-full mt-1 border border-[#011B33] rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                    <p id="emailError" class="text-red-500 text-sm hidden">Email is required.</p>
-                                    <p id="emailErrorInvalid" class="text-red-500 text-sm hidden error-message">Please enter a valid email address.</p>
+                                    <label class="text-sm text-gray-600">Last Name <span class="text-red-500">*</span></label>
+                                    <input type="text" name="lastName" id="lastName" placeholder="Asis" 
+                                        class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" required>
+                                    <p id="lastNameError" class="text-red-500 text-sm hidden">Last Name is required.</p>
                                 </div>
+                            </div>
+
+                            <!-- Phone No., Date of Birth, Email, and Address Section (Left Side) -->
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <!-- Left Side -->
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="text-sm text-gray-600">Phone No. <span class="text-red-500">*</span></label>
+                                        <input type="text" name="phoneNo" id="phoneNo" placeholder="+639123456789" 
+                                            class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" required>
+                                        <p id="phoneNoError" class="text-red-500 text-sm hidden">Phone No. is required.</p>
+                                    </div>
+
+                                    <div>
+                                        <label class="text-sm text-gray-600">Date of Birth <span class="text-red-500">*</span></label>
+                                        <input type="date" name="date_of_birth" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="dob" required>
+                                        <p id="dobError" class="text-red-500 text-sm hidden">Date of Birth is required.</p>
+                                    </div>
+
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium text-gray-700">Email <span class="text-red-500">*</span></label>
+                                        <input type="email" name="email" placeholder="Enter your email" id="email" name="email" required class="w-full mt-1 border border-[#011B33] rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                        <p id="emailError" class="text-red-500 text-sm hidden">Email is required.</p>
+                                        <p id="emailErrorInvalid" class="text-red-500 text-sm hidden error-message">Please enter a valid email address.</p>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="password" class="block text-sm font-medium text-gray-700">Password <span class="text-red-500">*</span></label>
+                                        <input type="password" name="password" id="password" placeholder="Enter your password" 
+                                            class="w-full mt-1 border rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                                        <p id="passwordError" class="text-red-500 text-sm hidden">Password is required.</p>
+                                    </div>
                                 
-                                <div>
-                                    <label for="password" class="block text-sm font-medium text-gray-700">Password <span class="text-red-500">*</span></label>
-                                    <input type="password" name="password" id="password" placeholder="Enter your password" 
-                                           class="w-full mt-1 border rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
-                                    <p id="passwordError" class="text-red-500 text-sm hidden">Password is required.</p>
-                                </div>
-                            
-                                <!-- Confirm Password -->
-                                <div>
-                                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password <span class="text-red-500">*</span></label>
-                                    <input type="password" name="password_confirmation" id="confirmPassword" placeholder="Confirm your password" 
-                                           class="w-full mt-1 border rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
-                                    <p id="confirmPasswordError" class="text-red-500 text-sm hidden">Passwords do not match.</p>
-                                </div>
-
-                                <div>
-                                    <label class="text-sm text-gray-600">Address <span class="text-red-500">*</span></label>
-                                    <textarea placeholder="Enter address here" name="address" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" rows="3" id="address" required></textarea>
-                                    <p id="addressError" class="text-red-500 text-sm hidden">Address is required.</p>
-                                </div>
-                            </div>
-
-                            <!-- Right Side (Photo Upload Section) -->
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="text-sm font-semibold text-gray-700">Upload Photo</label>
-                                    <!-- Photo Upload Input (Larger Image) -->
-                                    <div class="w-48 h-48 flex items-center justify-center mx-auto mb-4">
-                                        <img src="./images/photo.png" alt="photo" class="w-full h-full object-cover">
+                                    <!-- Confirm Password -->
+                                    <div>
+                                        <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password <span class="text-red-500">*</span></label>
+                                        <input type="password" name="password_confirmation" id="confirmPassword" placeholder="Confirm your password" 
+                                            class="w-full mt-1 border rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                                        <p id="confirmPasswordError" class="text-red-500 text-sm hidden">Passwords do not match.</p>
                                     </div>
-                                    <!-- File Upload Input (Block Format) -->
-                                    <input type="file" id="uploadPhoto" name="photo" accept="image/*" class="w-full mt-1 px-3 py-2 border rounded">
+
+                                    <div>
+                                        <label class="text-sm text-gray-600">Address <span class="text-red-500">*</span></label>
+                                        <textarea placeholder="Enter address here" name="address" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" rows="3" id="address" required></textarea>
+                                        <p id="addressError" class="text-red-500 text-sm hidden">Address is required.</p>
+                                    </div>
                                 </div>
 
-                                <!-- Modal Trigger Button -->
-                                <button type="button" onclick="openModal('AccessModal')" class="px-4 py-2 bg-[#012A4A] text-white rounded-md">
-                                Employee Accessibility
-                            </button>
+                                <!-- Right Side (Photo Upload Section) -->
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="text-sm font-semibold text-gray-700">Upload Photo</label>
+                                        <!-- Photo Upload Input (Larger Image) -->
+                                        <div class="w-48 h-48 flex items-center justify-center mx-auto mb-4">
+                                            <img src="./images/photo.png" alt="photo" class="w-full h-full object-cover">
+                                        </div>
+                                        <!-- File Upload Input (Block Format) -->
+                                        <input type="file" id="uploadPhoto" name="photo" accept="image/*" class="w-full mt-1 px-3 py-2 border rounded">
+                                    </div>
 
-                                <!-- Modal -->
-                                <div id="AccessModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center">
-                                    <div class="bg-white p-6 rounded-lg w-1/3">
-                                        <h2 class="text-lg font-semibold text-gray-700 mb-4">Employee accessibility</h2>
-                                        <div class="mt-4">
-                                            <label class="text-sm text-gray-600">Employee Permissions <span class="text-red-500">*</span></label>
-                                            <div class="mt-2">
-                                                <label class="block">
-                                                    <input type="checkbox" name="dashboard" id="dashboard" class="mr-2"> Dashboard
-                                                </label>
-                                                <label class="block">
-                                                    <input type="checkbox" name="employee" id="employee" class="mr-2"> Employee
-                                                </label>
-                                                <label class="block">
-                                                    <input type="checkbox" name="reservation" id="reservation" class="mr-2"> Reservation
-                                                </label>
-                                                <label class="block">
-                                                    <input type="checkbox" name="catalog" id="catalog" class="mr-2"> Catalog
-                                                </label>
-                                                <label class="block">
-                                                    <input type="checkbox" name="members" id="members" class="mr-2"> Members
-                                                </label>
-                                                <label class="block">
-                                                    <input type="checkbox" name="circulations" id="circulations" class="mr-2"> Circulations
-                                                </label>
-                                                <label class="block">
-                                                    <input type="checkbox" name="circulationReports" id="circulationsReports" class="mr-2"> Circulations Reports
-                                                </label>
-                                                <label class="block">
-                                                    <input type="checkbox" name="membersReports" id="membersReports" class="mr-2"> Members Reports
-                                                </label>
-                                                <label class="block">
-                                                    <input type="checkbox" name="overdueReports" id="overdueReports" class="mr-2"> Overdue Reports
-                                                </label>
-                                                <label class="block">
-                                                    <input type="checkbox" name="catalogReports" id="catalogReports" class="mr-2"> Catalog Reports
-                                                </label>
+                                    <!-- Modal Trigger Button -->
+                                    <button type="button" onclick="openModal('AccessModal')" class="px-4 py-2 bg-[#012A4A] text-white rounded-md">
+                                    Employee Accessibility
+                                </button>
+
+                                    <!-- Modal -->
+                                    <div id="AccessModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center">
+                                        <div class="bg-white p-6 rounded-lg w-1/3">
+                                            <h2 class="text-lg font-semibold text-gray-700 mb-4">Employee accessibility</h2>
+                                            <div class="mt-4">
+                                                <label class="text-sm text-gray-600">Employee Permissions <span class="text-red-500">*</span></label>
+                                                <div class="mt-2">
+                                                    <label class="block">
+                                                        <input type="checkbox" name="dashboard" id="dashboard" class="mr-2"> Dashboard
+                                                    </label>
+                                                    <label class="block">
+                                                        <input type="checkbox" name="employee" id="employee" class="mr-2"> Employee
+                                                    </label>
+                                                    <label class="block">
+                                                        <input type="checkbox" name="reservation" id="reservation" class="mr-2"> Reservation
+                                                    </label>
+                                                    <label class="block">
+                                                        <input type="checkbox" name="catalog" id="catalog" class="mr-2"> Catalog
+                                                    </label>
+                                                    <label class="block">
+                                                        <input type="checkbox" name="members" id="members" class="mr-2"> Members
+                                                    </label>
+                                                    <label class="block">
+                                                        <input type="checkbox" name="circulations" id="circulations" class="mr-2"> Circulations
+                                                    </label>
+                                                    <label class="block">
+                                                        <input type="checkbox" name="circulationReports" id="circulationsReports" class="mr-2"> Circulations Reports
+                                                    </label>
+                                                    <label class="block">
+                                                        <input type="checkbox" name="membersReports" id="membersReports" class="mr-2"> Members Reports
+                                                    </label>
+                                                    <label class="block">
+                                                        <input type="checkbox" name="overdueReports" id="overdueReports" class="mr-2"> Overdue Reports
+                                                    </label>
+                                                    <label class="block">
+                                                        <input type="checkbox" name="catalogReports" id="catalogReports" class="mr-2"> Catalog Reports
+                                                    </label>
+                                                </div>
+                                                <p id="employeePermissionsError" class="text-red-500 text-sm hidden">Permissions are required.</p>
                                             </div>
-                                            <p id="employeePermissionsError" class="text-red-500 text-sm hidden">Permissions are required.</p>
-                                        </div>
-                                        <div class="mt-4 flex space-x-2 justify-end">
-                                            <button onclick="closeModal('AccessModal')" class="px-3 py-2 bg-gray-500 text-white rounded-md">Close</button>
-                                            
-                                            <button type="button" onclick="savePermissions()" class="px-3 py-2 bg-blue-500 text-white rounded hover:bg-[#011B33]">Save</button>
+                                            <div class="mt-4 flex space-x-2 justify-end">
+                                                <button onclick="closeModal('AccessModal')" class="px-3 py-2 bg-gray-500 text-white rounded-md">Close</button>
+                                                
+                                                <button type="button" onclick="savePermissions()" class="px-3 py-2 bg-blue-500 text-white rounded hover:bg-[#011B33]">Save</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Modal Footer -->
+                        <div class="flex justify-end">
+                            <!-- Cancel Button -->
+                            <button type="button" onclick="closeModal('NewModal')" 
+                                    class="mr-2 px-3 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">
+                                Cancel
+                            </button>
+                            <!-- Submit Button -->
+                            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-[#011B33]">
+                                Save
+                            </button>
                         </div>
-                        <!-- Modal Footer -->
-                    <div class="flex justify-end">
-                        <!-- Cancel Button -->
-                        <button type="button" onclick="closeModal('NewModal')" 
-                                class="mr-2 px-3 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">
-                            Cancel
-                        </button>
-                        <!-- Submit Button -->
-                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-[#011B33]">
-                            Save
-                        </button>
+                        </form>
                     </div>
-                    </form>
-
-                    
                 </div>
-            </div>
+
 
 
 

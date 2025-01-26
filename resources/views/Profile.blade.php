@@ -16,7 +16,7 @@
             <div class="p-4 text-center text-gray-500">
                 <!--Content -->
                 <!-- Profile Header -->
-                <div class="bg-white shadow-md rounded-lg p-10 flex items-center space-x-4 mb-6">
+                <div class="bg-white shadow-md rounded-lg p-4 flex items-center space-x-4 mb-6">
                     <!-- Profile Image -->
                     <div class="w-20 h-20 bg-gray-300 rounded-full"></div>
                     <!-- Profile Name -->
@@ -32,93 +32,103 @@
                     </div>
                 </div>
 
-                <!-- Content Section -->
+               <!-- Content Section -->
                 <div class="flex flex-wrap gap-6">
                         <!-- Personal Information -->
                         <div class="bg-white shadow-md rounded-lg p-6 flex-1">
                                 <div class="flex justify-between items-center mb-4">
-                                        <h3 class="text-lg font-bold text-[#011B33]">Personal Information</h3>
-                                        <button onclick="openModal('profileModal')" class="bg-[#011B33] text-white px-4 py-1 rounded text-sm">Edit</button>
+                                <h3 class="text-lg font-bold text-[#011B33]">Personal Information</h3>
+                                <button onclick="openModal('profileModal')" class="bg-[#011B33] text-white px-4 py-1 rounded text-sm">Edit</button>
                                 </div>
 
                                 <div class="space-y-2 text-gray-500">
-                                        <div class="flex justify-between">
-                                                <span>Name</span>
-                                                <span class="text-black font-semibold">Althea Amor</span>
-                                        </div>
-                                        
-                                        <div class="flex justify-between">
-                                                <span>Middle Initial</span>
-                                                <span class="text-black font-semibold">J</span>
-                                        </div>
+                                <div class="flex justify-between">
+                                        <span>Name</span>
+                                        <span class="text-black font-semibold">Althea Amor</span>
+                                </div>
+                                
+                                <div class="flex justify-between">
+                                        <span>Middle Initial</span>
+                                        <span class="text-black font-semibold">J</span>
+                                </div>
 
-                                        <div class="flex justify-between">
-                                                <span>Last Name</span>
-                                                <span class="text-black font-semibold">Asis</span>
-                                        </div>
+                                <div class="flex justify-between">
+                                        <span>Last Name</span>
+                                        <span class="text-black font-semibold">Asis</span>
+                                </div>
 
-                                        <div class="flex justify-between">
-                                                <span>Bio</span>
-                                                <span class="text-black font-semibold">Student</span>
-                                        </div>
+                                <div class="flex justify-between">
+                                        <span>Bio</span>
+                                        <span class="text-black font-semibold">Student</span>
+                                </div>
 
-                                        <div class="flex justify-between">
-                                                <span>Date of Birth</span>
-                                                <span class="text-black font-semibold">March 02, 2004</span>
-                                        </div>
+                                <div class="flex justify-between">
+                                        <span>Date of Birth</span>
+                                        <span class="text-black font-semibold">March 02, 2004</span>
+                                </div>
 
-                                        <div class="flex justify-between">
-                                                <span>Email address</span>
-                                                <span class="text-black font-semibold">altheaamorjasis@gmail.com</span>
-                                        </div>
+                                <div class="flex justify-between">
+                                        <span>Email address</span>
+                                        <span class="text-black font-semibold">altheaamorjasis@gmail.com</span>
+                                </div>
 
-                                        <div class="flex justify-between">
-                                                <span>Phone No.</span>
-                                                <span class="text-black font-semibold">+639123456789</span>
-                                        </div>
+                                <div class="flex justify-between">
+                                        <span>Phone No.</span>
+                                        <span class="text-black font-semibold">+639123456789</span>
+                                </div>
                                 </div>
                         </div>
 
                         <!-- Address Section -->
                         <div class="bg-white shadow-md rounded-lg p-6 flex-1">
                                 <div class="flex justify-between items-center mb-4">
-                                        <h3 class="text-lg font-bold text-[#011B33]">Address</h3>
-                                        <button onclick="openModal('addressModal')" class="bg-[#011B33] text-white px-4 py-1 rounded text-sm">Edit</button>
+                                <h3 class="text-lg font-bold text-[#011B33]">Address</h3>
+                                <button onclick="openModal('addressModal')" class="bg-[#011B33] text-white px-4 py-1 rounded text-sm">Edit</button>
                                 </div>
 
                                 <div class="space-y-2 text-gray-500">
-                                        <div class="flex justify-between">
-                                                <span>House no.</span>
-                                                <span class="text-black font-semibold">1103</span>
-                                        </div>
+                                <div class="flex justify-between">
+                                        <span>House no.</span>
+                                        <span class="text-black font-semibold">1103</span>
+                                </div>
 
-                                        <div class="flex justify-between">
-                                                <span>Street name</span>
-                                                <span class="text-black font-semibold">Hev Abi</span>
-                                        </div>
-                                        
-                                        <div class="flex justify-between">
-                                                <span>Barangay</span>
-                                                <span class="text-black font-semibold">Holy Spirit</span>
-                                        </div>
+                                <div class="flex justify-between">
+                                        <span>Street name</span>
+                                        <span class="text-black font-semibold">Hev Abi</span>
+                                </div>
+                                
+                                <div class="flex justify-between">
+                                        <span>Barangay</span>
+                                        <span class="text-black font-semibold">Holy Spirit</span>
+                                </div>
 
-                                        <div class="flex justify-between">
-                                                <span>City or Municipality</span>
-                                                <span class="text-black font-semibold">Quezon City</span>
-                                        </div>
+                                <div class="flex justify-between">
+                                        <span>City or Municipality</span>
+                                        <span class="text-black font-semibold">Quezon City</span>
+                                </div>
 
-                                        <div class="flex justify-between">
-                                                <span>Province</span>
-                                                <span class="text-black font-semibold">Metro Manila</span>
-                                        </div>
+                                <div class="flex justify-between">
+                                        <span>Province</span>
+                                        <span class="text-black font-semibold">Metro Manila</span>
+                                </div>
 
-                                        <div class="flex justify-between">
-                                                <span>Zip Code</span>
-                                                <span class="text-black font-semibold">1008</span>
-                                        </div>
+                                <div class="flex justify-between">
+                                        <span>Zip Code</span>
+                                        <span class="text-black font-semibold">1008</span>
                                 </div>
                         </div>
                 </div>
+        </div>
+
+                       <!-- Logout Button -->
+                        <div class="mt-4 text-right">
+                                <button onclick="openModal('LogoutModal')" class="bg-red-500 text-white px-4 py-2 rounded text-sm w-50 hover:bg-red-700">
+                                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                                </button>
+                        </div>
+
+
+
 
 
                 <!--modals-->

@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <!-- Cards Section below Welcome -->
+        <!-- Cards -->
         <div class="grid grid-cols-3 gap-6 mt-6 w-[93%] mx-auto">
             <div class="bg-white shadow-md p-6 text-center rounded-lg">
                 <h3 class="text-xl font-semibold">Books</h3>
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="bg-white shadow-md p-6 text-center rounded-lg">
-                <h3 class="text-xl font-semibold">Reserved</h3>
+                <h3 class="text-xl font-semibold">Circulated Books</h3>
                 <div class="mt-4">
                     <canvas id="reservedChart" class="mx-auto"></canvas>
                 </div>

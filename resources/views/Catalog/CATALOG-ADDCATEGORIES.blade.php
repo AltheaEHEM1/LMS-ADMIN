@@ -202,7 +202,7 @@
 
 <!-- Delete Category Modal -->
 <div id="deleteCategoryModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+    <div class="bg-white p-6 rounded-lg shadow-md text-center w-[90%] sm:w-[400px] max-w-md"> <!-- Responsive width -->
         <h2 class="text-lg font-semibold text-red-500 mb-4">Delete this item?</h2>
         <p>Are you sure you want to delete this category? This action cannot be undone.</p>
         <div class="mt-6 flex justify-center space-x-4">

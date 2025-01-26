@@ -7,8 +7,16 @@ use App\Http\Controllers\BookController;
 
 //////////////////////////////////////////////////////////
 //if you want to run the log in of employee
+// Route::get('/', function () {
+//     return view('login_employee');
+// });
+
+// Route::get('/', function () {
+//     return view('DASHBORDLandingpage_employee'); 
+// });
+
 Route::get('/', function () {
-    return view('login_employee');
+    return view('DASHBORDLandingpage_employee'); 
 });
 
 Route::get('/login_employee', function () {
@@ -137,7 +145,7 @@ Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
 
 
-Route::get('/EMPLOYEET', function () {
+Route::get('/EMPLOYEE', function () {
     return view('EMPLOYEE'); 
 })->name('employee.page');
 
