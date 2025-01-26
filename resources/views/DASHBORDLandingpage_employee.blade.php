@@ -35,7 +35,7 @@
             <div class="bg-white shadow-md p-6 text-center rounded-lg">
                 <h3 class="text-xl font-semibold">Circulated Books</h3>
                 <div class="mt-4">
-                    <canvas id="reservedChart" class="mx-auto"></canvas>
+                    <canvas id="circulatedChart" class="mx-auto"></canvas>
                 </div>
             </div>
             <div class="bg-white shadow-md p-6 text-center rounded-lg">
