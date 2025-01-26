@@ -1,6 +1,9 @@
-@include('Asidebar_header')
-@vite('resources/js/profile.js')
 
+<html>
+<body>
+
+        @include('Asidebar_header')
+        @vite('resources/js/profile.js')
 
 
     <!-- Direction of Tabs -->
@@ -120,15 +123,13 @@
                 </div>
         </div>
 
-                       <!-- Logout Button -->
+                        <!-- Logout Button -->
                         <div class="mt-4 text-right">
                                 <button onclick="openModal('LogoutModal')" class="bg-red-500 text-white px-4 py-2 rounded text-sm w-50 hover:bg-red-700">
                                         <i class="fas fa-sign-out-alt mr-2"></i>Logout
                                 </button>
                         </div>
-
-
-
+                        
 
 
                 <!--modals-->
@@ -144,7 +145,7 @@
                                         <input type="file" id="uploadPhoto" name="photo" accept="image/*" class="w-full mt-1 px-3 py-2 border rounded">
                                 </div>
                                 <div class="flex justify-end">
-                                        <button type="button" onclick="closeModal('photoModal')" class="mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">Cancel</button>
+                                        <button type="button" onclick="closeModal('photoModal')" class="cancel-btn mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">Cancel</button>
                                         <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-[#011B33]">Upload</button>
                                 </div>
                                 </form>
@@ -202,9 +203,9 @@
 
                                     <!-- Action Buttons -->
                                     <div class="flex justify-end">
-                                            <button type="button" onclick="closeModal('profileModal')" class="mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">Cancel</button>
-                                            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-[#011B33]">Save</button>
-                                    </div>
+                                        <button type="button" onclick="closeModal('profileModal')" class="cancel-btn mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">Cancel</button>
+                                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-[#011B33]">Save</button>
+                                </div>
                             </form>
                     </div>
                 </div>
@@ -256,9 +257,10 @@
 
                                     <!-- Modal Buttons -->
                                     <div class="flex justify-end">
-                                            <button type="button" onclick="closeModal('addressModal')" class="mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">Cancel</button>
-                                            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-[#011B33]">Save</button>
+                                        <button type="button" onclick="closeModal('addressModal')" class="cancel-btn mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">Cancel</button>
+                                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-[#011B33]">Save</button>
                                     </div>
+                                </div>
 
                             </form>
                         </div>
@@ -266,7 +268,28 @@
 
         </div>
     </div>
-    
+
+        <!-- Modal Background with opacity (Initially hidden) -->
+
+        <!-- Logout Modal -->
+        <div id="LogoutModal" class="fixed inset-0 bg-gray-500 bg-opacity-50 items-center justify-center z-50 hidden">
+                <div class="bg-white p-6 rounded-lg shadow-md w-[60%] max-w-sm relative">
+                <h1 class="text-2xl font-semibold text-center mb-6">Are you sure you want to log out of this account?</h1>
+                <div class="flex justify-center space-x-4">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+                        
+                        <!-- Cancel Button -->
+                        <button id="logout-cancel-btn" type="button" class="mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">
+                                <i class="fas fa-times mr-2"></i> Cancel
+                        </button>
+                
+                        <!-- Log Out Button -->
+                        <button type="button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="flex items-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-300">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Log out
+                        </button>
+                </div>
+                </div>
+        </div>
 
 
 
@@ -274,6 +297,6 @@
 
 
 
-  
+
 </body>
 </html>

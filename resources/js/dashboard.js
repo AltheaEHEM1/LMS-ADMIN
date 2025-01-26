@@ -15,8 +15,18 @@ new Chart(booksCtx, {
         }]
     },
     options: {
-        responsive: true,
-        maintainAspectRatio: false,
+        responsive: true, // Make chart responsive
+        maintainAspectRatio: false, // Allow resizing
+        scales: {
+            x: {
+                // Ensuring that labels fit well on smaller screens
+                ticks: {
+                    autoSkip: true,
+                    maxRotation: 45, // Reduce label rotation if needed
+                    minRotation: 45,
+                }
+            }
+        }
     }
 });
 
@@ -36,8 +46,17 @@ new Chart(circulatedCtx, {
         }]
     },
     options: {
-        responsive: true,
-        maintainAspectRatio: false,
+        responsive: true, // Make chart responsive
+        maintainAspectRatio: false, // Allow resizing
+        scales: {
+            x: {
+                ticks: {
+                    autoSkip: true,
+                    maxRotation: 45,
+                    minRotation: 45,
+                }
+            }
+        }
     }
 });
 

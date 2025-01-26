@@ -21,7 +21,7 @@
         }
 
         .sidebar-item {
-            transition: background-color 0.1s ease, transform 0.1s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .sidebar-item:hover {
@@ -30,7 +30,8 @@
         }
 
         .sidebar-item.active {
-            background-color: #0E519B !important;
+            background-color: #028ABE !important;  /* Active background color */
+            color: white;
         }
 
         .sidebar-item.active:hover {
@@ -50,11 +51,34 @@
         /* Dropdown Menu */
         .dropdown-menu {
             display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background-color: #012A4A;
+            z-index: 50;
+            min-width: 100%;
+            border-radius: 0.25rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            opacity: 0;  /* Initially hidden */
+            transform: translateY(-20px); /* Slight offset for smoother entrance */
+            transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    }
+
+        /* Show dropdown when active */
+        .dropdown-menu.hidden {
+            display: none; /* Hidden state */
         }
 
-        .dropdown:hover .dropdown-menu {
-            display: block;
+        .dropdown-menu:not(.hidden) {
+            display: block; /* Visible state */
         }
+
+        .dropdown-menu.show {
+        display: block;
+        opacity: 1; /* Fade in */
+        transform: translateY(0); /* Slide in */
+    }
+    
     </style>
 </head>
 
@@ -67,7 +91,7 @@
                 <div class="mb-10 mt-6">
                     <img src="/images/logo_login_headerC.png" alt="Logo" class="w-36 mx-auto">
                 </div>
-
+    
                 <!-- Navigation Menu -->
                 <ul class="mt-15">
                     <li><a href="/DASHBORDLandingpage_employee" id="dashboard" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
