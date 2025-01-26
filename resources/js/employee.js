@@ -54,28 +54,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openEditModal(button) {
         // Get data attributes from the button
-        const id = button.getAttribute('data-id');
-        const firstName = button.getAttribute('data-first-name');
-        const middleName = button.getAttribute('data-middle-name');
-        const lastName = button.getAttribute('data-last-name');
-        const phone = button.getAttribute('data-phone');
-        const dob = button.getAttribute('data-dob');
-        const address = button.getAttribute('data-address');
-        const email = button.getAttribute('data-email');
+        const eid = button.getAttribute('data-id');
+        const efirstName = button.getAttribute('data-first-name');
+        const emiddleName = button.getAttribute('data-middle-name');
+        const elastName = button.getAttribute('data-last-name');
+        const ephone = button.getAttribute('data-phone');
+        const edob = button.getAttribute('data-dob');
+        const eaddress = button.getAttribute('data-address');
+        const eemail = button.getAttribute('data-email');
         const photo = button.getAttribute('data-photo');
     
-        // Set the values in the modal form
-        document.getElementById('firstName').value = firstName || ''; // Default to empty string if null
-        document.getElementById('middleName').value = middleName || '';
-        document.getElementById('lastName').value = lastName || '';
-        document.getElementById('phoneNo').value = phone || '';
-        document.getElementById('dob').value = dob || '';
-        document.getElementById('address').value = address || '';
-        document.getElementById('email').value = email || '';
-        alert(`Employee ID: ${id}`);
+        // Access control data
+        const accessDashboard = button.getAttribute('data-dashboard');
+        const accessEmployee = button.getAttribute('data-employee');
+        const accessReservation = button.getAttribute('data-reservation');
+        const accessCatalog = button.getAttribute('data-catalog');
+        const accessMembers = button.getAttribute('data-members');
+        const accessCirculations = button.getAttribute('data-circulations');
+        const accessCirculationReports = button.getAttribute('data-circulation_reports');
+        const accessMemberReports = button.getAttribute('data-member_reports');
+        const accessOverdueReports = button.getAttribute('data-overdue_reports');
+        const accessCatalogReports = button.getAttribute('data-catalog_reports');
+
+        console.log(accessCatalog)
     
-    // Alternatively, set it as text in a specific element
-        document.getElementById('displayId').innerText = `Employee ID: ${id}`;
+        // Set the values in the modal form
+        document.getElementById('efirstName').value = efirstName || ''; // Default to empty string if null
+        document.getElementById('emiddleName').value = emiddleName || '';
+        document.getElementById('elastName').value = elastName || '';
+        document.getElementById('ephoneNo').value = ephone || '';
+        document.getElementById('edob').value = edob || '';
+        document.getElementById('eaddress').value = eaddress || '';
+        document.getElementById('eemail').value = eemail || '';
+    
+        // Set the employee ID in the form
+        document.getElementById('recordId').value = eid;
+    
         // Update the photo preview
         const photoPreview = document.querySelector('#EditModal img');
         if (photoPreview) {
@@ -83,10 +97,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     
         // Store the employee ID in a hidden input (if needed)
-        document.getElementById('EditEmployeeForm').setAttribute('data-id', id);
+        document.getElementById('EditEmployeeForm').setAttribute('data-id', eid);
+    
+        // Handle checkboxes
+        document.getElementById('edashboard').checked = accessDashboard === '1';
+        document.getElementById('eemployee').checked = accessEmployee === '1';
+        document.getElementById('ereservation').checked = accessReservation === '1';
+        document.getElementById('ecatalog').checked = accessCatalog === '1';
+        document.getElementById('emembers').checked = accessMembers === '1';
+        document.getElementById('ecirculations').checked = accessCirculations === '1';
+        document.getElementById('ecirculationsReports').checked = accessCirculationReports === '1';
+        document.getElementById('emembersReports').checked = accessMemberReports === '1';
+        document.getElementById('eoverdueReports').checked = accessOverdueReports === '1';
+        document.getElementById('ecatalogReports').checked = accessCatalogReports === '1';
     
         // Show the modal
         openModal('EditModal');
+    }
+    function openDeleteModal(button) {
+        const eid = button.getAttribute('data-id');
+        document.getElementById('DrecordId').value = eid;
+        openModal('DeleteModal')
     }
     
     
@@ -97,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.closeModal = closeModal;
     window.openViewModal = openViewModal;
     window.openEditModal = openEditModal;
+    window.openDeleteModal = openDeleteModal;
 
 
     // Form Validation
@@ -140,28 +172,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 emailErrorInvalid.classList.add('hidden');
             }
         }
-
-        const id = this.getAttribute('data-id');
-        const formData = new FormData(this);
-
-        fetch(`/employee/update/${id}`, {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Employee updated successfully');
-                location.reload(); // Refresh the page or update the UI
-            } else {
-                alert('Error updating employee');
-            }
-        })
-        .catch(error => console.error('Error:', error));
     }
+    
+    
 
     // Expose functions globally if needed
     window.openModal = openModal;

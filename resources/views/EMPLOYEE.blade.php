@@ -79,7 +79,7 @@
                                             data-first-name="{{ $employee->first_name }}"
                                             data-middle-name="{{ $employee->middle_name }}"
                                             data-last-name="{{ $employee->last_name }}"
-                                            data-phone="{{ $employee->phone }}"
+                                            data-phone="{{ $employee->phone_no }}"
                                             data-dob="{{ $employee->date_of_birth }}"
                                             data-address="{{ $employee->address }}"
                                             data-email="{{ $employee->email }}"
@@ -96,15 +96,25 @@
                                             data-first-name="{{ $employee->first_name }}"
                                             data-middle-name="{{ $employee->middle_name }}"
                                             data-last-name="{{ $employee->last_name }}"
-                                            data-phone="{{ $employee->phone }}"
+                                            data-phone="{{ $employee->phone_no }}"
                                             data-dob="{{ $employee->date_of_birth }}"
                                             data-address="{{ $employee->address }}"
                                             data-email="{{ $employee->email }}"
-                                            data-photo="{{ $employee->photo ? asset('storage/' . $employee->photo) : asset('path/to/default/photo.jpg') }}">
+                                            data-photo="{{ $employee->photo ? asset('storage/' . $employee->photo) : asset('path/to/default/photo.jpg') }}"
+                                            data-dashboard="{{ $employee->access_dashboard }}"
+                                            data-employee="{{ $employee->access_employee }}"
+                                            data-reservation="{{ $employee->access_reservation }}"
+                                            data-catalog="{{ $employee->access_catalog }}"
+                                            data-members="{{ $employee->access_members }}"
+                                            data-circulations="{{ $employee->access_circulations }}"
+                                            data-circulation_reports="{{ $employee->access_circulation_reports }}"
+                                            data-member_reports="{{ $employee->access_member_reports }}"
+                                            data-overdue_reports="{{ $employee->access_overdue_reports }}"
+                                            data-catalog_reports="{{ $employee->access_catalog_reports }}">
                                             <i class="fa fa-pencil-alt w-5 h-5"></i>
                                         </button>
                                         <!-- Delete Icon -->
-                                        <button onclick="openModal('DeleteModal')" class="text-red-600 hover:text-gray-800">
+                                        <button onclick="openDeleteModal(this)" class="text-red-600 hover:text-gray-800" data-id="{{ $employee->id }}">
                                             <i class="fa fa-trash-alt w-5 h-5"></i>
                                         </button>
                                     </td>
@@ -356,57 +366,53 @@
                     <div class="bg-white p-7 rounded-lg shadow-md w-[60%] ml-[20%] mt-20">
                         <h2 class="text-xl font-semibold mb-4">Edit Employee Info</h2>
 
-                        <form id="EditEmployeeForm" onsubmit="return validateForm()">
-                        <!-- Name Section (Inline: First Name, Middle Name, Last Name) -->
-                        <div class="grid grid-cols-3 gap-4 mb-4">
-                            <div id="displayId" class="text-gray-800 mt-2"></div>
-                            <div>
-                                <label class="text-sm text-gray-600">First Name <span class="text-red-500">*</span></label>
-                                <input type="text" placeholder="Althea Amor" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="firstName" required>
-                                <p id="firstNameError" class="text-red-500 text-sm hidden">First Name is required.</p>
+                        <form id="EditEmployeeForm" action="{{ route('employees.update') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                            @csrf
+                            <input type="hidden" id="recordId" name="recordId">
+                
+                            <!-- Name Section (Inline: First Name, Middle Name, Last Name) -->
+                            <div class="grid grid-cols-3 gap-4 mb-4">
+                                <div>
+                                    <label class="text-sm text-gray-600">First Name <span class="text-red-500">*</span></label>
+                                    <input type="text" name="first_name" placeholder="Althea Amor" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="efirstName" required>
+                                    <p id="firstNameError" class="text-red-500 text-sm hidden">First Name is required.</p>
+                                </div>
+                                <div>
+                                    <label class="text-sm text-gray-600">Middle Name <span class="text-red-500">*</span></label>
+                                    <input type="text" name="middle_name" placeholder="J" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="emiddleName" required>
+                                    <p id="middleNameError" class="text-red-500 text-sm hidden">Middle Name is required.</p>
+                                </div>
+                                <div>
+                                    <label class="text-sm text-gray-600">Last Name <span class="text-red-500">*</span></label>
+                                    <input type="text" name="last_name" placeholder="Asis" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="elastName" required>
+                                    <p id="lastNameError" class="text-red-500 text-sm hidden">Last Name is required.</p>
+                                </div>
                             </div>
-
-                            <div>
-                                <label class="text-sm text-gray-600">Middle Name <span class="text-red-500">*</span></label>
-                                <input type="text" placeholder="J" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="middleName" required>
-                                <p id="middleNameError" class="text-red-500 text-sm hidden">Middle Name is required.</p>
-                            </div>
-
-                            <div>
-                                <label class="text-sm text-gray-600">Last Name <span class="text-red-500">*</span></label>
-                                <input type="text" placeholder="Asis" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="lastName" required>
-                                <p id="lastNameError" class="text-red-500 text-sm hidden">Last Name is required.</p>
-                            </div>
-                        </div>
-
-                        <!-- Phone No., Date of Birth, Email, and Address Section (Left Side) -->
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <!-- Left Side -->
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="text-sm text-gray-600">Phone No. <span class="text-red-500">*</span></label>
-                                    <input type="text" placeholder="+639123456789" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="phoneNo" required>
-                                    <p id="phoneNoError" class="text-red-500 text-sm hidden">Phone No. is required.</p>
-                                </div>
-
-                                <div>
-                                    <label class="text-sm text-gray-600">Date of Birth <span class="text-red-500">*</span></label>
-                                    <input type="date" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="dob" required>
-                                    <p id="dobError" class="text-red-500 text-sm hidden">Date of Birth is required.</p>
-                                </div>
-
-                                <div>
-                                    <label for="email" class="block text-sm font-medium text-gray-700">Email <span class="text-red-500">*</span></label>
-                                    <input type="email" placeholder="Enter your email" id="email" name="email" required class="w-full mt-1 border border-[#011B33] rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                    <p id="emailError" class="text-red-500 text-sm hidden">Email is required.</p>
-                                    <p id="emailErrorInvalid" class="text-red-500 text-sm hidden error-message">Please enter a valid email address.</p>
-                                </div>
-
-                                <div>
-                                    <label class="text-sm text-gray-600">Address <span class="text-red-500">*</span></label>
-                                    <textarea placeholder="Enter address here" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" rows="3" id="address" required></textarea>
-                                    <p id="addressError" class="text-red-500 text-sm hidden">Address is required.</p>
-                                </div>
+                
+                            <!-- Phone No., Date of Birth, Email, and Address Section (Left Side) -->
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="text-sm text-gray-600">Phone No. <span class="text-red-500">*</span></label>
+                                        <input type="text" name="phone_no" placeholder="+639123456789" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="ephoneNo" required>
+                                        <p id="phoneNoError" class="text-red-500 text-sm hidden">Phone No. is required.</p>
+                                    </div>
+                                    <div>
+                                        <label class="text-sm text-gray-600">Date of Birth <span class="text-red-500">*</span></label>
+                                        <input type="date" name="date_of_birth" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="edob" required>
+                                        <p id="dobError" class="text-red-500 text-sm hidden">Date of Birth is required.</p>
+                                    </div>
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium text-gray-700">Email <span class="text-red-500">*</span></label>
+                                        <input type="email" name="email" placeholder="Enter your email" id="eemail" required class="w-full mt-1 border border-[#011B33] rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                        <p id="emailError" class="text-red-500 text-sm hidden">Email is required.</p>
+                                        <p id="emailErrorInvalid" class="text-red-500 text-sm hidden error-message">Please enter a valid email address.</p>
+                                    </div>
+                                    <div>
+                                        <label class="text-sm text-gray-600">Address <span class="text-red-500">*</span></label>
+                                        <textarea name="address" placeholder="Enter address here" class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" rows="3" id="eaddress" required></textarea>
+                                        <p id="addressError" class="text-red-500 text-sm hidden">Address is required.</p>
+                                    </div>
                             </div>
 
                             <!-- Right Side (Photo Upload Section) -->
@@ -422,7 +428,12 @@
                                 </div>
 
                                 <!-- Modal Trigger Button -->
-                                `<button onclick="openModal('editAccessModal')"  class="px-4 py-2 bg-[#012A4A] text-white rounded-md">Employee Accessibility</button>
+                                <button 
+                                type="button" 
+                                onclick="openModal('editAccessModal')"  
+                                class="px-4 py-2 bg-[#012A4A] text-white rounded-md">
+                                Employee Accessibility
+                                </button>
 
                                 <!-- Modal -->
                                 <div id="editAccessModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center">
@@ -432,41 +443,40 @@
                                             <label class="text-sm text-gray-600">Employee Permissions <span class="text-red-500">*</span></label>
                                             <div class="mt-2">
                                                 <label class="block">
-                                                    <input type="checkbox" id="dashboard" class="mr-2"> Dashboard
+                                                    <input type="checkbox" name="dashboard" id="edashboard" class="mr-2"> Dashboard
                                                 </label>
                                                 <label class="block">
-                                                    <input type="checkbox" id="employee" class="mr-2"> Employee
+                                                    <input type="checkbox" name="employee" id="eemployee" class="mr-2"> Employee
                                                 </label>
                                                 <label class="block">
-                                                    <input type="checkbox" id="reservation" class="mr-2"> Reservation
+                                                    <input type="checkbox" name="reservation" id="ereservation" class="mr-2"> Reservation
                                                 </label>
                                                 <label class="block">
-                                                    <input type="checkbox" id="catalog" class="mr-2"> Catalog
+                                                    <input type="checkbox" name="catalog" id="ecatalog" class="mr-2"> Catalog
                                                 </label>
                                                 <label class="block">
-                                                    <input type="checkbox" id="members" class="mr-2"> Members
+                                                    <input type="checkbox" name="members" id="emembers" class="mr-2"> Members
                                                 </label>
                                                 <label class="block">
-                                                    <input type="checkbox" id="circulations" class="mr-2"> Circulations
+                                                    <input type="checkbox" name="circulations" id="ecirculations" class="mr-2"> Circulations
                                                 </label>
                                                 <label class="block">
-                                                    <input type="checkbox" id="circulationsReports" class="mr-2"> Circulations Reports
+                                                    <input type="checkbox" name="circulationReports" id="ecirculationsReports" class="mr-2"> Circulations Reports
                                                 </label>
                                                 <label class="block">
-                                                    <input type="checkbox" id="membersReports" class="mr-2"> Members Reports
+                                                    <input type="checkbox" name="membersReports" id="emembersReports" class="mr-2"> Members Reports
                                                 </label>
                                                 <label class="block">
-                                                    <input type="checkbox" id="overdueReports" class="mr-2"> Overdue Reports
+                                                    <input type="checkbox" name="overdueReports" id="eoverdueReports" class="mr-2"> Overdue Reports
                                                 </label>
                                                 <label class="block">
-                                                    <input type="checkbox" id="catalogReports" class="mr-2"> Catalog Reports
+                                                    <input type="checkbox" name="catalogReports" id="ecatalogReports" class="mr-2"> Catalog Reports
                                                 </label>
                                             </div>
                                             <p id="employeePermissionsError" class="text-red-500 text-sm hidden">Permissions are required.</p>
                                         </div>
                                         <div class="mt-4 flex space-x-2 justify-end">
-                                            <button onclick="closeModal('editAccessModal')" class="px-3 py-2 bg-gray-500 text-white rounded-md">Close</button>
-                                            <button type="submit" class="px-3 py-2 bg-blue-500 text-white rounded hover:bg-[#011B33]">Save</button>
+                                            <button type="button" onclick="closeModal('editAccessModal')" class="px-3 py-2 bg-gray-500 text-white rounded-md">Close</button>
                                         </div>
                                     </div>
                                 </div>
@@ -477,8 +487,6 @@
                             <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-[#011B33]">Save</button>
                         </div>
                     </form>
-                        <!-- Modal Footer -->
-                        
                     </div>
                 </div>
 
@@ -490,10 +498,14 @@
                     <i class="fas fa-trash text-red-500 text-xl"></i>
                     <h1 class="text-2xl font-semibold mb-3 mt-4">Delete this item?</h1>
                 </div>
-                <p class="text-gray-700 mb-6">Are you sure you want to delete book name from the library? Note: All copies and related data such as loan information will be removed permanently.</p>
+                <p class="text-gray-700 mb-6">Are you sure you want to delete the employee account? Note: You will no longer have access to the account after deletion.</p>
                 <div class="flex justify-end">
                 <button type="button" onclick="closeModal('DeleteModal')" class="mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">Cancel</button>
+                <form id="DeleteEmployeeForm" action="{{ route('employees.delete') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                    @csrf
+                    <input type="hidden" id="DrecordId" name="recordId">
                 <button type="submit" class="flex items-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                </form>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
