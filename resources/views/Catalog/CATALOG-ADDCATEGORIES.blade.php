@@ -50,16 +50,16 @@
                         <tr class="bg-[#012A4A] text-white text-sm leading-normal">
                             <th class="py-3 px-6 text-left">ID</th>
                             <th class="py-3 px-6 text-left">Name</th>
-                            <th class="py-3 px-6 text-left">Slug</th>
                             <th class="py-3 px-6 text-center">Items</th>
                             <th class="py-3 px-6 text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($categories as $category)
+        
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td id="categoryID" class="px-6 py-2 text-left">123456</td>
-                            <td id="categoryName" class="px-6 py-2 text-left">Fiction</td>
-                            <td id="categorySlug" class="px-6 py-2 text-left">Fiction</td>
+                            <td id="categoryID" class="px-6 py-2 text-left">{{ $category->id }}</td>
+                            <td id="categoryName" class="px-6 py-2 text-left">{{ $category->name }}</td>
                             <!-- Center-align the Items column -->
                             <td id="categoryItems" class="px-6 py-2 text-center">10</td>
                             <td class="px-6 py-2 text-center space-x-2">
@@ -74,6 +74,7 @@
                                 </button>
                             </td>
                         </tr>
+                        @endforeach
                         <!-- Repeat rows as needed -->
                     </tbody>
                 </table>

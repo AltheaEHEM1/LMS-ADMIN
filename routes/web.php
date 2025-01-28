@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 
 //////////////////////////////////////////////////////////
 //if you want to run the log in of employee
@@ -160,6 +161,7 @@ Route::get('/EMPLOYEE', function () {
 
 
 Route::post('/books', [BookController::class, 'store'])->name('book.store');
+Route::post('/books/add-copy', [BookController::class, 'addCopy'])->name('books.addCopy');
 Route::get('/catalog/show', [BookController::class, 'showCatalog'])->name('catalogs');
 Route::get('/CATALOG', function () {
     return view('CATALOG'); 
@@ -167,3 +169,7 @@ Route::get('/CATALOG', function () {
 
 Route::get('/EMPLOYEE/show', [EmployeeController::class, 'showEmployee'])->name('employee.show');
 Route::get('/User/show', [EmployeeController::class, 'showUser'])->name('user.show');
+
+
+Route::get('/categories/show', [CategoryController::class, 'index']);
+Route::get('/book/adding/categories', [CategoryController::class, 'index2']);

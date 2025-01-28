@@ -17,15 +17,19 @@ class Book extends Model
      */
     protected $fillable = [
         'media_type',
-        'category',
         'title',
         'isbn',
         'isbn_13',
         'edition',
         'year',
-        'tag',
+        'pages',
+        'language',
+        'publisher',
+        'author',
+        'copies',
         'photo',
         'created_by',
+        
     ];
 
     /**
@@ -43,6 +47,10 @@ class Book extends Model
     public function creator()
     {
         return $this->belongsTo(\App\Models\Employee::class, 'created_by');
+    }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'book_category');
     }
 }
 

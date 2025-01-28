@@ -16,13 +16,16 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('media_type');
-            $table->string('category');
             $table->string('title');
             $table->string('isbn');
             $table->string('isbn_13');
             $table->string('edition');
             $table->string('year');
-            $table->string('tag');
+            $table->string('language');
+            $table->string('pages');
+            $table->string('publisher');
+            $table->string('author');
+            $table->integer('copies');
             $table->string('photo')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('employees')->nullOnDelete();
             $table->softDeletes(); // Automatically manages 'deleted_at' for soft-deletion

@@ -35,8 +35,8 @@
 
             <!-- Action Buttons -->
             <div class="flex items-end space-x-2 px-4 py-4">
-                <a href="/CATALOG-ADDCATEGORIES" class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white">Categories</a>
-                <a href="/CATALOG-ADDBOOK" class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white">Add Book</a>
+                <a href="/categories/show" class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white">Categories</a>
+                <a href="/book/adding/categories" class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white">Add Book</a>
             </div>
 
 
@@ -62,15 +62,16 @@
                                 <td class="py-3 px-6 text-left text-gray-700">{{ $book->id }}</td>
                                 <td class="py-3 px-6 text-left text-gray-700">{{ $book->title }}</td>
                                 <td class="py-3 px-6 text-left text-gray-700">{{ $book->media_type }}</td>
-                                <td class="py-3 px-6 text-left text-gray-700">{{ $book->category }}</td>
+                                <td class="py-3 px-6 text-left text-gray-700">{{ $book->author }}</td>
+                                <td class="py-3 px-6 text-left text-gray-700">{{ $book->publisher }}</td>
                                 <td class="py-3 px-6 text-left text-gray-700">{{ $book->isbn }}</td>
-                                <td class="py-3 px-6 text-left text-gray-700">{{ $book->isbn_13 }}</td>
-                                <td class="py-3 px-6 text-left text-gray-700">{{ $book->edition }}</td>
+                                <td class="py-3 px-6 text-left text-gray-700">{{ $book->copies }}</td>
                                 <td class="py-3 px-6 text-center">
                                     <a href="{{ url('catalog/view', $book->id) }}" class="text-blue-500 hover:underline pr-2">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    <button onclick="togglePopup('addNewCopyPopup')" class="text-green-500 hover:underline">
+                                    <button onclick="addcopy(this)" class="text-green-500 hover:underline"
+                                    data-id="{{ $book->id }}">
                                         <i class="fa fa-plus"></i> 
                                     </button>
                                 </td>
@@ -89,12 +90,11 @@
     <div id="addNewCopyPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
     <div class="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 class="text-lg font-bold mb-4">Add New Copy</h2>
-        <form>
-            <label class="block mb-2 text-sm text-gray-600" for="accessionNo">Accession No.</label>
-            <input type="text" id="accessionNo" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
-            
+        <form id="addCopyForm" action="{{ route('books.addCopy') }}" method="POST">
+            @csrf
+            <input type="hidden" id="ebook_id" name="book_id">
             <label class="block mb-2 text-sm text-gray-600" for="copyNo">Copy No.</label>
-            <input type="text" id="copyNo" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
+            <input type="text" id="copyNo" name="number_of_copies" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4">
             
             <div class="flex items-center mb-2">
                 <label for="active" class="flex items-center cursor-pointer">
@@ -109,7 +109,6 @@
             
 
             <p class="text-xs text-gray-600">Make this item active for checking out, OPAC listing and other activities.</p>
-            
             <div class="flex justify-end space-x-2">
                 <button type="button" onclick="togglePopup('addNewCopyPopup')" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Close</button>
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Submit</button>

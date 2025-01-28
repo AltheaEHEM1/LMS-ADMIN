@@ -30,7 +30,7 @@
             <!-- Form Fields Section -->
             <div class="col-span-2 grid grid-cols-1 gap-4">
                 <!-- Form Fields -->
-                <form id="addBookForm" method="POST" action="{{ route('book.store') }}">
+                <form id="addBookForm" method="POST" action="{{ route('book.store') }}" enctype="multipart/form-data">
                     @csrf <!-- CSRF Token -->
 
                     <!-- First Row: Type, Category, Author -->
@@ -40,12 +40,12 @@
                             <input name="media_type" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Category</label>
-                            <input name="category" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
-                        </div>
-                        <div>
                             <label class="block text-sm font-medium text-gray-700">Author</label>
                             <input name="Author" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">No. of Copies</label>
+                            <input name="copies" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
                         </div>
                     </div>
 
@@ -88,12 +88,8 @@
                             <input name="pages" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Tag</label>
-                            <input name="tag" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Stock</label>
-                            <input name="stock" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <label class="block text-sm font-medium text-gray-700">Photo</label>
+                            <input name="photo" type="file" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
                         </div>
                     </div>
 
@@ -101,12 +97,44 @@
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Language</label>
-                            <input name="stock" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <input name="language" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Photo</label>
-                            <input name="photo" type="file" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500">
-                        </div>
+                        <!-- Button to open modal -->
+                            <div>
+                                <button 
+                                    type="button" 
+                                    id="openModalButton" 
+                                    class="px-3 py-2 bg-blue-600 text-white rounded-md">
+                                    Open Modal
+                                </button>
+                            </div>
+
+                            <!-- Modal structure -->
+                            <div id="myModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex justify-center items-center">
+                                <div class="bg-white p-6 rounded-lg w-1/3">
+                                    <h2 class="text-lg font-semibold text-gray-700 mb-4">Employee Accessibility</h2>
+                                    <div class="mt-4">
+                                        <label class="text-sm text-gray-600">Permissions <span class="text-red-500">*</span></label>
+                                        <!-- Scrollable container for categories -->
+                                        <div class="mt-2 max-h-40 overflow-y-scroll border border-gray-300 rounded-lg p-2">
+                                            @foreach ($categories as $category)
+                                            <label class="block">
+                                                <input type="checkbox" name="categories[]" value="{{ $category->id }}" class="mr-2"> {{ $category->name }}
+                                            </label>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 flex space-x-2 justify-end">
+                                        <button 
+                                            type="button" 
+                                            id="closeModalButton" 
+                                            class="px-3 py-2 bg-gray-500 text-white rounded-md">
+                                            Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
                         <div class="flex justify-center items-center">
                             <button type="submit" class="px-4 py-2 bg-[#012A4A] text-white rounded-md mt-4 w-full sm:w-auto">Save Changes</button>
                         </div>

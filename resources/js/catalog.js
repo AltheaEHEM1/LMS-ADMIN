@@ -7,8 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
+    function addcopy(button) {
+        // Get data attributes from the button
+        const id = button.getAttribute('data-id');
+        
+        document.getElementById('ebook_id').value = id;
+
+        togglePopup('addNewCopyPopup')
+    }
+
     // Expose the function globally if needed
     window.togglePopup = togglePopup;
+    window.addcopy = addcopy
 
     const toggleInput = document.getElementById('active');
     const toggleBg = document.getElementById('toggle-bg');
