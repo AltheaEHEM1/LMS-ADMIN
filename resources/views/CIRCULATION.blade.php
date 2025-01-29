@@ -28,13 +28,45 @@
                 </div>
             </div>
 
+            @if (session('success'))
+                <div class="bg-green-100 text-green-700 p-3 rounded-md mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
 
+            @if (session('error'))
+                <div class="bg-red-100 text-red-700 p-3 rounded-md mb-4">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+            @if (session('warning'))
+                <div class="bg-yellow-100 text-yellow-700 p-3 rounded-md mb-4">
+                    {{ session('warning') }}
+                </div>
+            @endif
+
+            @if (session('info'))
+                <div class="bg-blue-100 text-blue-700 p-3 rounded-md mb-4">
+                    {{ session('info') }}
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="bg-red-100 text-red-700 p-3 rounded-md mb-4">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <!-- Divider -->
             <hr class="mt-2 border-gray-300" />
 
             <!-- Action Buttons -->
             <div class="flex items-end space-x-2 px-4 py-4">
-                <a href="Check-out" class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white">Check-out</a>
+                <a href="/circulation/add" class="bg-white text-[#012A4A] px-4 py-2 border-2 border-[#012A4A] rounded-md hover:bg-[#012A4A] hover:text-white">Check-out</a>
             </div>
 
 
@@ -54,18 +86,24 @@
                     </thead>
                     
                     <tbody>
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left text-gray-700">Jan 2, 2025</td>
-                            <td class="py-3 px-6 text-left text-gray-700">Jan 2, 2025</td>
-                            <td class="py-3 px-6 text-left text-gray-700">A Brief History of Time</td>
-                            <td class="py-3 px-6 text-left text-gray-700">Stvyn Policarpio</td>
-                            <td class="py-3 px-6 text-left text-gray-700">9780451524935</td>
-                            <td class="py-3 px-6 text-left text-gray-700">Overdue</td>
-                            <td class="py-3 px-6 text-center">
-                                <a href="/Edit" class="text-blue-500 hover:text-blue-700">Edit</a>
-                            </td>
 
+                        @foreach ($circulations as $circulation)
+                        <form action="{{ route('circulation.edit', $circulation->id) }}" method="GET">
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left text-gray-700">{{$circulation->borrowed_date}}</td>
+                            <td class="py-3 px-6 text-left text-gray-700">{{$circulation->due_date}}</td>
+                            <td class="py-3 px-6 text-left text-gray-700">{{$circulation->user->email}}</td>
+                            <td class="py-3 px-6 text-left text-gray-700">{{$circulation->book->title}}</td>
+                            <td class="py-3 px-6 text-left text-gray-700">{{$circulation->book->isbn}}</td>
+                            <td class="py-3 px-6 text-left text-gray-700">{{$circulation->status}}</td>
+                            <td class="py-3 px-6 text-center">
+                                <button type="submit" class="text-blue-500 hover:text-blue-700">
+                                    Edit
+                                </button>
+                            </td>
                         </tr>
+                        </form>
+                        @endforeach
                         <!-- Repeat rows as needed -->
                     </tbody>
                 </table>

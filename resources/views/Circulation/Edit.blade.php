@@ -17,7 +17,15 @@
             <h1 class="text-xl font-bold text-[#012A4A] mb-2">Edit</h1>
             <hr class="mt-2 border-gray-300" />
         </div>
-
+        @if ($errors->any())
+            <div class="bg-red-100 text-red-700 p-3 rounded-md mb-4">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="ml-30 rounded-md p-6 mb-6 w-3/4 mx-auto">
             <div class="space-y-6 flex justify-center items-center">
                 <div class="flex flex-col p-6">
@@ -26,21 +34,21 @@
                         <div class="p-4">
                             <label class="block text-sm font-medium text-gray-700">Member</label>
                             <div class="border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 bg-gray-100">
-                                John Doe
+                                {{$circulation->user->firstName}} {{$circulation->user->lastName}}
                             </div>
                         </div>
 
                         <div class="p-4">
-                            <label class="block text-sm font-medium text-gray-700">Phone Number</label>
+                            <label class="block text-sm font-medium text-gray-700">Book Title</label>
                             <div class="border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 bg-gray-100">
-                                123-456-7890
+                                {{$circulation->book->title}}
                             </div>
                         </div>
 
                         <div class="p-4">
                             <label class="block text-sm font-medium text-gray-700">Email Address</label>
                             <div class="border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 bg-gray-100">
-                                john.doe@example.com
+                                {{$circulation->user->email}}
                             </div>
                         </div>
                     </div>
@@ -50,46 +58,55 @@
                         <div class="p-4">
                             <label class="block text-sm font-medium text-gray-700">Booking Date</label>
                             <div class="border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 bg-gray-100">
-                                January 2,2025
+                                {{$circulation->borrowed_date}}
                             </div>
                         </div>
 
                         <div class="p-4">
                             <label class="block text-sm font-medium text-gray-700">Returning Date</label>
                             <div class="border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 bg-gray-100">
-                                January 10,2025
+                                {{$circulation->due_date}}
                             </div>
                         </div>
 
                         <div class="p-4">
-                            <label class="block text-sm font-medium text-gray-700">Status</label>
-                            <select id="status" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                                <option value="overdue">Overdue</option>
-                                <option value="cancelled">Cancelled</option>
-                                <option value="checkin">Check-in</option>
-                            </select>
+                            <label class="block text-sm font-medium text-gray-700">Old Status</label>
+                            <div class="border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 bg-gray-100">
+                                {{$circulation->status}}
+                            </div>
                         </div>
+
+                        
                     </div>
 
                     <!-- Row 3: Quick Return Date, Extend Return Date -->
-                    <div class="flex space-x-8 items-center justify-center">
-                        <div class="p-4">
-                            <label class="block text-sm font-medium text-gray-700">Quick Return Date</label>
-                            <input id="quickReturnDate" type="date" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <form action="{{ route('circulation.update') }}" method="POST">
+                        @csrf
+                        <div class="flex space-x-8 items-center justify-center">
+                            <input type="hidden" value={{$circulation->id}} id="DrecordId" name="circulationId">
+                            <div class="p-4">
+                                <label class="block text-sm font-medium text-gray-700">Return Date</label>
+                                <input id="extendReturnDate" type="date" name="returndate" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+                            </div>
+                            <div class="p-4">
+                                <label class="block text-sm font-medium text-gray-700">Updating Status</label>
+                                <select id="status" name="status" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+                                    <option value="borrowed">Borrowed</option>
+                                    <option value="returned">Returned</option>
+                                    <option value="overdue">Overdue</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                            </div>
                         </div>
+                        
 
-                        <div class="p-4">
-                            <label class="block text-sm font-medium text-gray-700">Extend Return Date</label>
-                            <input id="extendReturnDate" type="date" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <!-- Save Changes Button -->
+                        <div class="flex justify-center mt-6">
+                            <button id="saveButton" class="px-6 py-3 bg-[#012A4A] text-white rounded-md hover:bg-[#013d66]">
+                                Save Changes
+                            </button>
                         </div>
-                    </div>
-
-                    <!-- Save Changes Button -->
-                    <div class="flex justify-center mt-6">
-                        <button id="saveButton" class="px-6 py-3 bg-[#012A4A] text-white rounded-md hover:bg-[#013d66]">
-                            Save Changes
-                        </button>
-                    </div>
+                    </form>
                 </div>
                 
             </div>

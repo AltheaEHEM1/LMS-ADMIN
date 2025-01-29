@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CirculationController;
+
 
 //////////////////////////////////////////////////////////
 //if you want to run the log in of employee
@@ -173,3 +175,11 @@ Route::get('/User/show', [EmployeeController::class, 'showUser'])->name('user.sh
 
 Route::get('/categories/show', [CategoryController::class, 'index']);
 Route::get('/book/adding/categories', [CategoryController::class, 'index2']);
+
+
+Route::get('/circulation/show', [CirculationController::class, 'index'])->name('view.circulation');
+Route::get('/circulation/{id}/edit', [CirculationController::class, 'edit'])->name('circulation.edit');
+Route::post('/circulation/update', [CirculationController::class, 'updateCirculation'])->name('circulation.update');
+
+Route::get('/circulation/add', [CirculationController::class, 'create']);
+Route::post('/circulations/store', [CirculationController::class, 'store'])->name('circulations.store');

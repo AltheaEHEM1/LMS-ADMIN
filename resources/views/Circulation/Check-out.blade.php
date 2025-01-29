@@ -21,39 +21,54 @@
         <div class="ml-6 rounded-md p-4">
             <!-- Form Fields Section -->
             <div class="col-span-2 grid grid-cols-1 gap-4">
+
                 <!-- Form Fields -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Member</label>
-                    <input id="mediaType" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Phone Number</label>
-                    <input id="phoneNumber" type="text" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Email Address</label>
-                    <input id="emailAddress" type="email" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                </div>
-
-                <!-- Borrowing Details -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Booking Date</label>
-                    <input id="bookingDate" type="date" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Returning Date</label>
-                    <input id="returningDate" type="date" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-                </div>
+                <form action="{{ route('circulations.store') }}" method="POST">
+                    @csrf
+                    <div>
+                        <label for="customer" class="block text-sm font-medium text-gray-700">Customer</label>
+                        <select id="customer" name="customer" class="select2 form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72">
+                            <option value="" disabled selected>Select a customer</option>
+                            @foreach ($customers as $customer)
+                                <option value="{{ $customer->id }}">{{ $customer->firstName }} {{ $customer->lastName }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                
+                    <div>
+                        <label for="book" class="block text-sm font-medium text-gray-700">Book</label>
+                        <select id="book" name="book" class="select2 form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72">
+                            <option value="" disabled selected>Select a book</option>
+                            @foreach ($books as $book)
+                                <option value="{{ $book->id }}">{{ $book->title }} ({{ $book->copies }} copies available)</option>
+                            @endforeach
+                        </select>
+                    </div>
+                
+                    <div>
+                        <label for="borrowed_date" class="block text-sm font-medium text-gray-700">Borrowed Date</label>
+                        <input type="date" id="borrowed_date" name="borrowed_date" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72">
+                    </div>
+                
+                    <div>
+                        <label for="due_date" class="block text-sm font-medium text-gray-700">Due Date</label>
+                        <input type="date" id="due_date" name="due_date" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72" min="" required>
+                    </div>
+                
+                    <div>
+                        <label for="copies_borrowed" class="block text-sm font-medium text-gray-700">Copies Borrowed</label>
+                        <input type="number" id="copies_borrowed" name="copies_borrowed" min="1" class="form-control border border-gray-300 rounded-lg px-4 py-2 text-sm w-72">
+                    </div>
+                
+                    <div class="flex mt-2">
+                        <button id="saveButton" class="px-4 py-2 bg-gray-300 text-white rounded-md hover:bg-[#012A4A]">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
 
                 <!-- Save Changes Button (Moved to Next Line) -->
-                <div class="flex mt-2">
-                    <button id="saveButton" class="px-4 py-2 bg-gray-300 text-white rounded-md hover:bg-[#012A4A]">
-                        Save Changes
-                    </button>
-                </div>
+                
             </div>
 
         </div>
@@ -82,3 +97,13 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get today's date in YYYY-MM-DD format
+        const today = new Date().toISOString().split('T')[0];
+
+        // Set the minimum date for the due_date input
+        const dueDateInput = document.getElementById('due_date');
+        dueDateInput.setAttribute('min', today);
+    });
+</script>
