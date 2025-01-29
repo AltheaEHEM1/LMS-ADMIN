@@ -9,12 +9,13 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        // Retrieve all categories
-        $categories = Category::all();
+        // Retrieve all categories with the count of books associated with each
+        $categories = Category::withCount('books')->get();
 
-        // Pass the categories to a view
+        // Pass the categories (with book counts) to a view
         return view('Catalog.CATALOG-ADDCATEGORIES', compact('categories'));
     }
+
 
     public function index2()
     {

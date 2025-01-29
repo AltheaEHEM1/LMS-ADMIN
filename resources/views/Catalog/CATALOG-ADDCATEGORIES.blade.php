@@ -61,7 +61,7 @@
                             <td id="categoryID" class="px-6 py-2 text-left">{{ $category->id }}</td>
                             <td id="categoryName" class="px-6 py-2 text-left">{{ $category->name }}</td>
                             <!-- Center-align the Items column -->
-                            <td id="categoryItems" class="px-6 py-2 text-center">10</td>
+                            <td id="categoryItems" class="px-6 py-2 text-center">{{ $category->books_count }}</td>
                             <td class="px-6 py-2 text-center space-x-2">
                                 <button class="text-blue-500" onclick="showModal('viewCategoryModal')">
                                     <i class="fa fa-eye"></i>
