@@ -70,7 +70,11 @@
                                     </td>
                                     <td class="py-3 px-4">{{ $employee->email }}</td>
                                     <td class="py-3 px-4">{{ $employee->created_at }}</td>
-                                    <td class="py-3 px-4 text-green-600">{{ $employee->activate }}</td>
+                                    @if($employee->activate)
+                                    <td class="py-3 px-4 text-green-600">Active</td>
+                                    @else
+                                        <td class="py-3 px-4 text-red-600">Inactive</td>
+                                    @endif
                                     <td class="py-3 px-4 flex justify-center items-center space-x-5">
                                         <!-- View Icon -->
                                         <button 

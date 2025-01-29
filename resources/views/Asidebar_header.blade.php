@@ -94,35 +94,62 @@
     
                 <!-- Navigation Menu -->
                 <ul class="mt-15">
-                    <li><a href="/DASHBORDLandingpage_employee" id="dashboard" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                    @if(auth()->user()->access_dashboard)
+                        <li><a href="/DASHBORDLandingpage_employee" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
                             <i class="fas fa-tachometer-alt mr-4"></i> Dashboard</a></li>
-                    <li><a href="{{ route('employee.show') }}" id="employee" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                    @endif
+
+                    @if(auth()->user()->access_employee)
+                        <li><a href="{{ route('employee.show') }}" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
                             <i class="fas fa-user-tie mr-4"></i> Employee</a></li>
-                    <li><a href="/RESERVATION" id="Reservation" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                    @endif
+
+                    @if(auth()->user()->access_reservation)
+                        <li><a href="/RESERVATION" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
                             <i class="fas fa-calendar-check mr-4"></i> Reservations</a></li>
-                    <li><a href="{{ route('catalogs') }}" id="catalog" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                    @endif
+
+                    @if(auth()->user()->access_catalog)
+                        <li><a href="{{ route('catalogs') }}" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
                             <i class="fas fa-book-open mr-4"></i> Catalog</a></li>
-                    <li><a href="{{ route('user.show') }}" id="members" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                    @endif
+
+                    @if(auth()->user()->access_members)
+                        <li><a href="{{ route('user.show') }}" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
                             <i class="fas fa-users mr-4"></i> Members</a></li>
-                    <li><a href="/circulation/show" id="circulation" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                    @endif
+
+                    @if(auth()->user()->access_circulations)
+                        <li><a href="/circulation/show" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
                             <i class="fas fa-exchange-alt mr-4"></i> Circulations</a></li>
-                    <li class="relative dropdown">
-                        <a href="#" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
-                            <i class="fas fa-chart-line mr-4"></i> Reports
-                            <i class="fas fa-caret-down ml-auto"></i>
-                        </a>
-                        <!-- Dropdown Menu -->
-                        <ul class="dropdown-menu absolute left-0 w-full bg-[#012A4A] text-white mt-2 rounded-lg">
-                            <li><a href="/CIRCULATION_REPORTS" id="circulation_reports" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
-                                    <i class="fas fa-chart-line mr-4"></i> Circulation Reports</a></li>
-                            <li><a href="/MEMBER_REPORTS" id="member_reports" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
-                                    <i class="fas fa-file-alt mr-4"></i> Member Reports</a></li>
-                            <li><a href="/OVERDUE_REPORTS" id="overdue_reports" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
-                                    <i class="fas fa-clock mr-4"></i> Overdue Reports</a></li>
-                            <li><a href="/CATALOG_REPORTS" id="catalog_reports" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
-                                    <i class="fas fa-chart-pie mr-4"></i> Catalog Reports</a></li>
-                        </ul>
-                    </li>
+                    @endif
+                    @if(auth()->user()->access_circulation_reports || auth()->user()->access_member_reports || auth()->user()->access_overdue_reports || auth()->user()->access_catalog_reports)
+                        <li class="relative dropdown">
+                            <a href="#" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                                <i class="fas fa-chart-line mr-4"></i> Reports
+                                <i class="fas fa-caret-down ml-auto"></i>
+                            </a>
+                            <!-- Dropdown Menu -->
+                            <ul class="dropdown-menu absolute left-0 w-full bg-[#012A4A] text-white mt-2 rounded-lg">
+                                @if(auth()->user()->access_circulation_reports)
+                                    <li><a href="/CIRCULATION_REPORTS" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                                        <i class="fas fa-chart-line mr-4"></i> Circulation Reports</a></li>
+                                @endif
+                                @if(auth()->user()->access_member_reports)
+                                    <li><a href="/MEMBER_REPORTS" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                                        <i class="fas fa-file-alt mr-4"></i> Member Reports</a></li>
+                                @endif
+                                @if(auth()->user()->access_overdue_reports)
+                                    <li><a href="/OVERDUE_REPORTS" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                                        <i class="fas fa-clock mr-4"></i> Overdue Reports</a></li>
+                                @endif
+                                @if(auth()->user()->access_catalog_reports)
+                                    <li><a href="/CATALOG_REPORTS" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                                        <i class="fas fa-chart-pie mr-4"></i> Catalog Reports</a></li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </aside>
