@@ -95,17 +95,16 @@
                 <!-- Navigation Menu -->
                 <ul class="mt-15">
                     @if(auth()->user()->access_dashboard)
-                        <li><a href="/DASHBORDLandingpage_employee" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
-                            <i class="fas fa-tachometer-alt mr-4"></i> Dashboard</a></li>
+                    <li><a href="/DASHBORDLandingpage_employee" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                        <i class="fas fa-tachometer-alt mr-4"></i> Dashboard</a></li>
                     @endif
-
                     @if(auth()->user()->access_employee)
                         <li><a href="{{ route('employee.show') }}" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
                             <i class="fas fa-user-tie mr-4"></i> Employee</a></li>
                     @endif
 
                     @if(auth()->user()->access_reservation)
-                        <li><a href="/RESERVATION" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                        <li><a href="/borrows" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
                             <i class="fas fa-calendar-check mr-4"></i> Reservations</a></li>
                     @endif
 

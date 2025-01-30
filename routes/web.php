@@ -6,6 +6,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CirculationController;
+use App\Http\Controllers\BorrowController;
 
 
 //////////////////////////////////////////////////////////
@@ -18,12 +19,14 @@ use App\Http\Controllers\CirculationController;
 //     return view('DASHBORDLandingpage_employee'); 
 // });
 
+
+
 Route::get('/', function () {
-    return view('DASHBORDLandingpage_employee'); 
+    return view('login_employee'); 
 });
 
-Route::get('/login_employee', function () {
-    return view('login_employee'); 
+Route::get('/DASHBORDLandingpage_employee', function () {
+    return view('DASHBORDLandingpage_employee'); 
 });
 
 Route::get('/Profile', function () {
@@ -183,3 +186,6 @@ Route::post('/circulation/update', [CirculationController::class, 'updateCircula
 
 Route::get('/circulation/add', [CirculationController::class, 'create']);
 Route::post('/circulations/store', [CirculationController::class, 'store'])->name('circulations.store');
+
+
+Route::get('/borrows', [BorrowController::class, 'index'])->name('borrows.index');
