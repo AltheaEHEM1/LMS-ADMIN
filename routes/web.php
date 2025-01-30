@@ -189,3 +189,4 @@ Route::post('/circulations/store', [CirculationController::class, 'store'])->nam
 
 
 Route::get('/borrows', [BorrowController::class, 'index'])->name('borrows.index');
+Route::put('/borrows/update/{id}', [BorrowController::class, 'updateBorrow'])->name('borrow.update');

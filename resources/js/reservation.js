@@ -1,64 +1,52 @@
-// Function to open the modal
-function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');  // Ensure modal displays as flex
-    } else {
-        console.error(`Modal with ID "${modalId}" not found.`);
-    }
-}
-
-// Function to close the modal
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.remove('flex');
-        modal.classList.add('hidden');  // Ensure modal is hidden
-    } else {
-        console.error(`Modal with ID "${modalId}" not found.`);
-    }
-}
-
-// **Note**: Uncomment if ever needed.
-// // Function to handle save action
-// function saveChanges() {
-//     console.log("Changes Saved!");
-//     // Add your save logic here
-//     closeModal('ViewModal');  // Close the modal after saving
-// }
-
-// Add event listener for modals when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Select all buttons that open modals (e.g., View)
-    const modalButtons = document.querySelectorAll('[onclick^="openModal("]');
-    
-    modalButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent any default action
-            const modalId = button.getAttribute('onclick').match(/'([^']+)'/)[1]; // Extract modal ID from onclick
-            openModal(modalId);  // Open the corresponding modal
-        });
-    });
+    // Function to open the View Modal and populate it with dynamic data
+    function openViewModal(button) {
+        // Fetch data from the button's data attributes
+        const bookTitle = button.getAttribute('data-book-title') || "N/A";
+        const reservationDate = button.getAttribute('data-reservation-date') || "N/A";
+        const status = button.getAttribute('data-status') || "Pending";
+        const photo = button.getAttribute('data-photo') || "https://via.placeholder.com/150"; // Default photo if none provided
+        const borrowerName = button.getAttribute('data-borrower-name') || "N/A";
+        const borrowerEmail = button.getAttribute('data-borrower-email') || "N/A";
+        const bookId = button.getAttribute('data-borrower-bid') || "N/A";
+        const borrowId = button.getAttribute('data-borrower-id') || "N/A";
+        const userId = button.getAttribute('data-borrower-uid') || "N/A";
+        
+        // Populate modal fields
+        document.querySelector('#ViewModal #book-image').setAttribute('src', photo);
+        document.querySelector('#ViewModal #book-title').textContent = bookTitle;
+        document.querySelector('#ViewModal #book-author').textContent = button.getAttribute('data-book-author') || "Unknown";
+        document.querySelector('#ViewModal #borrower-name').textContent = borrowerName;
+        document.querySelector('#ViewModal #borrower-email').textContent = borrowerEmail;
+        document.querySelector('#ViewModal #booking-date').textContent = reservationDate; // FIXED: Properly set the span text
+        document.querySelector('#ViewModal #status').value = status;
+        document.querySelector('#ViewModal #borrowId').value = borrowId;
 
-    // **Cancel Button**: General case for Cancel buttons inside any modal
-    const cancelButtons = document.querySelectorAll('.mr-2');  // Targets buttons with 'mr-2' class (Cancel button)
-    
-    cancelButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            const modalId = button.closest('.fixed').id; // Get the modal ID by finding the closest '.fixed' parent
-            closeModal(modalId);  // Close the modal when Cancel is clicked
-        });
-    });
+        // Open the modal
+        openModal('ViewModal');
+    }
 
-    // **Save Button**: Select all Save buttons and handle their actions
-    // **Note**: Uncomment if ever needed.
-    // const saveButtons = document.querySelectorAll('.save-btn');  // Targets Save buttons with 'save-btn' class
-    // saveButtons.forEach(button => {
-    //     button.addEventListener('click', (e) => {
-    //         e.preventDefault(); // Prevent default action
-    //         saveChanges();  // Handle save action and close the modal
-    //     });
-    // });
+    // Function to open the modal by ID
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('hidden'); // Remove the hidden class
+            modal.classList.add('flex'); // Add the flex class to display the modal
+        }
+    }
+
+    // Function to close the modal by ID
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('hidden'); // Add the hidden class to hide the modal
+            modal.classList.remove('flex'); // Remove the flex class
+        }
+    }
+
+    // Expose functions globally if needed
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+    window.openViewModal = openViewModal;
+
 });

@@ -29,6 +29,17 @@
                     </div>
                 </div>
             </div>
+            @if (session('success'))
+                <div class="bg-green-500 text-white p-2 rounded">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="bg-red-500 text-white p-2 rounded">
+                    {{ session('error') }}
+                </div>
+            @endif
 
 
             <table class="min-w-full bg-white border border-gray-200">
@@ -42,13 +53,37 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="py-3 px-4">Nadine Borja</td>
-                        <td class="py-3 px-4">The 48 Laws of Power</td>
-                        <td class="py-3 px-4">01-01-2025</td>
-                        <td class="py-3 px-4 text-green-600">Active</td>
-                        <td onclick="openModal('ViewModal')" class="py-3 px-4 cursor-pointer text-blue-600 hover:text-blue-800">View</td>
-                    </tr>
+                    @foreach($borrows as $borrow)
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-3 px-4">{{$borrow->user->username}}</td>
+                            <td class="py-3 px-4">{{$borrow->book->title}}</td>
+                            <td class="py-3 px-4">{{$borrow->reservation_date}}</td>
+                            @if($borrow->status == 'pending')
+                            <td class="py-3 px-4 text-red-600">Pending</td>
+                            @else
+                            <td class="py-3 px-4 text-green-600">Approved</td>
+                            @endif
+                            <td class="py-3 px-4 cursor-pointer text-blue-600 hover:text-blue-800">
+                                <button 
+                                    onclick="openViewModal(this)" 
+                                    data-username="{{$borrow->user->username}}"
+                                    data-book-title="{{$borrow->book->title}}"
+                                    data-book-author="{{$borrow->book->author}}"
+                                    data-reservation-date="{{$borrow->reservation_date}}"
+                                    data-status="{{$borrow->status}}"
+                                    data-photo="{{$borrow->book->photo}}"
+                                    data-borrower-name="{{$borrow->user->firstName}} {{$borrow->user->lastName}}"
+                                    data-borrower-phone="{{$borrow->user->phone}}"
+                                    data-borrower-email="{{$borrow->user->email}}"
+                                    data-borrower-id="{{$borrow->id}}"
+                                    data-borrower-uid="{{$borrow->book->id}}"
+                                    data-borrower-bid="{{$borrow->user->id}}">
+                                    <i class="py-3 px-4">View</i>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+
                     <!-- Repeat for other rows -->
                 </tbody>
             </table>
@@ -64,62 +99,76 @@
     </div>
 
     <!--modals-->
-            <!-- New Modal -->
-                <div id="ViewModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 items-center justify-center">
-                    <div class="bg-white p-7 rounded-lg shadow-md w-[70%] ml-[20%] mt-20">
-                        <h1 class="text-2xl font-bold mb-4">Reservations</h1>
-                        <p class="text-gray-600 mb-6">Manage library member or patron accounts and login options.</p>
-                
-                        <!-- Modal Content -->
-                        <div class="flex gap-8">
-                            <!-- Book Image -->
-                            <div class="w-1/3">
-                                <img src="https://via.placeholder.com/150" alt="Book" class="w-full h-72 rounded-lg shadow-md">
-                                <h2 class="text-xl font-semibold mt-4">Noli Me Tangere</h2>
-                                <p class="text-gray-500">Rizal, Jose P.</p>
-                            </div>
-                
-                            <!-- Borrowing Details Section -->
-                            <div class="w-2/3 space-y-6">
-                                <!-- Information Section -->
-                                <div>
-                                    <h3 class="text-lg font-semibold">Borrower's Information</h3>
-                                    <div class="text-sm text-gray-600 space-y-1">
-                                        <p><strong>Name:</strong> Althea Amor J. Asis</p>
-                                        <p><strong>Phone no.:</strong> +639123456789</p>
-                                        <p><strong>Email Address:</strong> altheaamorjasis@gmail.com</p>
-                                    </div>
+            <!-- Edit Modal -->
+            <div id="ViewModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 items-center justify-center">
+                <div class="bg-white p-7 rounded-lg shadow-md w-[70%] ml-[20%] mt-20">
+                    <h1 class="text-2xl font-bold mb-4">Reservations</h1>
+                    <p class="text-gray-600 mb-6">Manage library member or patron accounts and login options.</p>
+            
+                    <div class="flex gap-8">
+                        <!-- Book Image -->
+                        <div class="w-1/3">
+                            <img id="book-image" src="https://via.placeholder.com/150" alt="Book" class="w-full h-72 rounded-lg shadow-md">
+                            <h2 id="book-title" class="text-xl font-semibold mt-4">Noli Me Tangere</h2>
+                            <p id="book-author" class="text-gray-500">Rizal, Jose P.</p>
+                        </div>
+            
+                        <!-- Borrowing Details Section -->
+                        <div class="w-2/3 space-y-6">
+                            <!-- Borrower's Information -->
+                            <div>
+                                <h3 class="text-lg font-semibold">Borrower's Information</h3>
+                                <div class="text-sm text-gray-600 space-y-1">
+                                    <p><strong>Name:</strong> <span id="borrower-name">Althea Amor J. Asis</span></p>
+                                    <p><strong>Email Address:</strong> <span id="borrower-email">altheaamorjasis@gmail.com</span></p>
+                                    <p><strong>Reservation Date:</strong> <span id="booking-date">23-23-2003</span></p>
                                 </div>
+                            </div>
+            
+                            <!-- Borrowing Details -->
+                            <form id="Editborrowform" action="{{ route('borrow.update', ['id' => $borrow->id]) }}" method="POST">
+                                @csrf
+                                @method('PUT')
                                 <div>
                                     <h3 class="text-lg font-semibold">Borrowing Details</h3>
                                     <div class="flex gap-4 items-center">
+                                        <input type="hidden" id="borrowId" name="borrowId">
                                         <div>
                                             <label for="booking-date" class="block text-sm font-medium text-gray-700">Booking date</label>
-                                            <input type="date" id="booking-date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                            <input type="date" id="pickup-date" name="pickup-date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         </div>
                                         <div>
-                                            <label for="returning-date" class="block text-sm font-medium text-gray-700">Returning date</label>
-                                            <input type="date" id="returning-date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                            <label for="pickupdate" class="block text-sm font-medium text-gray-700">Returning date</label>
+                                            <input type="date" id="duedate" name="duedate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         </div>
                                         <div>
                                             <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                                            <select id="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                            <select id="status" name="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                 <option>Approved</option>
                                                 <option>Denied</option>
+                                                <option>Circulated</option>
                                             </select>
                                         </div>
+
+                                        
                                     </div>
+                                    <div class="flex justify-end">
+                                        <button type="button" onclick="closeModal('ViewModal')" class="mr-2 px-3 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">Cancel</button>
+                                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-[#011B33]">Save</button>
+                                    </div>
+                                
                                 </div>
-                            </div>
-                        </div>
-                
-                        <!-- Modal Footer -->
-                        <div class="flex justify-end">
-                            <button type="button" onclick="closeModal('ViewModal')" class="mr-2 px-3 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-200">Cancel</button>
-                            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-[#011B33]">Save</button>
+                            </form>
                         </div>
                     </div>
+            
+                    <!-- Modal Footer -->
+                    
                 </div>
+            </div>
+            
+            
+                
 
         
 
