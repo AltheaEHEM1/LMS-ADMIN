@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique(); // Ensures category names are unique
-            $table->string('description')->nullable(); // Optional description
+            $table->string('picture')->nullable(); // Nullable picture column
             $table->timestamps();
         });
 
