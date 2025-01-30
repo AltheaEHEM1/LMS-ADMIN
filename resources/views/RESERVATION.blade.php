@@ -126,6 +126,7 @@
                             </div>
             
                             <!-- Borrowing Details -->
+                            @if (isset($borrow))
                             <form id="Editborrowform" action="{{ route('borrow.update', ['id' => $borrow->id]) }}" method="POST">
                                 @csrf
                                 @method('PUT')
@@ -159,6 +160,9 @@
                                 
                                 </div>
                             </form>
+                            @else
+                                <p>Borrow record not found.</p>
+                            @endif
                         </div>
                     </div>
             

@@ -178,6 +178,9 @@ Route::get('/User/show', [EmployeeController::class, 'showUser'])->name('user.sh
 
 Route::get('/categories/show', [CategoryController::class, 'index']);
 Route::get('/book/adding/categories', [CategoryController::class, 'index2']);
+Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
+Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
+Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 
 Route::get('/circulation/show', [CirculationController::class, 'index'])->name('view.circulation');
@@ -190,3 +193,4 @@ Route::post('/circulations/store', [CirculationController::class, 'store'])->nam
 
 Route::get('/borrows', [BorrowController::class, 'index'])->name('borrows.index');
 Route::put('/borrows/update/{id}', [BorrowController::class, 'updateBorrow'])->name('borrow.update');
+

@@ -63,13 +63,23 @@
                             <!-- Center-align the Items column -->
                             <td id="categoryItems" class="px-6 py-2 text-center">{{ $category->books_count }}</td>
                             <td class="px-6 py-2 text-center space-x-2">
-                                <button class="text-blue-500" onclick="showModal('viewCategoryModal')">
+                                <button class="text-blue-500 view-category-btn" 
+                                    data-photo="{{ asset('storage/' . $category->picture) }}" 
+                                    data-created="{{ $category->created_at }}" 
+                                    data-modified="{{ $category->updated_at }}"
+                                    onclick="openViewCategoryModal(this)">
                                     <i class="fa fa-eye"></i>
                                 </button>
-                                <button class="text-green-500" onclick="showModal('editCategoryModal')">
+                                <button class="text-green-500 edit-category-btn" 
+                                    data-id="{{ $category->id }}"
+                                    data-name="{{ $category->name }}"
+                                    data-photo="{{ asset('storage/' . $category->picture) }}" 
+                                    onclick="openEditCategoryModal(this)">
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                <button class="text-red-500" onclick="showModal('deleteCategoryModal')">
+                                <button class="text-red-500 delete-category-btn" 
+                                    data-id="{{ $category->id }}" 
+                                    onclick="openDeleteCategoryModal(this)">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </td>
@@ -84,31 +94,28 @@
 
 <!-- Add Category Modal -->
 <div id="addCategoryModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white p-6 rounded-lg shadow-md w-1/6">
+    <div class="bg-white p-6 rounded-lg shadow-md w-1/3">
         <h2 class="text-lg font-semibold mb-4">Add New Category</h2>
-        <div>
-            <label class="block text-sm font-medium text-gray-700">Name</label>
-            <input type="text" class="border border-gray-300 rounded-lg px-4 py-2 text-sm w-full" />
-        </div>
-        <div class="mt-4">
-            <label class="block text-sm font-medium text-gray-700">Slug</label>
-            <input type="text" class="border border-gray-300 rounded-lg px-4 py-2 text-sm w-full" />
-        </div>
-        <div class="space-y-4">
+        
+        <form id="addCategoryForm" action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div>
-                <label class="text-sm font-semibold text-gray-700">Upload Photo</label>
-                <!-- Photo Upload Input (Larger Image) -->
-                <div class="w-48 h-48 flex items-center justify-center mx-auto mb-4">
-                    <img src="./images/photo.png" alt="photo" class="w-full h-full object-cover">
-                </div>
-                <!-- File Upload Input (Block Format) -->
-                <input type="file" id="uploadPhoto" name="photo" accept="image/*" class="w-full mt-1 px-3 py-2 border rounded">
+                <label class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" name="name" required class="border border-gray-300 rounded-lg px-4 py-2 text-sm w-full" />
             </div>
-        </div>
-        <div class="mt-6 flex justify-end space-x-2">
-            <button onclick="closeModal('addCategoryModal')" class="px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
-            <button class="px-4 py-2 bg-[#012A4A] text-white rounded-md">Submit</button>
-        </div>
+            <div class="space-y-4 mt-4">
+                <label class="text-sm font-semibold text-gray-700">Upload Photo</label>
+                <div class="w-48 h-48 flex items-center justify-center mx-auto mb-4">
+                    <img id="categoryImagePreview" src="./images/photo.png" alt="photo" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <input type="file" id="uploadPhoto" name="picture" accept="image/*" class="w-full mt-1 px-3 py-2 border rounded" onchange="previewImage(event)">
+            </div>
+
+            <div class="mt-6 flex justify-end space-x-2">
+                <button type="button" onclick="closeModal('addCategoryModal')" class="px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
+                <button type="submit" class="px-4 py-2 bg-[#012A4A] text-white rounded-md">Submit</button>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -130,7 +137,10 @@
             <ul class="space-y-2">
             <div class="space-y-4">
             <div class="w-48 h-48 flex items-center justify-center mx-auto mb-4">
-                <img src="./images/photo.png" alt="photo" class="w-full h-full object-cover">
+                <img src="{{ asset('images/photo.png') }}" 
+                alt="Category Photo" 
+                class="w-full h-full object-cover" 
+                data-key="photo">
             </div>
 
         </div>
@@ -139,16 +149,8 @@
                     <span id="categoryName">Biography</span>
                 </li>
                 <li>
-                    <strong>Slug:</strong>
-                    <span id="categorySlug">Biography</span>
-                </li>
-                <li>
                     <strong>Item(s):</strong>
                     <span id="categoryItems">10</span>
-                </li>
-                <li>
-                    <strong>Published:</strong>
-                    <span id="categoryPublished">Yes</span>
                 </li>
                 <li>
                     <strong>Created:</strong>
@@ -173,42 +175,58 @@
 
 <!-- Edit Category Modal -->
 <div id="editCategoryModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white p-6 rounded-lg shadow-md w-1/6">
+    <div class="bg-white p-6 rounded-lg shadow-md w-1/3">
         <h2 class="text-lg font-semibold mb-4">Edit Category</h2>
-        <div>
-            <label class="block text-sm font-medium text-gray-700">Name</label>
-            <input type="text" class="border border-gray-300 rounded-lg px-4 py-2 text-sm w-full"/>
-        </div>
-        <div class="mt-4">
-            <label class="block text-sm font-medium text-gray-700">Slug</label>
-            <input type="text" class="border border-gray-300 rounded-lg px-4 py-2 text-sm w-full"/>
-        </div>
-        <div class="space-y-4">
+
+        <!-- Form for updating category -->
+        <form id="editCategoryForm" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+            <!-- Hidden Field for Category ID -->
+            <input type="hidden" id="editCategoryId" name="category_id">
+
             <div>
-                <label class="text-sm font-semibold text-gray-700">Upload Photo</label>
-                <!-- Photo Upload Input (Larger Image) -->
-                <div class="w-48 h-48 flex items-center justify-center mx-auto mb-4">
-                    <img src="./images/photo.png" alt="photo" class="w-full h-full object-cover">
-                </div>
-                <!-- File Upload Input (Block Format) -->
-                <input type="file" id="uploadPhoto" name="photo" accept="image/*" class="w-full mt-1 px-3 py-2 border rounded">
+                <label class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" id="editCategoryName" name="name" class="border border-gray-300 rounded-lg px-4 py-2 text-sm w-full" required>
             </div>
-        </div>
-        <div class="mt-6 flex justify-end space-x-2">
-            <button onclick="closeModal('editCategoryModal')" class="px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
-            <button class="px-4 py-2 bg-[#012A4A] text-white rounded-md">Save</button>
-        </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="text-sm font-semibold text-gray-700">Upload Photo</label>
+                    <div class="w-48 h-48 flex items-center justify-center mx-auto mb-4">
+                        <img id="editCategoryPhoto" src="./images/photo.png" alt="photo" class="w-full h-full object-cover">
+                    </div>
+                    <input type="file" id="uploadPhoto" name="photo" accept="image/*" class="w-full mt-1 px-3 py-2 border rounded">
+                </div>
+            </div>
+            
+            <div class="mt-6 flex justify-end space-x-2">
+                <button type="button" onclick="closeModal('editCategoryModal')" class="px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
+                <button type="submit" class="px-4 py-2 bg-[#012A4A] text-white rounded-md">Save</button>
+            </div>
+        </form>
     </div>
 </div>
 
+
+
 <!-- Delete Category Modal -->
 <div id="deleteCategoryModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white p-6 rounded-lg shadow-md text-center w-[90%] sm:w-[400px] max-w-md"> <!-- Responsive width -->
+    <div class="bg-white p-6 rounded-lg shadow-md text-center w-[90%] sm:w-[400px] max-w-md">
         <h2 class="text-lg font-semibold text-red-500 mb-4">Delete this item?</h2>
         <p>Are you sure you want to delete this category? This action cannot be undone.</p>
-        <div class="mt-6 flex justify-center space-x-4">
-            <button onclick="closeModal('deleteCategoryModal')" class="px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
-            <button class="px-4 py-2 bg-red-500 text-white rounded-md">Delete</button>
-        </div>
+        
+        <!-- Delete form -->
+        <form id="deleteCategoryForm" method="POST" action="{{ route('categories.destroy', ['category' => 0]) }}">
+            @csrf
+            @method('DELETE')
+            <input type="hidden" id="deleteCategoryId" name="category_id">
+        
+            <div class="mt-6 flex justify-center space-x-4">
+                <button type="button" onclick="closeModal('deleteCategoryModal')" class="px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
+                <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-md">Delete</button>
+            </div>
+        </form>
     </div>
 </div>
