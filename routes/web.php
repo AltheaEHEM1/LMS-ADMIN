@@ -183,6 +183,7 @@ Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('cat
 Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 
+
 Route::get('/circulation/show', [CirculationController::class, 'index'])->name('view.circulation');
 Route::get('/circulation/{id}/edit', [CirculationController::class, 'edit'])->name('circulation.edit');
 Route::post('/circulation/update', [CirculationController::class, 'updateCirculation'])->name('circulation.update');

@@ -73,7 +73,7 @@ class CirculationController extends Controller
         // Reduce the available copies in the books table
         $book->decrement('copies', $request->copies_borrowed);
 
-        return redirect()->route('circulations.index')->with('success', 'Circulation record created successfully.');
+        return redirect()->route('view.circulation')->with('success', 'Circulation record created successfully.');
     }
 
     /**
@@ -104,13 +104,33 @@ class CirculationController extends Controller
         // Validate incoming request
         $request->validate([
             'circulationId' => 'required|exists:circulations,id',
-            'returndate' => 'required|date',
+            'returndate' => 'nullable|date', // Nullable since it's not required for some statuses
             'status' => 'required|in:borrowed,returned,overdue,cancelled'
         ]);
 
-        $circulation = Circulation::find(intval($request->circulationId));
-        $circulation->returned_date = $request->returndate;
-        $circulation->status = $request->status;
+        // Find the circulation record
+        $circulation = Circulation::findOrFail($request->circulationId);
+        $book = Book::findOrFail($circulation->book_id); // Get the book associated with circulation
+
+        if ($request->status === 'returned') {
+            // Update circulation details and increment book copies
+            $circulation->returned_date = $request->returndate;
+            $circulation->status = 'returned';
+
+            // Increment the available copies of the book
+            $book->increment('copies', $circulation->copies_borrowed);
+        } elseif ($request->status === 'cancelled') {
+            // Update status only, but also return book copies
+            $circulation->status = 'cancelled';
+
+            // Increment the available copies of the book
+            $book->increment('copies', $circulation->copies_borrowed);
+        } else {
+            // If status is borrowed or overdue, just update the status
+            $circulation->status = $request->status;
+        }
+
+        // Save the circulation changes
         $updated = $circulation->save();
 
         if ($updated) {
@@ -119,6 +139,7 @@ class CirculationController extends Controller
             return redirect()->route('view.circulation')->with('error', 'Failed to update circulation.');
         }
     }
+
 
 
     /**
