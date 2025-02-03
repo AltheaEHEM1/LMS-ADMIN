@@ -46,6 +46,6 @@ class AuthController extends BaseController
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login_employee')->with('message', 'Logged out successfully.');
+        return redirect('/')->with('message', 'Logged out successfully.');
     }
 }
