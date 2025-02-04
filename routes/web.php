@@ -174,6 +174,7 @@ Route::get('/CATALOG', function () {
 
 Route::get('/EMPLOYEE/show', [EmployeeController::class, 'showEmployee'])->name('employee.show');
 Route::get('/User/show', [EmployeeController::class, 'showUser'])->name('user.show');
+Route::get('/members', [EmployeeController::class, 'index']);
 
 
 Route::get('/categories/show', [CategoryController::class, 'index']);

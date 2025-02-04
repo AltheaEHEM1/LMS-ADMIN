@@ -135,7 +135,7 @@
                                         <i class="fas fa-chart-line mr-4"></i> Circulation Reports</a></li>
                                 @endif
                                 @if(auth()->user()->access_member_reports)
-                                    <li><a href="/MEMBER_REPORTS" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
+                                    <li><a href="/members" class="sidebar-item flex items-center py-3 px-6 rounded-lg">
                                         <i class="fas fa-file-alt mr-4"></i> Member Reports</a></li>
                                 @endif
                                 @if(auth()->user()->access_overdue_reports)

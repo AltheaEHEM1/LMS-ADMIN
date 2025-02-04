@@ -43,5 +43,9 @@ class User extends Authenticatable
     {
         return $this->morphMany(Session::class, 'user');
     }
+    public function circulations()
+    {
+        return $this->hasMany(Circulation::class, 'user_id');
+    }
     
 }

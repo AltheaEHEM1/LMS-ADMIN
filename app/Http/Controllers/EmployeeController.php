@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Http;
 
 class EmployeeController extends Controller
 {   
@@ -211,5 +212,51 @@ class EmployeeController extends Controller
     {
         $users = User::all();
         return view('/MEMBERS', compact('users')); 
+    }
+    public function index()
+    {
+        // Fetch all members with their circulations
+        $members = User::with('circulations')->get();
+
+        // Fetch attendance data from external API
+        $attendanceApiUrl = 'http://127.0.0.2:8000/api/attendances'; // Replace with actual API URL
+        $response = Http::get($attendanceApiUrl);
+
+        // Handle API failure
+        if ($response->failed()) {
+            return view('members.index', [
+                'members' => $members,
+                'error' => 'Failed to fetch attendance data'
+            ]);
+        }
+
+        // Get attendance data
+        $attendanceData = $response->json()['data'];
+
+        // Process each member
+        foreach ($members as $member) {
+            // Count matching dependent entities from attendance data
+            $engagementCount = 0;
+
+            foreach ($attendanceData as $attendance) {
+                foreach ($attendance['dependents'] as $dependent) {
+                    if ($dependent['email'] === $member->email || $dependent['username'] === $member->username) {
+                        $engagementCount++;
+                    }
+                }
+            }
+
+            // Count circulations where status is "returned" or "borrowed"
+            $circulatedCount = $member->circulations
+                ->whereIn('status', ['borrowed', 'returned'])
+                ->count();
+
+            // Attach counts to member
+            $member->engagement_count = $engagementCount;
+            $member->circulated_count = $circulatedCount;
+        }
+
+        // Return the data to a Blade view
+        return view('MEMBER_REPORTS', compact('members'));
     }
 }

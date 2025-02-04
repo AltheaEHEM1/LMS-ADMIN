@@ -25,11 +25,11 @@
                         <div>
                             <select class="w-full mt-1 px-3 py-2 border rounded bg-gray-100 text-gray-800" id="employeeType" required>
                                 <option value="">Range</option>
-                                <option value="security">Today</option>
-                                <option value="janitor">Yesterday</option>
-                                <option value="technician">Last week</option>
-                                <option value="maintenance">This month</option>
-                                <option value="maintenance">Last month</option>
+                                <option value="Today">Today</option>
+                                <option value="Yesterday">Yesterday</option>
+                                <option value="Last week">Last week</option>
+                                <option value="This month">This month</option>
+                                <option value="Last month">Last month</option>
                             </select>
                         </div>
                     </div>
@@ -41,18 +41,21 @@
                             <tr class="bg-[#012A4A] text-white">
                                 <th class="py-2 px-4 text-center">Name</th>
                                 <th class="py-2 px-4 text-center">Email</th>
-                                <th class="py-2 px-4 text-center">Date</th>
+                                <th class="py-2 px-4 text-center">Join Date</th>
                                 <th class="py-2 px-4 text-center">Engagement Count</th>
                                 <th class="py-2 px-4 text-center">Circulated Count</th>
                             </tr>
                         </thead>
+                        @foreach($members as $index => $member)
                         <tbody>
-                                <td class="py-3 px-4">Baron Aloveros</td>
-                                <td class="py-3 px-4">baron123@gmail.com</td>
-                                <td class="py-3 px-4">Nov 20, 2024</td>
-                                <td class="py-3 px-4">10</td>
-                                <td class="py-3 px-4">10</td>
+                                <td class="py-3 px-4">{{ $member->username }}</td>
+                                <td class="py-3 px-4">{{ $member->email }}</td>
+                                <td class="py-3 px-4">{{ $member->created_at }}</td>
+                                <td class="py-3 px-4">{{ $member->engagement_count }}</td>
+                                <td class="py-3 px-4">{{ $member->circulated_count }}</td>
+                                
                         </tbody>
+                        @endforeach
                     </table>
                 </div>
 
