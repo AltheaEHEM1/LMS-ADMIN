@@ -219,7 +219,7 @@ class EmployeeController extends Controller
         $members = User::with('circulations')->get();
 
         // Fetch attendance data from external API
-        $attendanceApiUrl = 'http://127.0.0.2:8000/api/attendances'; // Replace with actual API URL
+        $attendanceApiUrl = 'https://ams-sia-production.up.railway.app/api/attendances'; // Replace with actual API URL
         $response = Http::get($attendanceApiUrl);
 
         // Handle API failure
